@@ -1,0 +1,336 @@
+{
+  "owner": [
+    "School owner & administrator",
+    [
+      [
+        "1. Create and activate your school",
+        "Open Start your school. Enter the school identity and Nigerian state, owner name and email, then select an available plan and billing cycle. Prices and trials come from platform configuration. Use a private password of 12–72 characters and accept the account terms. Your Start Here workspace opens after creation. If payment is required, use the subscription checkout and verify the returned payment. Do not treat a browser success screen as proof of payment. Subscription renewals require an explicit checkout; they are not automatically debited."
+      ],
+      [
+        "2. Complete the foundations",
+        "Open Start Here / guided setup and work through each reminder. Confirm school identity and logo, contact information, timezone and academic session. Configure terms, resumption dates, school-specific subjects, curriculum version and class structure before importing records. Set CA/exam weights so each assessed subject totals 100%. Configure grade bands and report-card rules before publishing results. Review state-specific calendars and inspection obligations with the responsible staff member."
+      ],
+      [
+        "3. Add people and verify access",
+        "Create classes before adding or importing students. Check import columns, duplicate identities and class allocation with a small sample first. Create staff accounts or approve pending requests in People / account access. Confirm identity and email control before approval. Self-registration does not grant access until approved. Verify staff roles, class/subject assignments and parent-child relationships separately; never guess a child link from a matching name. Driver and warden capabilities require explicit assignment. Initial credentials expire and must be replaced with a personal password before school records can be opened."
+      ],
+      [
+        "4. Recover an account safely",
+        "Use account recovery in Setup & Accounts after verifying identity and email control. The temporary credential is displayed once; deliver it through your school-approved private channel. It expires after 72 hours. A platform administrator handles owner recovery. Do not email passwords through an unapproved broadcast or share an owner account with staff."
+      ],
+      [
+        "5. Admissions and student records",
+        "Use People & admissions to record enquiries, applications, review stages, offers and enrolment. Check required documents before an admission decision. Allocate admitted students to the correct class and connect verified guardians. Maintain medical, emergency and safeguarding details only where needed and lawfully authorized. Review duplicate records before merging or deleting any information."
+      ],
+      [
+        "6. Teaching, learning and results",
+        "Assign teachers to classes and subjects in the academic workspace. Prepare curriculum topics, lesson plans, resources and timetables. Teachers capture attendance, create homework and enter scores; moderation is separate from entry. Complete missing marks and approve assessments before publishing a term. Published results become available to linked families and students. Use report-card previews and sample calculations to validate weighting, ranking and promotion rules before release. Configure CBT questions, timing and eligible learners before opening an assessment."
+      ],
+      [
+        "7. Fees and Finance",
+        "Configure fee heads, class charges, instalments and opening balances before issuing invoices. School tuition and your SchoolOS subscription are different payment streams. Connect the school’s permitted payment provider, run a test payment, then confirm receipts and journals reconcile. Verify bank transfers using actual bank/provider evidence; a screenshot or user claim is not settlement. Review debt reports, payment allocation and balanced journals. Restrict refunds, adjustments and cash permissions to authorized staff."
+      ],
+      [
+        "8. Parent and guardian experience",
+        "After verifying links, parents can switch between children and view published results, attendance, invoices, receipts, homework and documents. Configure calendars, teacher booking slots, absence request review, consent forms, authorized pickup contacts, transport updates and meals before inviting families to those workflows. Review support tickets and surveys regularly. A pickup authorization is not a substitute for staff checking the adult at the handover."
+      ],
+      [
+        "9. HR and payroll",
+        "Create departments, staff records, contracts and onboarding tasks. Configure attendance, leave approvals and duty schedules. Set salary components, allowances, advances and authorized deductions. PAYE and pension settings must be reviewed against current Nigerian rules by your payroll professional; software configuration is not tax advice. Validate a sample pay run, approve payroll and issue payslips. Keep evaluations, grievances and exit clearance restricted to HR roles."
+      ],
+      [
+        "10. Transport and boarding",
+        "Register vehicles, drivers, routes and stops before assigning students. Configure fees, passenger manifests and authorized handovers. Drivers record pickup/drop-off and incidents for their assignments. GPS depends on a configured provider/device and suitable consent. Record vehicle maintenance and examine route suggestions before adopting them. For boarding, create hostels, rooms and beds; allocate without conflicts, then manage check-in/out, leave permits, visitors, roll calls, welfare, supplies, maintenance and meals through the warden workflow."
+      ],
+      [
+        "11. Library, procurement and assets",
+        "Create catalogue records with ISBN where available, copies/barcodes, digital resources and licensing restrictions. Configure lending, reservations, returns, fines and loss handling; review overdue and inventory reports. Create suppliers and stock items, record opening quantities, and use purchase requests and approvals before orders and receipt. Issue stock through recorded transactions. Maintain the asset register, depreciation policy, maintenance and audit records. Do not overwrite stock quantities to hide a discrepancy."
+      ],
+      [
+        "12. Communication and school website",
+        "Set provider credentials and templates in the authorized integrations workspace. Obtain required recipient consent and test WhatsApp, SMS, email and push with a small approved audience. Review scheduled broadcasts, delivery logs and credit balances. Community Hub supports school discussion workflows. In Website & CMS, configure theme, public pages, news, events, galleries, staff profiles, admissions pages, enquiries, prospectus, testimonials and SEO. Preview and approve content before publication. Custom domains require DNS/hosting configuration; software cannot configure a registrar automatically. Use integrated payment actions only after gateway verification."
+      ],
+      [
+        "13. Reports, innovation and governance",
+        "Use Reporting & Analytics for enrolment, conversion, academics, attendance, fee debt, collections, workload and operational comparisons. Select the correct session, term, date range and scope before exporting. Configure scheduled reports and verify the server worker runs. Review early-warning alerts with a human; indicators explain contributing records and are not diagnoses. AI Copilot respects permissions and drafts for review; sensitive actions require approval. Financial forecasts are estimates. Timetable suggestions require collision review. Configure wallet funding and spending roles with a permitted provider where required. Alumni, fundraising, mentoring, scholarships and accreditation evidence need named workflow owners. Headquarters analytics require explicit group-school authorization. Enable only approved, compatible integrations and API scopes."
+      ],
+      [
+        "14. Daily checks, privacy and continuity",
+        "Review setup warnings, attendance gaps, payment reconciliation, approval queues and support tickets. Verify any downloadable report before sharing. Schools must document lawful purposes, guardian consent where required, retention and incident response under the Nigeria Data Protection Act 2023. Export only the records needed by the recipient. Keep private provider keys and backups off the public website. Test restoration periodically; operators should stage updates and retain rollback snapshots. Shared-device users must sign out and remove synchronized offline data."
+      ],
+      [
+        "15. Troubleshooting and escalation",
+        "A missing menu may reflect role permission, an inactive module or an incomplete setup. Check the guide and setup reminders, then ask the platform team with the route, timestamp and safe reproduction steps. Do not include passwords or children’s records in a public support request. A payment pending state needs provider reconciliation; repeating a charge is not the first remedy. Offline conflicts need review rather than silent overwrite. For 404/500 errors, operators should preserve server logs and rollback evidence; no release can prove hosting deletion is permanently solved without logs."
+      ]
+    ]
+  ],
+  "teacher": [
+    "Teacher",
+    [
+      [
+        "Start with your assignments",
+        "Sign in with your individual account and complete any initial password change. Open Start Here and Teaching & learning. If assigned classes or subjects are missing, ask the school administrator to allocate them; do not use another teacher’s account."
+      ],
+      [
+        "Your teaching day",
+        "Review the timetable and assigned class. Record attendance for the correct date and learners. Prepare lesson plans against curriculum topics, update syllabus progress and attach approved teaching resources. Publish homework with clear instructions and deadlines. Use parent messaging only for verified linked families and school-authorized content."
+      ],
+      [
+        "Assessment workflow",
+        "Build question banks and CBT assessments for the assigned subject. Enter scores against the configured maximum and CA/exam weight. For bulk upload, download/use the expected columns, test a small sample and inspect errors before submission. Submit for moderation, request documented corrections and verify published results. Use performance analytics with context rather than ranking students from incomplete records."
+      ],
+      [
+        "Offline and responsible assistance",
+        "Capture only supported attendance/assessment tasks offline on a secured device. Reconnect, synchronize and review conflicts; do not assume local capture reached the server. AI lesson assistance drafts suggestions for your review; do not submit confidential student data without school approval. Log incidents through the safeguarding workflow, submit leave requests and maintain professional development records."
+      ]
+    ]
+  ],
+  "parent": [
+    "Parent & guardian",
+    [
+      [
+        "Get verified access",
+        "Accept a school invitation or request a parent account with the correct school. Wait for approval and verified child links. Set your personal password before use. Ask the school to correct a missing or wrong child relationship immediately."
+      ],
+      [
+        "Follow every child",
+        "Use the child selector for multiple children. Review each child’s published results, attendance, homework, teacher feedback, calendar and shared documents. Draft/unapproved academic results are not shown. Contact the teacher or school through messages or a support ticket when a record needs explanation."
+      ],
+      [
+        "Fees and family administration",
+        "Open the correct child’s invoices, review instalments, follow the configured payment link and wait for verified settlement before downloading a receipt. Keep your payment reference for reconciliation. Submit absence requests and consent forms, reserve available teacher bookings and answer school surveys. An absence request is not approved until the school reviews it."
+      ],
+      [
+        "Transport, meals and safe pickup",
+        "Review assigned transport updates and meal selections where the school enables them. Create a time-limited pickup authorization for the intended adult and learner. Share codes privately; staff must verify the guardian/adult and record handover. Revoke an unused authorization if plans change. Never put real family information in the public demo."
+      ]
+    ]
+  ],
+  "student": [
+    "Student",
+    [
+      [
+        "Find your school day",
+        "Use the verified student account supplied or approved by your school. Open the dashboard, timetable and homework. If your learner record is missing, ask the school administrator; never select another learner’s identity."
+      ],
+      [
+        "Learn and submit",
+        "Open approved resources, follow homework instructions and submit before the deadline. For CBT, confirm assessment availability and timing, use a stable connection, and submit once. Report a technical issue with its timestamp rather than repeatedly starting attempts. Review published grades, attendance and teacher feedback."
+      ],
+      [
+        "Build good habits",
+        "Use the study planner, school announcements, clubs, library and badges where enabled. Respect ebook licensing and lending rules. Safeguarded AI study support is for explanation and practice, not cheating or sharing private information. Ask a teacher when an answer seems wrong or makes you uncomfortable. Sign out on shared devices."
+      ]
+    ]
+  ],
+  "hr": [
+    "HR & payroll officer",
+    [
+      [
+        "Prepare staff and policies",
+        "Ask an administrator for the HR capability. Maintain departments, contracts, staff profiles, onboarding and emergency contacts only within your school. Set attendance rules, leave approvals and duty schedules."
+      ],
+      [
+        "Run payroll with review",
+        "Configure salary components, allowances, PAYE, pension and advances with a qualified reviewer. Confirm the pay period, attendance adjustments and deductions before approval. Compare a sample payslip to expected calculations, approve the authorized run and deliver payslips privately. Reconcile the finance records; a generated payslip is not a bank payment."
+      ],
+      [
+        "Support the staff lifecycle",
+        "Record evaluations and development plans, restrict grievance records and track exit clearance. Review access promptly when a staff member leaves. Retain employment and payroll records according to documented legal requirements."
+      ]
+    ]
+  ],
+  "driver": [
+    "Driver",
+    [
+      [
+        "Before a journey",
+        "Use your assigned driver account. Review your vehicle, route, stops and manifest; assignments are limited to your authorized scope. Report missing or incorrect passenger assignments to the transport manager."
+      ],
+      [
+        "Pickup and drop-off",
+        "Record pickup and drop-off at the correct stop. Verify authorized adult handovers using the school workflow and record the outcome. Never hand a child to someone based only on a screenshot or an unverified message. Notifications depend on the school’s configured communication provider."
+      ],
+      [
+        "Safety and reporting",
+        "Log incidents promptly with factual details. Report maintenance and route concerns before a journey. GPS is optional and depends on approved hardware/provider setup. Avoid interacting with the application while driving; stop safely first."
+      ]
+    ]
+  ],
+  "transport": [
+    "Transport manager",
+    [
+      [
+        "Set up transport",
+        "Create vehicles, licensed drivers, routes and ordered stops. Check vehicle capacity and maintenance status before assigning students and fees. Grant driver capability explicitly and validate each assignment."
+      ],
+      [
+        "Run and reconcile",
+        "Review manifests, pickup/drop-off records, notification delivery and incident logs. Validate proposed route changes and any GPS feed before relying on them. Investigate missing handovers through the safeguarding procedure, not an automated guess."
+      ]
+    ]
+  ],
+  "warden": [
+    "Warden & boarding team",
+    [
+      [
+        "Prepare boarding",
+        "Confirm your assigned hostel and rooms. Check the bed register, occupancy and learner allocations. Ask a boarding manager to resolve allocation conflicts before moving a student."
+      ],
+      [
+        "Daily welfare",
+        "Record check-in/out and roll calls. Review approved leave permits and visitors, verify identity on departure/return and log incidents factually. Manage supplies, maintenance and welfare requests, and coordinate meal records. Escalate safeguarding concerns through the school’s designated process."
+      ]
+    ]
+  ],
+  "library": [
+    "Librarian",
+    [
+      [
+        "Build the catalogue",
+        "Use your librarian capability to create books, ISBN records, copies and barcode/QR identifiers. Add digital resources with appropriate license restrictions. Record inventory accurately and inspect duplicate identifiers."
+      ],
+      [
+        "Lend, return and report",
+        "Confirm the borrower and copy before lending. Check return dates, reservations and overdue alerts. Record returns, fines and losses using the approved policy; do not delete a loan to conceal a loss. Review reading history only for authorized purposes and reconcile inventory reports."
+      ]
+    ]
+  ],
+  "inventory": [
+    "Store, procurement & asset officers",
+    [
+      [
+        "Opening setup",
+        "Create suppliers, stock items, uniforms/books and units of measure. Record justified opening quantities and an asset register. Restrict purchase approval to designated approvers."
+      ],
+      [
+        "Procure and issue",
+        "Raise purchase requests, obtain approval, create purchase orders and record received quantities before issuance. Issue to the correct recipient and retain references. Review low-stock alerts, differences and supplier records. Track asset depreciation using school policy, maintenance and audit results; do not bypass transaction history."
+      ]
+    ]
+  ],
+  "communications": [
+    "Communications officer",
+    [
+      [
+        "Consent and audience",
+        "Use your communications capability and only approved templates/providers. Select the intended school/class audience and review consent before broadcasts. Protect recipient lists and never use a public demo for real messaging."
+      ],
+      [
+        "Send and verify",
+        "Draft announcements, emergency notices, newsletters, event information and polls. Review personalized values and scheduled times, obtain any required approval, then send. Inspect delivery logs and credit balances; queued or sent is not proof of delivery. Parent-teacher messaging must stay within verified school relationships."
+      ]
+    ]
+  ],
+  "website": [
+    "Website editor & approver",
+    [
+      [
+        "Prepare the school website",
+        "Configure the school theme, identity, admissions landing page and SEO metadata. Create news, events, staff profiles, testimonials, prospectus and galleries using approved content and lawful image consent."
+      ],
+      [
+        "Review and publish",
+        "Preview changes, request approval and publish only approved content. Test enquiry and school-tour forms with safe sample data. Ask the hosting/domain operator to configure custom-domain DNS. Confirm integrated payment links lead to the intended verified provider. Remove expired or inaccurate information promptly."
+      ]
+    ]
+  ],
+  "admissions": [
+    "Admissions officer",
+    [
+      [
+        "Manage the pipeline",
+        "Use your authorized admissions account. Record enquiries and applications, validate required documents and update review stages accurately. Follow configured entrance testing and offer workflows."
+      ],
+      [
+        "Enrol safely",
+        "Confirm acceptance, applicable fee evidence and authorized enrolment decisions. Place learners in the right school/class and ask administrators to verify guardian links. Protect applicant documents and review conversion reports with correct dates; an offer is not an enrolment."
+      ]
+    ]
+  ],
+  "finance": [
+    "Finance officer",
+    [
+      [
+        "Configure and reconcile",
+        "Use the school’s authorized finance capability. Confirm fee heads, invoices, instalments and opening balances. Keep tuition transactions distinct from platform subscriptions and affiliate obligations."
+      ],
+      [
+        "Verify the money",
+        "Accept provider-verified settlement or approved bank evidence, allocate to the correct invoice and issue the resulting receipt. Review balanced journals, debt, refunds and adjustments with the designated approver. Never mark cash received solely from a browser redirect. Forecasts are estimates based on the available records."
+      ]
+    ]
+  ],
+  "affiliate": [
+    "Affiliate partner",
+    [
+      [
+        "Apply and share responsibly",
+        "Open Partners and read the current rate, holding period and minimum withdrawal. Create a dedicated affiliate account or sign in with your existing SchoolOS account and apply. Approval is required. Your account grants no school data access. Share your personal referral link without spam or misleading claims; first attribution applies to a new school registering within 30 days."
+      ],
+      [
+        "Understand commission",
+        "Trials, free subscriptions, unverified payments and self-referrals do not earn commissions. Verified subscription payments for attributed schools create automatic credits, including eligible renewals. Rate and hold are frozen when the school is attributed. Refunds reverse proportionate commission; a negative balance reduces future availability. You see school/payment references, not school records or private contacts."
+      ],
+      [
+        "Set up and request payout",
+        "In the affiliate workspace, use the Nigerian bank directory to select your bank code and enter your ten-digit account number. The provider resolves the account and creates an NGN recipient. Confirm the resolved account name. Request an amount between the configured minimum and available balance. Test and live balances are separate. Reverify your bank account after switching provider environments. Funds are reserved immediately. Platform approval submits the transfer; provider verification alone marks it successful. A pending/unknown state must be reconciled, not blindly resent. Existing withdrawal recipients remain unchanged if you later change bank details."
+      ]
+    ]
+  ],
+  "platform": [
+    "Platform Super Admin",
+    [
+      [
+        "Platform foundations",
+        "Use an individual Super Admin account, protect credentials and restrict hosting access. Configure active subscription plans and permitted trials, HTTPS canonical origin and Paystack environment/keys in Setup & Accounts / Integrations. Enable registration only when plans and payment callbacks have been tested. Verify school owner identity before recovery. Do not grant platform access to school applicants."
+      ],
+      [
+        "Public website and documentation",
+        "The platform homepage links features, how-it-works, about, contact, privacy, terms, cookie information, Partners and downloadable role guides. In Website & Affiliates publish the real operator legal name and public support/privacy email. Review these policy texts against actual agreements, retention and provider arrangements before marketing the service. School CMS sites remain separate from the platform website."
+      ],
+      [
+        "Enable the affiliate module",
+        "Open Website & Affiliates and install its additive tables. The default is disabled, rate zero, holding period 30 days and minimum 500000 kobo. Enter approved commercial terms, operator name and email; configure an HTTPS origin before enabling. Basis points use 1000 = 10%. Maximum supported rate is 50%. Existing referral rates/holds are preserved after settings change. Disabling stops new acquisition and withdrawal requests; existing earned obligations remain visible and eligible recorded referral payments still accrue."
+      ],
+      [
+        "Review payouts and provider events",
+        "Review affiliate applications and investigate self-referral or misleading marketing. Verify provider bank resolution in test mode. Review a withdrawal before selecting Approve & transfer. Ensure sufficient Paystack balance and required provider permissions. Transfers requiring OTP must be authorized in the provider dashboard then reconciled here. An uncertain response remains reserved as sending/pending; use Verify provider status, never resubmit the same withdrawal blindly. Reject only unsubmitted requests to release reservations. Signed callbacks use index.php?v23_webhook=paystack and reverify charge, transfer and processed-refund evidence with the provider. Disputes/chargebacks require investigation: suspend the affiliate and pause payouts while resolving the source payment; do not assume every dispute is a settled refund."
+      ],
+      [
+        "Hosting, workers and release safety",
+        "Use PHP 8.4, MariaDB/InnoDB, PDO MySQL, mbstring, cURL, OpenSSL, ZipArchive and the documented worker setup. Keep config, uploads, storage, encryption keys and database backups private and out of update archives. Back up files, database and both credential keys before updating. Install the updater support ZIP first, then the main release through Update Manager. Confirm manifest preview, install, routing and core workflows before production rollout. Restore compatible files from Update Manager rollback; additive tables and created records are retained. Do not drop business tables to downgrade. Preserve server logs for any missing-file investigation."
+      ],
+      [
+        "Demo, privacy and continuity",
+        "Provision the demo only in its separate dedicated database ending _demo. Demo sessions and records are isolated; external providers and financial actions are blocked. Refresh only the validated sandbox, never a live tenant. Monitor scheduled jobs, delivery failures, backups and payment reconciliation. Protect server logs and downloads, document retention and data-processing responsibilities, and investigate access/child-data incidents under the applicable Nigerian requirements."
+      ]
+    ]
+  ],
+  "staff": [
+    "General staff & support",
+    [
+      [
+        "Use your assigned workspace",
+        "Sign in, replace temporary credentials and open Start Here. Only explicitly assigned HR, transport, boarding, library, inventory, communication, finance or reporting capabilities are available. Ask the administrator for the minimum capability needed; do not request an owner account."
+      ],
+      [
+        "Work and escalate",
+        "Review tasks, duty schedules, school announcements and your permitted operational workspace. Use support tickets for missing assignments or inaccurate records, including the route and timestamp without passwords or unnecessary child information. Read the specialist guide for each capability you receive."
+      ]
+    ]
+  ],
+  "governance": [
+    "Reports, headquarters & governance officers",
+    [
+      [
+        "Scope your evidence",
+        "Confirm your school/group authorization and reporting capability. Choose session, term, dates and filters before comparing results. Group headquarters access requires explicit school authorization; a staff title alone is insufficient."
+      ],
+      [
+        "Review and act",
+        "Use custom reports, scheduled exports, accreditation evidence, policy deadlines, alumni and scholarship workflows within your granted scope. Protect exports and evidence documents. Inspect early-warning explanations and source records with a human reviewer. AI drafts and forecasts support decisions; they do not authorize sensitive actions. Versioned API tokens require limited scopes, secure storage and prompt revocation when no longer needed."
+      ]
+    ]
+  ]
+}

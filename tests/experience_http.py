@@ -14,7 +14,7 @@ def clean(s,b):return s==200 and not any(x in b for x in ['Fatal error','SQLSTAT
 def login(email,demo=False):
  c=client();_,b,_=req(c,'index.php?login=1');s,b,_=req(c,'index.php?login=1',{'csrf':token(b),'login':1,'email':email,'password':'SchoolOS-Demo-Explore-2026!' if demo else 'Local-test-password-2026!',**({'demo_mode':'yes'} if demo else {})});ok(clean(s,b) and ('Sign out' in b or 'sign out' in b.lower()),'login '+email);return c
 public=client()
-for path,label in [('index.php?login=1','Good to see you again'),('index.php?register=1','Let your school thrive'),('index.php?join=1','Find your place'),('index.php?xp_privacy=1','Your school account and information')]:
+for path,label in [('index.php?login=1','Good to see you again'),('index.php?register=1','Let your school thrive'),('index.php?join=1','Find your place'),('index.php?xp_privacy=1','Who handles information?')]:
  s,b,h=req(public,path);ok(clean(s,b) and label in b,'public '+path)
 s,b,h=req(public,'index.php?login=1');ok('data-fact-pause' in b and 'data-demo-role="driver"' in b and 'experience.css' in b,'interactive login facts and demo selector');ok('type="password"' in b and 'data-show-password' in b,'password visibility control')
 admin=login('admin@test.local');platform=login('platform@test.local');teacher=login('teacher@test.local');parent=login('parent@test.local');student=login('student@test.local')

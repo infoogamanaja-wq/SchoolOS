@@ -1,0 +1,58 @@
+PASS 1 additive activation prepares installed workspaces
+PASS 2 repeat activation retains school records
+PASS 3 parent cannot configure signup (RuntimeException)
+PASS 4 school cannot configure platform signup (RuntimeException)
+PASS 5 platform enables configured signup and preserves selected billing policy on reload
+PASS 6 school creation atomically creates tenant owner and configured trial
+PASS 7 one enrolment recorded
+PASS 8 school registration form replay does not duplicate tenant
+PASS 9 plan without trial waits for payment
+PASS 10 existing schools retain existing subscription handling
+PASS 11 subscription checkout uses allowed HTTPS provider host
+PASS 12 other school cannot verify checkout (RuntimeException)
+PASS 13 wrong payment amount rejected (RuntimeException)
+PASS 14 exact gateway response activates school subscription
+PASS 15 payment replay does not extend subscription twice
+PASS 16 self-service subscription expiry enforced
+PASS 17 self-registered school member is inactive
+PASS 18 request never guesses a child link
+PASS 19 parent cannot approve access (RuntimeException)
+PASS 20 identity verification required (RuntimeException)
+PASS 21 approved parent still needs explicit verified child links
+PASS 22 approval replaces unverified request password with temporary credential
+PASS 23 initial password change requires strong password (RuntimeException)
+PASS 24 self-registration cannot grant school administrator (RuntimeException)
+PASS 25 school can close self-registration (RuntimeException)
+PASS 26 public registration CSRF enforced (RuntimeException)
+PASS 27 empty identity invalid (RuntimeException)
+PASS 28 readiness reports explicit setup checks
+PASS 29 role actions and detailed administrator walkthrough
+PASS 30 unset paid-plan cycle is not a free subscription (RuntimeException)
+PASS 31 rejected registration leaves no orphan tenant
+PASS 32 legacy subscription verifier shares idempotent Experience payment path
+PASS 33 other school cannot approve pending request (RuntimeException)
+PASS 34 pending request cannot become a school administrator (RuntimeException)
+PASS 35 failed role escalation leaves account inactive
+PASS 36 teacher approval never guesses classroom allocation
+PASS 37 explicit all-zero free plan opens without a fake payment
+PASS 38 expired free plan has a real renewal path
+PASS 39 free renewal cannot stack unearned future periods (RuntimeException)
+PASS 40 member cannot issue recovery credentials (RuntimeException)
+PASS 41 school recovery cannot reach another school or its owner (RuntimeException)
+PASS 42 verified school recovery issues a real temporary credential
+PASS 43 expired temporary credential cannot be converted into a new password (RuntimeException)
+PASS 44 platform team can recover a verified school owner
+PASS 45 isolated demo has connected synthetic students
+PASS 46 all fourteen demo roles seeded
+PASS 47 demo parent linked to multiple children
+PASS 48 demo provisioning leaves live fixture records unchanged
+PASS 49 populated demo database not overwritten (RuntimeException)
+PASS 50 demo invoices and receipts share balanced journals
+PASS 51 demo transport and boarding connect same learners
+PASS 52 refresh restores connected fictional demo data
+PASS 53 demo refresh leaves live school records unchanged
+PASS 54 unexpected sandbox table prevents destructive refresh (RuntimeException)
+PASS 55 refused refresh preserves sandbox data
+PASS 56 missing platform credential key fails closed (RuntimeException)
+PASS 57 missing private key is not silently regenerated
+Experience domain: 57 assertions passed.

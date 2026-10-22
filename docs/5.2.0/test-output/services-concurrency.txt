@@ -1,0 +1,9 @@
+PASS parallel ebook claims cannot exceed one licence seat
+PASS parallel issues cannot overdraw last stock unit
+PASS same-reference issue retries succeed without duplicate decrement
+PASS parallel distinct receipts cannot exceed approved order quantity
+PASS parallel depreciation cannot post one period twice
+PASS parallel delivery workers make one provider call and reserve credits once
+PASS parallel public bookings cannot exceed tour capacity
+PASS parallel payment verification posts one journal pair
+TOTAL 8 passed

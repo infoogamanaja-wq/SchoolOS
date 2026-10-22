@@ -1,0 +1,116 @@
+PASS 1 all additive intelligence tables installed
+PASS 2 activation repeatable
+PASS 3 activation retains existing students
+PASS 4 parent cannot grant capabilities (RuntimeException)
+PASS 5 cannot grant cross-school (RuntimeException)
+PASS 6 fixed report SQL executes executive
+PASS 7 fixed report SQL executes enrolment
+PASS 8 fixed report SQL executes admissions
+PASS 9 fixed report SQL executes academics
+PASS 10 fixed report SQL executes attendance
+PASS 11 fixed report SQL executes finance
+PASS 12 fixed report SQL executes workload
+PASS 13 fixed report SQL executes retention
+PASS 14 fixed report SQL executes hr
+PASS 15 fixed report SQL executes operations
+PASS 16 analyst finance withheld (RuntimeException)
+PASS 17 analyst HR withheld (RuntimeException)
+PASS 18 family no executive data (RuntimeException)
+PASS 19 cross-school class denied (RuntimeException)
+PASS 20 arbitrary SQL denied (RuntimeException)
+PASS 21 CSV formula escaped
+PASS 22 custom fixed dataset definition saved
+PASS 23 other analyst cannot export private definition (RuntimeException)
+PASS 24 private CSV generated
+PASS 25 scheduled exports run once per due date
+PASS 26 revoked scheduled owner fails closed
+PASS 27 explicit cohort retention available
+PASS 28 immutable cohort cannot overwrite (PDOException)
+PASS 29 forecast scenarios respect assumptions
+PASS 30 forecast finance permission enforced (RuntimeException)
+PASS 31 family copilot scoped
+PASS 32 copilot HR/finance permission restrictions (RuntimeException)
+PASS 33 copilot injection denied (RuntimeException)
+PASS 34 reviewed school flags persisted
+PASS 35 staff cannot change sensitive flags (RuntimeException)
+PASS 36 teacher snapshot includes current assigned class only
+PASS 37 unassigned teacher snapshot denied (RuntimeException)
+PASS 38 family offline snapshot denied (RuntimeException)
+PASS 39 offline attendance applied
+PASS 40 offline replay idempotent
+PASS 41 changed event replay denied
+PASS 42 stale base causes conflict
+PASS 43 conflict does not overwrite server
+PASS 44 cross-account sync denied (RuntimeException)
+PASS 45 offline allocated draft assessment applies
+PASS 46 offline score bounds enforced
+PASS 47 curriculum author cannot self approve (RuntimeException)
+PASS 48 family approved nursery observations available
+PASS 49 other guardian cannot view report card (RuntimeException)
+PASS 50 report layout rejects arbitrary HTML (RuntimeException)
+PASS 51 grade bands must cover zero (RuntimeException)
+PASS 52 class school policy binds explicit versions
+PASS 53 timetable independent approval required (RuntimeException)
+PASS 54 reviewed timetable applied once
+PASS 55 reapplying plan blocked (RuntimeException)
+PASS 56 requester cannot self verify bank credit (RuntimeException)
+PASS 57 bank funding idempotent
+PASS 58 meal purchase idempotent
+PASS 59 guardian daily budget enforced (RuntimeException)
+PASS 60 sale reference cannot change content (RuntimeException)
+PASS 61 cafeteria refund restored once
+PASS 62 unlinked parent cannot set spend policy (RuntimeException)
+PASS 63 wrong provider amount denied (RuntimeException)
+PASS 64 exact NGN provider funding accepted
+PASS 65 wallet journals balance
+PASS 66 alumni self verification denied (RuntimeException)
+PASS 67 mentoring cannot approve without school supervisor (RuntimeException)
+PASS 68 mentoring supervisor persisted
+PASS 69 scholarship budget cannot overcommit (RuntimeException)
+PASS 70 scholarship fee waiver applied once
+PASS 71 unreviewed access response denied (RuntimeException)
+PASS 72 reviewed access response scoped child data
+PASS 73 other requester cannot retrieve rights response (RuntimeException)
+PASS 74 NDPA register reviewed without legal certification
+PASS 75 group shares nothing by default
+PASS 76 consenting second school aggregates visible
+PASS 77 analyst needs explicit group grant (RuntimeException)
+PASS 78 explicit analyst grant permitted
+PASS 79 revoked member sharing immediate
+PASS 80 plugin cannot self approve (RuntimeException)
+PASS 81 API v1 approved aggregate query works
+PASS 82 API cannot exceed approved scope (RuntimeException)
+PASS 83 only hashed API tokens persisted
+PASS 84 API rechecks current permissions (RuntimeException)
+PASS 85 API minute quota enforced (RuntimeException)
+PASS 86 revoked token denied (RuntimeException)
+PASS 87 declining attendance creates explainable evidence
+PASS 88 same day success scan deduplicated
+PASS 89 human success alert review recorded
+PASS 90 sensitive draft self approval denied (RuntimeException)
+PASS 91 unapproved sensitive draft cannot execute (RuntimeException)
+PASS 92 executed sensitive draft cannot replay (RuntimeException)
+PASS 93 AI summary mock receives numeric aggregate payload
+PASS 94 family facts never sent to external AI
+PASS 95 AI per account daily quota enforced (RuntimeException)
+PASS 96 pickup stores hash only
+PASS 97 physical identity checkbox required (RuntimeException)
+PASS 98 verified one-time pickup consumed
+PASS 99 pickup reuse denied (RuntimeException)
+PASS 100 expired pickup denied (RuntimeException)
+PASS 101 unsigned WhatsApp command denied (RuntimeException)
+PASS 102 signed consented command accepted
+PASS 103 signed command replay idempotent
+PASS 104 WhatsApp reply assigned original authorized communicator
+PASS 105 WhatsApp STOP revokes operational consent
+PASS 106 revoked consent cannot queue another reply
+PASS 107 wallet settles linked school-store invoice
+PASS 108 wallet invoice allocation does not create external cash
+PASS 109 verified fundraising receipt posts one balanced journal
+PASS 110 donation bank reference cannot be reused (RuntimeException)
+PASS 111 unpublished primary term inaccessible (RuntimeException)
+PASS 112 published CA/exam weighted result and configured grade exact
+PASS 113 offline cannot change published result
+PASS 114 changed timetable constraints require regeneration (RuntimeException)
+PASS 115 inspection deadline links independently reviewed evidence
+School Intelligence domain: 115 assertions passed.

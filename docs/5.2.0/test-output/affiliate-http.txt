@@ -1,0 +1,10 @@
+PASS standalone module denied affiliate.php
+PASS standalone module denied affiliate_worker.php
+PASS standalone module denied public_site.php
+PASS standalone module denied public_guides.php
+PASS anonymous invalid payment callback rejected before homepage
+PASS isolated school demo login
+PASS demo cannot enroll or expose live affiliate finances
+PASS demo affiliate financial mutation fails closed
+PASS anonymous affiliate has explicit login route
+Affiliate HTTP: 9 assertions passed.

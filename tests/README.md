@@ -165,3 +165,10 @@ The demo fixture host/credentials are local test-only values. For a second datab
 `experience_package_http.py` installs/activates/rolls back/reinstalls through a disposable local Apache frontend seeded with 5.0.0 and a fresh test database. It additionally provisions an empty `schoolos_package_test_demo` database and tests demo session isolation across rollback. Never point it at a live installation. Existing suites require their own separately seeded fixtures, as documented above.
 
 The unlinked-learner login test now expects a helpful overview while retaining its protected Learning-route 403 assertion. `tests/bootstrap.php` resolves extracted index functions' `__DIR__` to the application directory so credential/storage behavior matches the real runtime. Historical ZIPs remain immutable. Evidence and limitations are in `docs/5.1.0/VALIDATION.md`.
+
+
+## Website & Affiliates 5.2.0
+
+Use the existing disposable Experience fixtures and test DSN after running `experience.php`. Run `affiliate.php` and then `affiliate_concurrency.php` with the same test DSN. The affiliate suite requires a fresh fixture database; it deliberately creates schools, payments, commissions and simulated payouts. Never run fixtures against a live database. Concurrency subprocesses inherit the test DSN; set `SCHOOLOS_PHP_COMMAND` when PHP is not on PATH.
+
+`website_browser.py` uses real Chromium against a loopback Experience runtime; `affiliate_http.py` checks direct-file guards, callback authentication and demo denial. `website_package_http.py` uploads the current two-stage packages to a disposable local Apache root based on 5.1.0, then rolls back and reinstalls. `website_release.py` checks manifests, historical hashes and deterministic rebuilds. Set `SCHOOLOS_TEST_OUTPUT` when rerunning `experience_browser.py` to keep historical evidence unchanged. See `docs/5.2.0/VALIDATION.md` for exact suite counts and limits.

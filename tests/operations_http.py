@@ -37,9 +37,9 @@ for c,label in [(driver,'peer'),(foreign,'cross-school'),(parent,'parent')]:
  s,b,_=req(c,'index.php?s=operations&op_hr_file='+fileid);ok(s==403,label+' private contract denied')
 s,b,_=req(hr,'index.php?s=operations&area=hr&view=records',{'csrf':'bad','op_action':'hr_staff','name':'CSRF INJECTION','role_title':'Bad'});ok(clean(s,b) and 'Security token expired' in b and 'CSRF INJECTION' not in b,'HTTP CSRF denial')
 for f in ['operations_core.php','hr_payroll.php','transport_portal.php','boarding_portal.php']:
- s,b,_=req(client(),f);ok(s==403 or (clean(s,b) and ('Sign in' in b or 'School Operations' in b)),'direct library guarded '+f)
+ s,b,_=req(client(),f);ok(s==403 or (clean(s,b) and ('Sign in' in b or 'School Operations' in b or 'Give your school' in b)),'direct library guarded '+f)
 for route in ['staff','vehicles','hostels']:
  s,b,_=req(admin,'index.php?s='+route);ok(clean(s,b) and 'School Operations' in b,'legacy route '+route)
-for path,text in [('index.php','Run your school'),('index.php?s=family&child=1&view=homework','Complete page 12'),('index.php?s=learning&view=classes','Teacher Portal'),('index.php?s=fees','Finance'),('index.php?s=announcements','Community')]:
+for path,text in [('index.php','Give your school'),('index.php?s=family&child=1&view=homework','Complete page 12'),('index.php?s=learning&view=classes','Teacher Portal'),('index.php?s=fees','Finance'),('index.php?s=announcements','Community')]:
  c=client() if path=='index.php' else parent if 'family' in path else teacher if 'learning' in path else admin;s,b,_=req(c,path);ok(clean(s,b) and text.lower() in b.lower(),'existing application '+path)
 print('TOTAL',n,'passed')

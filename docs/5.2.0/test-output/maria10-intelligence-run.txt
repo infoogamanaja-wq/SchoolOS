@@ -1,0 +1,6 @@
+seed 0 Fixture schema and integrations installed on 10.11.18-MariaDB-0+deb12u1
+learning_seed 0 Learning fixture ready on 10.11.18-MariaDB-0+deb12u1
+operations_seed 0 Operations accounts seeded; activation intentionally pending.
+services_seed 0 School Services accounts seeded; activation pending.
+intelligence 0 School Intelligence domain: 115 assertions passed.
+intelligence_concurrency 0 School Intelligence concurrency: 7 assertions passed.

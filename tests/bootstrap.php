@@ -27,3 +27,5 @@ define('SCHOOLOS_INSIGHTS_LIBRARY',true);
 foreach(['insights_core.php', 'intelligence_reports.php', 'school_innovations.php', 'academic_tools.php', 'school_wallet.php', 'governance_hub.php'] as $module)require __DIR__.'/../app/'.$module;
 
 define('SCHOOLOS_EXPERIENCE',true);foreach(['experience.php','experience_ui.php','experience_admin.php','experience_demo.php'] as $module)require __DIR__.'/../app/'.$module;
+
+foreach(['affiliate.php','public_site.php','public_guides.php'] as $module)require __DIR__.'/../app/'.$module;

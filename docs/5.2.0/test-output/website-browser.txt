@@ -1,0 +1,75 @@
+PASS new website hero renders
+PASS academic fact control works
+PASS quiz explains incorrect answer
+PASS quiz explains correct arithmetic
+PASS dashboard snapshot selection onboarding
+PASS dashboard snapshot selection parent
+PASS dashboard snapshot selection owner
+PASS populated public route features
+PASS populated public route how-it-works
+PASS populated public route affiliate
+PASS populated public route documentation
+PASS populated public route about
+PASS populated public route contact
+PASS populated public route privacy
+PASS populated public route terms
+PASS populated public route cookies
+PASS populated public route affiliate-account
+PASS eighteen role guides listed
+PASS accessible online guide ?guide=owner
+PASS downloadable valid PDF ?guide=owner
+PASS accessible online guide ?guide=teacher
+PASS downloadable valid PDF ?guide=teacher
+PASS accessible online guide ?guide=parent
+PASS downloadable valid PDF ?guide=parent
+PASS accessible online guide ?guide=student
+PASS downloadable valid PDF ?guide=student
+PASS accessible online guide ?guide=hr
+PASS downloadable valid PDF ?guide=hr
+PASS accessible online guide ?guide=driver
+PASS downloadable valid PDF ?guide=driver
+PASS accessible online guide ?guide=transport
+PASS downloadable valid PDF ?guide=transport
+PASS accessible online guide ?guide=warden
+PASS downloadable valid PDF ?guide=warden
+PASS accessible online guide ?guide=library
+PASS downloadable valid PDF ?guide=library
+PASS accessible online guide ?guide=inventory
+PASS downloadable valid PDF ?guide=inventory
+PASS accessible online guide ?guide=communications
+PASS downloadable valid PDF ?guide=communications
+PASS accessible online guide ?guide=website
+PASS downloadable valid PDF ?guide=website
+PASS accessible online guide ?guide=admissions
+PASS downloadable valid PDF ?guide=admissions
+PASS accessible online guide ?guide=finance
+PASS downloadable valid PDF ?guide=finance
+PASS accessible online guide ?guide=affiliate
+PASS downloadable valid PDF ?guide=affiliate
+PASS accessible online guide ?guide=platform
+PASS downloadable valid PDF ?guide=platform
+PASS accessible online guide ?guide=staff
+PASS downloadable valid PDF ?guide=staff
+PASS accessible online guide ?guide=governance
+PASS downloadable valid PDF ?guide=governance
+PASS download traversal rejected
+PASS unknown public page returns 404
+PASS no horizontal overflow home 390
+PASS no horizontal overflow features 390
+PASS no horizontal overflow how-it-works 390
+PASS no horizontal overflow documentation 390
+PASS no horizontal overflow affiliate 390
+PASS no horizontal overflow privacy 390
+PASS mobile menu opens 390
+PASS Escape closes mobile menu 390
+PASS no horizontal overflow home 768
+PASS no horizontal overflow features 768
+PASS no horizontal overflow how-it-works 768
+PASS no horizontal overflow documentation 768
+PASS no horizontal overflow affiliate 768
+PASS no horizontal overflow privacy 768
+PASS mobile menu opens 768
+PASS Escape closes mobile menu 768
+PASS reduced-motion preference stops decorative animation
+PASS no browser JavaScript errors
+Website browser: 74 assertions passed.

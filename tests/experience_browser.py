@@ -1,7 +1,7 @@
 from playwright.sync_api import sync_playwright
 from pathlib import Path
 import os,urllib.parse
-out=Path(__file__).resolve().parents[1]/'docs/5.1.0/test-output';out.mkdir(exist_ok=True);base=os.environ.get('SCHOOLOS_EXPERIENCE_BASE','http://127.0.0.1:8090/experience')+'/index.php';assert urllib.parse.urlsplit(base).hostname in ('127.0.0.1','localhost');n=0
+out=Path(os.environ.get('SCHOOLOS_TEST_OUTPUT',str(Path(__file__).resolve().parents[1]/'docs/5.1.0/test-output')));out.mkdir(exist_ok=True);base=os.environ.get('SCHOOLOS_EXPERIENCE_BASE','http://127.0.0.1:8090/experience')+'/index.php';assert urllib.parse.urlsplit(base).hostname in ('127.0.0.1','localhost');n=0
 with sync_playwright() as p:
  browser=p.chromium.launch(executable_path=os.environ.get('SCHOOLOS_CHROMIUM','/usr/bin/chromium'),headless=True,args=['--no-sandbox']);page=browser.new_page(viewport={'width':1440,'height':1050});errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
  page.goto(base+'?login=1');page.screenshot(path=str(out/'login-desktop.png'),full_page=True);assert page.locator('#xpFact').is_visible();original=page.locator('#xpFact').inner_text();page.locator('[data-fact-next]').click();assert page.locator('#xpFact').inner_text()!=original;n+=1
