@@ -4,7 +4,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 import os,urllib.parse
 base=os.getenv('SCHOOLOS_WEBSITE_BASE','http://127.0.0.1:8090/experience/index.php');assert urllib.parse.urlsplit(base).hostname in ('localhost','127.0.0.1')
-out=Path(__file__).resolve().parents[1]/'docs/5.2.0/test-output';out.mkdir(parents=True,exist_ok=True)
+out=Path(os.environ.get('SCHOOLOS_TEST_OUTPUT',str(Path(__file__).resolve().parents[1]/'docs/5.2.0/test-output')));out.mkdir(parents=True,exist_ok=True)
 n=0
 def ok(v,msg):
  global n

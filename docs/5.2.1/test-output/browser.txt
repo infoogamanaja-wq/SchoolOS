@@ -1,0 +1,149 @@
+PASS shared public logo mark
+PASS education doodles actually move over time
+PASS headline rotates through inspiring text
+PASS pause stops automatic text rotation
+PASS pause stops decorative motion
+PASS motion preference survives reload
+PASS night theme button works
+PASS night preference survives reload
+PASS night preference applies across public pages
+PASS night background uses dark surface
+PASS cards respond to pointer hover with spotlight
+PASS hover border highlights in night theme
+PASS 36 distinct challenge questions
+PASS six academic and digital topics
+PASS every challenge has valid options, answer and explanation
+PASS challenge deck avoids repeats 1
+PASS correct feedback 1
+PASS challenge deck avoids repeats 2
+PASS correct feedback 2
+PASS challenge deck avoids repeats 3
+PASS correct feedback 3
+PASS challenge deck avoids repeats 4
+PASS correct feedback 4
+PASS challenge deck avoids repeats 5
+PASS correct feedback 5
+PASS challenge deck avoids repeats 6
+PASS correct feedback 6
+PASS challenge deck avoids repeats 7
+PASS correct feedback 7
+PASS challenge deck avoids repeats 8
+PASS correct feedback 8
+PASS challenge deck avoids repeats 9
+PASS correct feedback 9
+PASS challenge deck avoids repeats 10
+PASS correct feedback 10
+PASS challenge deck avoids repeats 11
+PASS correct feedback 11
+PASS challenge deck avoids repeats 12
+PASS correct feedback 12
+PASS challenge deck avoids repeats 13
+PASS correct feedback 13
+PASS challenge deck avoids repeats 14
+PASS correct feedback 14
+PASS challenge deck avoids repeats 15
+PASS correct feedback 15
+PASS challenge deck avoids repeats 16
+PASS correct feedback 16
+PASS challenge deck avoids repeats 17
+PASS correct feedback 17
+PASS challenge deck avoids repeats 18
+PASS correct feedback 18
+PASS challenge deck avoids repeats 19
+PASS correct feedback 19
+PASS challenge deck avoids repeats 20
+PASS correct feedback 20
+PASS challenge deck avoids repeats 21
+PASS correct feedback 21
+PASS challenge deck avoids repeats 22
+PASS correct feedback 22
+PASS challenge deck avoids repeats 23
+PASS correct feedback 23
+PASS challenge deck avoids repeats 24
+PASS correct feedback 24
+PASS challenge deck avoids repeats 25
+PASS correct feedback 25
+PASS challenge deck avoids repeats 26
+PASS correct feedback 26
+PASS challenge deck avoids repeats 27
+PASS correct feedback 27
+PASS challenge deck avoids repeats 28
+PASS correct feedback 28
+PASS challenge deck avoids repeats 29
+PASS correct feedback 29
+PASS challenge deck avoids repeats 30
+PASS correct feedback 30
+PASS challenge deck avoids repeats 31
+PASS correct feedback 31
+PASS challenge deck avoids repeats 32
+PASS correct feedback 32
+PASS challenge deck avoids repeats 33
+PASS correct feedback 33
+PASS challenge deck avoids repeats 34
+PASS correct feedback 34
+PASS challenge deck avoids repeats 35
+PASS correct feedback 35
+PASS challenge deck avoids repeats 36
+PASS correct feedback 36
+PASS score counts unique solved questions
+PASS topic filter Digital skills
+PASS topic filter Digital skills
+PASS topic filter Digital skills
+PASS topic filter Digital skills
+PASS topic filter Digital skills
+PASS topic filter Digital skills
+PASS topic deck has six different questions Digital skills
+PASS topic filter Geography
+PASS topic filter Geography
+PASS topic filter Geography
+PASS topic filter Geography
+PASS topic filter Geography
+PASS topic filter Geography
+PASS topic deck has six different questions Geography
+PASS topic filter Logic
+PASS topic filter Logic
+PASS topic filter Logic
+PASS topic filter Logic
+PASS topic filter Logic
+PASS topic filter Logic
+PASS topic deck has six different questions Logic
+PASS topic filter Maths
+PASS topic filter Maths
+PASS topic filter Maths
+PASS topic filter Maths
+PASS topic filter Maths
+PASS topic filter Maths
+PASS topic deck has six different questions Maths
+PASS topic filter Science
+PASS topic filter Science
+PASS topic filter Science
+PASS topic filter Science
+PASS topic filter Science
+PASS topic filter Science
+PASS topic deck has six different questions Science
+PASS topic filter Words
+PASS topic filter Words
+PASS topic filter Words
+PASS topic filter Words
+PASS topic filter Words
+PASS topic filter Words
+PASS topic deck has six different questions Words
+PASS no horizontal overflow 360
+PASS theme switch accessible 360
+PASS long answer controls fit 360
+PASS no horizontal overflow 390
+PASS theme switch accessible 390
+PASS long answer controls fit 390
+PASS no horizontal overflow 768
+PASS theme switch accessible 768
+PASS long answer controls fit 768
+PASS no horizontal overflow 1024
+PASS theme switch accessible 1024
+PASS long answer controls fit 1024
+PASS reduced motion disables doodle animation
+PASS reduced motion preserves visible content
+PASS login brand matches public site
+PASS dashboard brand matches public site
+PASS saved website theme carries into dashboard
+PASS no JavaScript browser errors
+Interactive website: 148 assertions passed.

@@ -172,3 +172,8 @@ The unlinked-learner login test now expects a helpful overview while retaining i
 Use the existing disposable Experience fixtures and test DSN after running `experience.php`. Run `affiliate.php` and then `affiliate_concurrency.php` with the same test DSN. The affiliate suite requires a fresh fixture database; it deliberately creates schools, payments, commissions and simulated payouts. Never run fixtures against a live database. Concurrency subprocesses inherit the test DSN; set `SCHOOLOS_PHP_COMMAND` when PHP is not on PATH.
 
 `website_browser.py` uses real Chromium against a loopback Experience runtime; `affiliate_http.py` checks direct-file guards, callback authentication and demo denial. `website_package_http.py` uploads the current two-stage packages to a disposable local Apache root based on 5.1.0, then rolls back and reinstalls. `website_release.py` checks manifests, historical hashes and deterministic rebuilds. Set `SCHOOLOS_TEST_OUTPUT` when rerunning `experience_browser.py` to keep historical evidence unchanged. See `docs/5.2.0/VALIDATION.md` for exact suite counts and limits.
+
+
+## Interactive website 5.2.1
+
+Run `website_interactions_browser.py` against the local Experience runtime for all 36 questions, themes, animation, pause controls and branding. `website_interactive_package.py` requires the disposable Apache root already at 5.2.0 and tests installation, exact rollback and reinstall. `website_interactive_release.py` checks the patch and the pinned historical archives. `website_browser.py` accepts `SCHOOLOS_TEST_OUTPUT` so regression screenshots/logs can be written under the current release without changing historical evidence.

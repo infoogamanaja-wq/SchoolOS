@@ -1,0 +1,3 @@
+No syntax errors detected in app/index.php
+No syntax errors detected in app/experience_ui.php
+No syntax errors detected in app/public_site.php

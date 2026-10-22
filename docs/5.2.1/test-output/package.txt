@@ -1,0 +1,18 @@
+PASS platform sign-in
+PASS single patch installs through existing 5.2 updater
+PASS installed version 5.2.1
+PASS deployed manifest index.php
+PASS deployed manifest experience_ui.php
+PASS deployed manifest public_site.php
+PASS deployed manifest public_site.css
+PASS deployed manifest public_site.js
+PASS deployed manifest VERSION.txt
+PASS new interactive homepage routes
+PASS shared mark in packaged dashboard
+PASS existing affiliate account preserved
+PASS frontend patch rollback succeeds
+PASS exact six baseline files restored
+PASS affiliate Finance Family private config and updater unchanged
+PASS single patch installs through existing 5.2 updater
+PASS reinstall restores interactive public page
+Interactive package: 17 assertions passed.

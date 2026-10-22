@@ -1,4 +1,10 @@
-# SchoolOS Nigeria — Website & Affiliates 5.2.0
+# SchoolOS Nigeria — Interactive Website 5.2.1
+
+A six-file frontend patch adds visible academic doodle movement, animated headline text, scroll reveals, hover spotlights, a persistent light/night switch and **36 challenges across six topics**. Public pages, login and dashboards now share the same SchoolOS mark. School-specific uploaded logos remain separate.
+
+On an existing **5.2.0** installation, test on staging and install `dist/SchoolOS-5.2.1-Interactive-Website.zip` through Super Admin → Updates & Plugins. No new updater support package or database migration is needed. Read the [release and validation notes](docs/5.2.1/RELEASE.md) and preview the [night website](docs/5.2.1/test-output/website-night-desktop.png).
+
+## Website & Affiliates 5.2.0
 
 A redesigned public website with responsive mobile layouts, working dashboard snapshots, academic facts, an interactive quiz, clear school onboarding paths and complete public information pages. Eighteen role guides are available as accessible pages and downloadable server-generated PDFs.
 

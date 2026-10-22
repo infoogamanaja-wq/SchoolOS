@@ -1,0 +1,27 @@
+PASS immutable historical archive SchoolOS-4.6.4-Updater-Repair.zip
+PASS immutable historical archive SchoolOS-4.6.5-Family-Portal.zip
+PASS immutable historical archive SchoolOS-4.6.6-Learning-Updater.zip
+PASS immutable historical archive SchoolOS-4.7.0-Teacher-Student-Portals.zip
+PASS immutable historical archive SchoolOS-4.7.1-Operations-Updater.zip
+PASS immutable historical archive SchoolOS-4.8.0-HR-Transport-Boarding.zip
+PASS immutable historical archive SchoolOS-4.8.1-Services-Updater.zip
+PASS immutable historical archive SchoolOS-4.9.0-Library-Inventory-Engagement-CMS.zip
+PASS immutable historical archive SchoolOS-4.9.1-Intelligence-Updater.zip
+PASS immutable historical archive SchoolOS-5.0.0-Intelligence-Innovations.zip
+PASS immutable historical archive SchoolOS-5.0.1-Experience-Updater.zip
+PASS immutable historical archive SchoolOS-5.1.0-Platform-Experience.zip
+PASS immutable historical archive SchoolOS-5.1.1-Website-Affiliate-Updater.zip
+PASS immutable historical archive SchoolOS-5.2.0-Website-Affiliates.zip
+PASS six-file patch manifest
+PASS ZIP integrity
+PASS no unexpected payload files
+PASS manifest source matches index.php
+PASS manifest source matches experience_ui.php
+PASS manifest source matches public_site.php
+PASS manifest source matches public_site.css
+PASS manifest source matches public_site.js
+PASS manifest source matches VERSION.txt
+PASS 0644 file permissions
+PASS private paths excluded
+PASS deterministic package rebuild
+Release: 26 assertions passed.
