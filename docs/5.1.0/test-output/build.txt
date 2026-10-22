@@ -1,0 +1,14 @@
+{
+  "SchoolOS-4.6.4-Updater-Repair.zip": "d8b389a56c0d5b2b2450e3fe02123daa6361344ee383e6f2066db515f80edd9c",
+  "SchoolOS-4.6.5-Family-Portal.zip": "af34f7b02a380fc398b587fd7c0030ef863f532ce9633298f9a96b75dc7ec438",
+  "SchoolOS-4.6.6-Learning-Updater.zip": "b854164e3decaed5908cbecc14ff65afd5bed703c58ec09a1851cbc2cf191e61",
+  "SchoolOS-4.7.0-Teacher-Student-Portals.zip": "1be831a21e6cbf1cb2f0c2f66f90722110ceb12a9e70c09cf000a9f1eb093b3c",
+  "SchoolOS-4.7.1-Operations-Updater.zip": "8bf99492e9d69cc4480ad1e856fb7724018c72ab31c2bb4cd97ffc4c39f7c600",
+  "SchoolOS-4.8.0-HR-Transport-Boarding.zip": "3d2d98bc6111df73aca35161c5a2fd84fb7d6e4462729a9700b33ed0749758d6",
+  "SchoolOS-4.8.1-Services-Updater.zip": "5bd2082e4f8283386a6657e8e511610f061924866cc71fb4c4bf37d626e20ca5",
+  "SchoolOS-4.9.0-Library-Inventory-Engagement-CMS.zip": "0b81fb620b014c7fccf2581772a3fe81b40f97bde24b436d760147fd78ad83d4",
+  "SchoolOS-4.9.1-Intelligence-Updater.zip": "15b868f9b7d84d1d09848aab70d6cbeddbf77248f45897e100bee9935651af3c",
+  "SchoolOS-5.0.0-Intelligence-Innovations.zip": "a3a2d61d05190c157ddfa212765cc516d289375ce72cbedc504528a99a0a8ffe",
+  "SchoolOS-5.0.1-Experience-Updater.zip": "4ee2767f7cd0b53ac0f731a4bbfaeea2464b3e26e94e53ee9500c78af8ae1cd6",
+  "SchoolOS-5.1.0-Platform-Experience.zip": "12d32455e6e205866362ed9a84aedf34cc120a89e60c34d4153c9a1afdda3344"
+}

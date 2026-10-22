@@ -143,3 +143,25 @@ python3 tests/intelligence_release.py
 The domain fixture includes synthetic independent reviewers, cashier, parent, teacher and cross-school accounts. Provider responses are injected mocks; no real external send/payment is needed. MariaDB compatibility tests use a separately seeded instance/socket. `intelligence_http.py` targets a matching local runtime clone (default loopback port 8090 `/intelligence`); `intelligence_package_http.py` targets a disposable local Apache root with baseline 4.9.0 and fresh pre-Intelligence fixtures. Package tests replace files and perform frontend rollback: **never run them against a live installation**. Python HTTP suites that invoke PHP accept `SCHOOLOS_PHP_COMMAND`. Existing Family/Learning/Operations/Services regressions each need their own freshly seeded fixture database.
 
 Release evidence and limitations are in `docs/5.0.0/VALIDATION.md`. The offline JS suite executes WebCrypto and queue logic; it does not substitute for Android/IndexedDB/service-worker acceptance testing.
+
+## Platform Experience 5.1.0
+
+Use a fresh, disposable main database ending `_test` and a separate empty `schoolos_experience_test_demo` database. Set `SCHOOLOS_ALLOW_TEST_FIXTURES=1`, `SCHOOLOS_TEST_DSN`, `SCHOOLOS_TEST_USER` and `SCHOOLOS_TEST_PASSWORD`. Never use a live school database or production credentials. PHP 8.4 with the documented extensions and MariaDB are required.
+
+```sh
+php tests/seed.php
+php tests/learning_seed.php
+php tests/operations_seed.php
+php tests/services_seed.php
+php tests/experience.php
+php tests/experience_concurrency.php
+python3 tests/experience_release.py
+```
+
+The demo fixture host/credentials are local test-only values. For a second database engine, change both the explicit test DSN and PHP's default PDO MySQL socket (including child-process configuration), because demo provisioning opens its own connection. The fixture deliberately refuses populated databases. The missing-key test temporarily moves and restores only the synthetic application credential key; run it separately from other tests that use that key. Do not copy production keys into fixtures.
+
+`experience_http.py` checks a matching local runtime clone, default `http://127.0.0.1:8090/experience`. `experience_browser.py` uses Playwright and local Chromium, with `SCHOOLOS_EXPERIENCE_BASE` and `SCHOOLOS_CHROMIUM` overrides; it captures the fictional UI screenshots. Browser dependencies are test-only. Clear demo walkthrough progress through the guarded fixture refresh before replaying first-run browser checks.
+
+`experience_package_http.py` installs/activates/rolls back/reinstalls through a disposable local Apache frontend seeded with 5.0.0 and a fresh test database. It additionally provisions an empty `schoolos_package_test_demo` database and tests demo session isolation across rollback. Never point it at a live installation. Existing suites require their own separately seeded fixtures, as documented above.
+
+The unlinked-learner login test now expects a helpful overview while retaining its protected Learning-route 403 assertion. `tests/bootstrap.php` resolves extracted index functions' `__DIR__` to the application directory so credential/storage behavior matches the real runtime. Historical ZIPs remain immutable. Evidence and limitations are in `docs/5.1.0/VALIDATION.md`.

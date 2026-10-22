@@ -8,7 +8,7 @@ function load_index_functions():void {
   $j=$i+1;while($j<$n&&is_array($tokens[$j])&&$tokens[$j][0]===T_WHITESPACE)$j++;
   if(!is_array($tokens[$j])||$tokens[$j][0]!==T_STRING)continue;
   $code='';$depth=0;$opened=false;
-  for(;$i<$n;$i++){$tok=$tokens[$i];$text=is_array($tok)?$tok[1]:$tok;$code.=$text;if($tok==='{'){$depth++;$opened=true;}elseif($tok==='}'){$depth--;if($opened&&$depth===0)break;}}
+  for(;$i<$n;$i++){$tok=$tokens[$i];$text=is_array($tok)?($tok[0]===T_DIR?var_export(realpath(__DIR__.'/../app'),true):$tok[1]):$tok;$code.=$text;if($tok==='{'){$depth++;$opened=true;}elseif($tok==='}'){$depth--;if($opened&&$depth===0)break;}}
   eval($code);
  }
 }
@@ -25,3 +25,5 @@ foreach(['services_core.php','library_manager.php','inventory_manager.php','enga
 
 define('SCHOOLOS_INSIGHTS_LIBRARY',true);
 foreach(['insights_core.php', 'intelligence_reports.php', 'school_innovations.php', 'academic_tools.php', 'school_wallet.php', 'governance_hub.php'] as $module)require __DIR__.'/../app/'.$module;
+
+define('SCHOOLOS_EXPERIENCE',true);foreach(['experience.php','experience_ui.php','experience_admin.php','experience_demo.php'] as $module)require __DIR__.'/../app/'.$module;

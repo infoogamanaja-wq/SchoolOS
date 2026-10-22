@@ -31,7 +31,7 @@ function fn45Install():void {global $pdo;
  "CREATE TABLE IF NOT EXISTS fn45_gateway(id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,tenant_id BIGINT UNSIGNED NOT NULL,invoice_id BIGINT UNSIGNED NOT NULL,reference VARCHAR(110) NOT NULL,amount_kobo BIGINT NOT NULL,authorization_url TEXT NULL,status VARCHAR(25) NOT NULL DEFAULT 'pending',verified_at DATETIME NULL,created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,UNIQUE KEY gateway_ref(reference),INDEX(tenant_id,invoice_id)) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4"
  ] as $sql)$pdo->exec($sql);
 }
-function fn45Api(string $method,string $path,string $secret,?array $payload=null):array {
+function fn45Api(string $method,string $path,string $secret,?array $payload=null):array {if(defined('SCHOOLOS_DEMO_MODE'))throw new RuntimeException('External providers are disabled in the demo.');
  if(!function_exists('curl_init'))throw new RuntimeException('Server PHP cURL extension is required.');
  $ch=curl_init('https://api.paystack.co'.$path);$headers=['Authorization: Bearer '.$secret,'Accept: application/json'];
  if($payload!==null){$headers[]='Content-Type: application/json';curl_setopt($ch,CURLOPT_POSTFIELDS,json_encode($payload,JSON_THROW_ON_ERROR));}

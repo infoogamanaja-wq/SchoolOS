@@ -7,3 +7,5 @@ app/uploads/schoolos-logos/*
 app/.installed.lock
 __pycache__/
 *.log
+
+tests/storage/

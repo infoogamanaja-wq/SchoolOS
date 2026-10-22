@@ -1,0 +1,91 @@
+PASS login hr@test.local
+PASS login admin@test.local
+PASS login driver@test.local
+PASS login warden@test.local
+PASS login otherwarden@test.local
+PASS login parent@test.local
+PASS login student@test.local
+PASS login teacher@test.local
+PASS login foreignhr@test.local
+PASS HTTP hr records
+PASS HTTP hr recruitment
+PASS HTTP hr onboarding
+PASS HTTP hr contracts
+PASS HTTP hr departments
+PASS HTTP hr attendance
+PASS HTTP hr leave
+PASS HTTP hr duties
+PASS HTTP hr salaries
+PASS HTTP hr allowances
+PASS HTTP hr policy
+PASS HTTP hr payslips
+PASS HTTP hr advances
+PASS HTTP hr evaluations
+PASS HTTP hr development
+PASS HTTP hr grievances
+PASS HTTP hr exit
+PASS HTTP transport vehicles
+PASS HTTP transport drivers
+PASS HTTP transport routes
+PASS HTTP transport assignments
+PASS HTTP transport fees
+PASS HTTP transport trips
+PASS HTTP transport events
+PASS HTTP transport suggestions
+PASS HTTP transport trips
+PASS HTTP transport events
+PASS HTTP boarding dashboard
+PASS HTTP boarding rooms
+PASS HTTP boarding allocations
+PASS HTTP boarding fees
+PASS HTTP boarding movements
+PASS HTTP boarding leave
+PASS HTTP boarding visitors
+PASS HTTP boarding roll
+PASS HTTP boarding incidents
+PASS HTTP boarding maintenance
+PASS HTTP boarding supplies
+PASS HTTP boarding meals
+PASS HTTP hr records
+PASS HTTP hr onboarding
+PASS HTTP hr contracts
+PASS HTTP hr attendance
+PASS HTTP hr leave
+PASS HTTP hr duties
+PASS HTTP hr payslips
+PASS HTTP hr advances
+PASS HTTP hr evaluations
+PASS HTTP hr development
+PASS HTTP hr grievances
+PASS HTTP hr exit
+PASS parent linked child transport
+PASS parent linked child boarding
+PASS parent denied HR route
+PASS student linked child transport
+PASS student linked child boarding
+PASS student denied HR route
+PASS unassigned warden private data denied
+PASS other school personnel hidden
+PASS own payslip private download
+PASS driver cannot download another employee payslip
+PASS parent cannot download another employee payslip
+PASS foreign cannot download another employee payslip
+PASS private PDF upload and PRG
+PASS employee private PDF access
+PASS peer private contract denied
+PASS cross-school private contract denied
+PASS parent private contract denied
+PASS HTTP CSRF denial
+PASS direct library guarded operations_core.php
+PASS direct library guarded hr_payroll.php
+PASS direct library guarded transport_portal.php
+PASS direct library guarded boarding_portal.php
+PASS legacy route staff
+PASS legacy route vehicles
+PASS legacy route hostels
+PASS existing application index.php
+PASS existing application index.php?s=family&child=1&view=homework
+PASS existing application index.php?s=learning&view=classes
+PASS existing application index.php?s=fees
+PASS existing application index.php?s=announcements
+TOTAL 90 passed

@@ -1,0 +1,24 @@
+PASS historical archive unchanged SchoolOS-4.6.4-Updater-Repair.zip
+PASS historical archive unchanged SchoolOS-4.6.5-Family-Portal.zip
+PASS historical archive unchanged SchoolOS-4.6.6-Learning-Updater.zip
+PASS historical archive unchanged SchoolOS-4.7.0-Teacher-Student-Portals.zip
+PASS historical archive unchanged SchoolOS-4.7.1-Operations-Updater.zip
+PASS historical archive unchanged SchoolOS-4.8.0-HR-Transport-Boarding.zip
+PASS historical archive unchanged SchoolOS-4.8.1-Services-Updater.zip
+PASS historical archive unchanged SchoolOS-4.9.0-Library-Inventory-Engagement-CMS.zip
+PASS historical archive unchanged SchoolOS-4.9.1-Intelligence-Updater.zip
+PASS historical archive unchanged SchoolOS-5.0.0-Intelligence-Innovations.zip
+PASS published digest SchoolOS-5.0.1-Experience-Updater.zip
+PASS complete ZIP manifest SchoolOS-5.0.1-Experience-Updater.zip
+PASS exact validated source bytes SchoolOS-5.0.1-Experience-Updater.zip
+PASS no private directories or configuration SchoolOS-5.0.1-Experience-Updater.zip
+PASS dependencies accounted for SchoolOS-5.0.1-Experience-Updater.zip
+PASS normal 0644 package permissions SchoolOS-5.0.1-Experience-Updater.zip
+PASS published digest SchoolOS-5.1.0-Platform-Experience.zip
+PASS complete ZIP manifest SchoolOS-5.1.0-Platform-Experience.zip
+PASS exact validated source bytes SchoolOS-5.1.0-Platform-Experience.zip
+PASS no private directories or configuration SchoolOS-5.1.0-Platform-Experience.zip
+PASS dependencies accounted for SchoolOS-5.1.0-Platform-Experience.zip
+PASS normal 0644 package permissions SchoolOS-5.1.0-Platform-Experience.zip
+PASS deterministic rebuild and unchanged history
+TOTAL 23 passed

@@ -1,0 +1,10 @@
+PASS Apache DirectoryIndex serves PHP homepage
+PASS Apache rewrite falls back to application
+PASS Apache blocks /storage/system/version.json
+PASS Apache blocks /storage/system/backups/
+PASS Apache blocks /config.php
+PASS Apache blocks /.git/config
+PASS Apache blocks /database/schema.sql
+PASS Apache direct portal route redirects safely
+PASS Apache FastCGI authenticated parent route
+TOTAL 9 passed

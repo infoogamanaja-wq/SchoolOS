@@ -15,7 +15,7 @@ def req(c,path,data=None):
 def token(b):return re.search(r'name=["\']?csrf["\']?\s+value=["\']([^"\']+)',b)[1]
 def login(email,unlinked=False):
  c=client();_,b,_=req(c,'index.php?login=1');s,b,_=req(c,'index.php?login=1',{'csrf':token(b),'login':1,'email':email,'password':'Local-test-password-2026!'})
- ok((s==403 and 'exactly one student record' in b) if unlinked else (s==200 and 'Sign out' in b),'login '+email);return c
+ ok((s==200 and 'A verified student link is still needed' in b) if unlinked else (s==200 and 'Sign out' in b),'login '+email);return c
 teacher=login('teacher@test.local');student=login('student@test.local');other=login('student2@test.local');admin=login('admin@test.local');parent=login('parent@test.local')
 for c,title,views in [(teacher,'Teacher Portal',['classes','attendance','timetable','lessons','syllabus','assignments','questions','scores','bulk','corrections','analytics','messages','resources','incidents','leave','pd','ai']),(student,'Student Portal',['dashboard','timetable','homework','resources','cbt','grades','attendance','feedback','announcements','clubs','library','badges','planner','ai'])]:
  for view in views:

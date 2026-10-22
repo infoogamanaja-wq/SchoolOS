@@ -1,0 +1,5 @@
+PASS 1 parallel subscription confirmations are idempotent
+PASS 2 parallel verification extends one monthly period only
+PASS 3 concurrent approval applies once
+PASS 4 concurrent approval does not infer private child links
+Experience concurrency: 4 assertions passed.

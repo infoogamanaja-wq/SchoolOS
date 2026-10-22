@@ -1,0 +1,151 @@
+PASS services require explicit activation
+PASS staff cannot activate schemas
+PASS administrator activates all service tables
+PASS repeated activation creates no duplicate business records
+PASS delegated librarian cannot grant access
+PASS cross-school capability denied
+PASS services CSRF required
+PASS ISBN10 and ISBN13 normalize with correct checksums
+PASS bad ISBN checksum rejected
+PASS duplicate waiting reservation rejected
+PASS unlinked family cannot request another child loan
+PASS librarian cannot change another school book
+PASS legacy school review respects first reservation priority
+PASS librarian issue decrements shared available stock
+PASS duplicate issue rejected
+PASS daily overdue reminders do not duplicate
+PASS overdue fine calculates three days once through Finance
+PASS loss removes physical copy without restoring available stock
+PASS loss cannot charge twice
+PASS lost copy recovery restores stock once
+PASS lost-copy recovery cannot replay
+PASS copy adjustment cannot make stock negative
+PASS ebook URL requires active licensed seat
+PASS licensed ebook access granted to seat holder
+PASS ebook licence seat limit enforced
+PASS foreign school ebook denied
+PASS disabled licence blocks existing seat access
+PASS unsafe digital resource URL denied
+PASS local QR label has expected version and quiet zone
+PASS parent cannot make purchase request
+PASS requester cannot approve own purchase
+PASS submitted purchase order is frozen
+PASS order creator cannot approve own order
+PASS partial goods receipt retry does not duplicate stock
+PASS over-receipt rejected
+PASS supplier payment posts only once
+PASS purchase payable and payment journals balance
+PASS stock audit snapshots variance without silent adjustment
+PASS issuance cannot overdraw stock
+PASS other parent cannot cancel store order
+PASS store handover blocked before confirmed payment
+PASS paid store handover cannot replay
+PASS store stock reserved once at approval
+PASS straight-line monthly depreciation known vector
+PASS depreciation cannot post a period twice
+PASS stock capability does not grant asset access
+PASS communications manager cannot invent recipient consent
+PASS minor account cannot self-authorize external channels
+PASS unlinked guardian cannot consent for student
+PASS credit allocation reference is idempotent
+PASS email adapter renders intended school/recipient
+PASS provider acceptance is not labelled delivered
+PASS external send reserves exact messaging units
+PASS worker repeat does not resend or duplicate in-app post
+PASS revocation after queue prevents provider call
+PASS newsletter purpose is forced to marketing
+PASS operational consent alone cannot authorize a newsletter
+PASS definite provider rejection refunds credits
+PASS uncertain outcome is retained without unsafe automatic retry
+PASS unknown delivery is not retried automatically
+PASS teacher cannot broadcast school-wide
+PASS teacher cannot broadcast to unassigned class
+PASS class broadcast includes linked parents and excludes unlinked students
+PASS poll allows one vote per recipient
+PASS nonrecipient cannot vote in private poll
+PASS WhatsApp adapter uses approved-template request and normalized phone
+PASS unsigned delivery webhook rejected
+PASS signed correct-school callback confirms WhatsApp delivery
+PASS duplicate signed callback is idempotent
+PASS other school cannot consume signed callback
+PASS new CMS draft is not public
+PASS editor cannot approve own content
+PASS old published revision remains live while replacement is draft
+PASS publication atomically replaces old revision
+PASS other school cannot inspect private CMS revisions
+PASS identifiable testimonial requires publication consent
+PASS domain cannot verify without DNS ownership and CNAME
+PASS only verified exact allowlisted custom domain routes
+PASS invalid hostname denied
+PASS public site token resolves one school only
+PASS public enquiry integrates existing Admissions CRM
+PASS public enquiry replay rejected
+PASS tour hold capacity prevents overbooking
+PASS wrong gateway amount cannot confirm website booking
+PASS exact gateway verification books tour and posts balanced advance
+PASS verified website payment cannot duplicate
+PASS other school cannot verify private booking
+PASS tour with live bookings cannot be withdrawn blindly
+PASS public website contains approved current content and no booking list
+PASS communications manager cannot change private provider credentials
+PASS encrypted provider settings decrypt only for their school
+PASS missing encryption key fails closed when credentials exist
+PASS missing credential key is not silently regenerated
+PASS provider secret is not stored in plaintext
+PASS server-managed provider override takes precedence
+PASS provider credential control characters rejected
+PASS delivery audience does not inherit Community Hub admin-read override
+PASS guardian consent stops applying when explicit child link is removed
+PASS future scheduled campaign is not dispatched early
+PASS legacy Community Hub email queue uses one campaign per post and recipient
+PASS legacy Community Hub email cannot bypass revoked consent
+PASS existing SMTP adapter preserves intended recipient
+PASS existing SMTP handoff is reported as accepted only
+PASS late verified payment with occupied capacity is flagged for review instead of overbooking
+PASS library view catalogue renders
+PASS library view resources renders
+PASS library view loans renders
+PASS library view reservations renders
+PASS library view overdue renders
+PASS library view history renders
+PASS library view reports renders
+PASS library view labels renders
+PASS inventory view store renders
+PASS inventory view orders renders
+PASS inventory view requests renders
+PASS inventory view stock renders
+PASS inventory view suppliers renders
+PASS inventory view purchases renders
+PASS inventory view alerts renders
+PASS inventory view audits renders
+PASS inventory view assets renders
+PASS inventory view depreciation renders
+PASS inventory view maintenance renders
+PASS engagement view feed hides secrets
+PASS engagement view events hides secrets
+PASS engagement view messages hides secrets
+PASS engagement view consent hides secrets
+PASS engagement view compose hides secrets
+PASS engagement view campaigns hides secrets
+PASS engagement view templates hides secrets
+PASS engagement view logs hides secrets
+PASS engagement view credits hides secrets
+PASS engagement view providers hides secrets
+PASS CMS view site renders
+PASS CMS view content renders
+PASS CMS view approval renders
+PASS CMS view domains renders
+PASS CMS view enquiries renders
+PASS CMS view tours renders
+PASS family/student library history scoped
+PASS family/student store view excludes procurement records
+PASS family/student library history scoped
+PASS family/student store view excludes procurement records
+PASS capability revocation takes immediate effect
+PASS existing student records unchanged
+PASS existing authentication hashes unchanged
+PASS other school catalogue unchanged
+PASS existing Finance invoice unchanged
+PASS existing Finance invoice unchanged
+PASS existing Finance invoice unchanged
+TOTAL 150 passed

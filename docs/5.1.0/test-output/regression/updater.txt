@@ -1,0 +1,28 @@
+PASS syntax rejected before activation
+PASS stable index preserved after syntax failure
+PASS missing literal dependency rejected
+PASS explicit missing dependency rejected
+PASS traversal rejected
+PASS configuration overwrite rejected
+PASS undeclared payload rejected
+PASS tampering rejected
+PASS ZIP symlink rejected
+PASS destination symlink rejected
+PASS activation failure rolls back
+PASS rollback restores stable index
+PASS rollback retains new dependency
+PASS rollback restores version metadata
+PASS valid update installed
+PASS installed PHP mode 0644
+PASS same version rejected inside lock
+PASS concurrent update rejected
+PASS manual rollback restores stable entry
+PASS manual rollback does not delete portal
+PASS interrupted deployment recovered from journal
+PASS backup storage protected
+PASS corrupted backup rejected
+PASS corrupt backup cannot overwrite live index
+PASS approved static directory created after verification
+PASS nested rollback retains shell and working index
+PASS offline parent symlink rejected
+TOTAL 27 passed

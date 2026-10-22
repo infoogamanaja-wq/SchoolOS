@@ -1,0 +1,36 @@
+PASS support package leaves working 5.0.0 index unchanged
+PASS main release installed through frontend
+PASS deployed source matches package manifest
+PASS Finance Family Operations and private config bytes preserved
+PASS explicit additive activation remains required
+PASS packaged Experience activation
+PASS packaged school route index.php?s=workspace
+PASS packaged school route index.php?s=welcome
+PASS packaged school route index.php?s=welcome&view=access
+PASS packaged school route index.php?s=welcome&view=modules
+PASS packaged school route index.php?s=learning
+PASS packaged school route index.php?s=operations
+PASS packaged school route index.php?s=services
+PASS packaged school route index.php?s=intelligence
+PASS packaged asset experience.css
+PASS packaged asset experience.js
+PASS packaged asset login.html
+PASS packaged asset register.html
+PASS packaged asset onboarding.html
+PASS packaged asset dashboard.html
+PASS existing configured plan creation
+PASS packaged platform signup policy
+PASS packaged frontend provisions isolated demo
+PASS packaged role login enters separate database
+PASS public school registration enters guided onboarding
+PASS new school owner overview and setup alerts
+PASS existing family homework preserved
+PASS frontend rollback succeeds
+PASS rollback restores exact stable 5.0.0 index
+PASS rollback restores exact modified libraries and entry templates
+PASS unmodified Finance view Family Operations and private config preserved
+PASS rollback retains new dependency files
+PASS homepage works after rollback
+PASS demo session ID cannot authenticate into stable production app after rollback
+PASS reinstall preserves newly registered school and subscription
+TOTAL 35 passed

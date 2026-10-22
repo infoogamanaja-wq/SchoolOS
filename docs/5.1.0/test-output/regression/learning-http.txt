@@ -1,0 +1,56 @@
+PASS login teacher@test.local
+PASS login student@test.local
+PASS login student2@test.local
+PASS login admin@test.local
+PASS login parent@test.local
+PASS HTTP Teacher Portal classes
+PASS HTTP Teacher Portal attendance
+PASS HTTP Teacher Portal timetable
+PASS HTTP Teacher Portal lessons
+PASS HTTP Teacher Portal syllabus
+PASS HTTP Teacher Portal assignments
+PASS HTTP Teacher Portal questions
+PASS HTTP Teacher Portal scores
+PASS HTTP Teacher Portal bulk
+PASS HTTP Teacher Portal corrections
+PASS HTTP Teacher Portal analytics
+PASS HTTP Teacher Portal messages
+PASS HTTP Teacher Portal resources
+PASS HTTP Teacher Portal incidents
+PASS HTTP Teacher Portal leave
+PASS HTTP Teacher Portal pd
+PASS HTTP Teacher Portal ai
+PASS HTTP Student Portal dashboard
+PASS HTTP Student Portal timetable
+PASS HTTP Student Portal homework
+PASS HTTP Student Portal resources
+PASS HTTP Student Portal cbt
+PASS HTTP Student Portal grades
+PASS HTTP Student Portal attendance
+PASS HTTP Student Portal feedback
+PASS HTTP Student Portal announcements
+PASS HTTP Student Portal clubs
+PASS HTTP Student Portal library
+PASS HTTP Student Portal badges
+PASS HTTP Student Portal planner
+PASS HTTP Student Portal ai
+PASS school administrator approval screens
+PASS parent denied Teacher/Student portal
+PASS login unlinked@test.local
+PASS unlinked student route denied
+PASS direct module routes through authenticated application
+PASS another student attempt route denied index.php?s=exams&attempt=1
+PASS another student attempt route denied index.php?s=learning&view=cbt&attempt=1
+PASS study planner form and PRG redirect
+PASS HTTP CSRF denial
+PASS legacy LMS cannot erase a graded submission
+PASS legacy welfare form cannot bypass teacher allocation
+PASS existing integration index.php?s=family&child=1&view=messages
+PASS existing integration index.php?s=fees
+PASS existing integration index.php?s=announcements
+PASS actual CSV multipart upload previews rows
+PASS CSV preview confirmation commits rows
+PASS actual homework attachment accepted in protected database storage
+PASS owner downloads homework attachment
+PASS other student homework download denied
+TOTAL 55 passed

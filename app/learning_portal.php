@@ -94,7 +94,7 @@ function lp_cbt_save(array $u,int $id,array $answers,bool $submit): string {
   if($submit)cbFinalize($tid,$id);$pdo->commit();return $submit?'Exam submitted. Results appear after school publication.':'Answers saved. The timer continues.';
  }catch(Throwable $e){if($pdo->inTransaction())$pdo->rollBack();throw $e;}
 }
-function lp_ai_api(string $path,array $payload,string $key): array {
+function lp_ai_api(string $path,array $payload,string $key): array {if(defined('SCHOOLOS_DEMO_MODE'))throw new RuntimeException('External providers are disabled in the demo.');
  $ch=curl_init('https://api.openai.com/v1/'.$path);curl_setopt_array($ch,[CURLOPT_POST=>true,CURLOPT_POSTFIELDS=>json_encode($payload,JSON_THROW_ON_ERROR),CURLOPT_HTTPHEADER=>['Authorization: Bearer '.$key,'Content-Type: application/json'],CURLOPT_RETURNTRANSFER=>true,CURLOPT_CONNECTTIMEOUT=>8,CURLOPT_TIMEOUT=>30,CURLOPT_SSL_VERIFYPEER=>true,CURLOPT_SSL_VERIFYHOST=>2]);
  $raw=curl_exec($ch);$status=(int)curl_getinfo($ch,CURLINFO_HTTP_CODE);curl_close($ch);if($raw===false||$status<200||$status>=300)throw new RuntimeException('AI provider unavailable. Try again later or ask your teacher.');$r=json_decode($raw,true,512,JSON_THROW_ON_ERROR);return $r;
 }
