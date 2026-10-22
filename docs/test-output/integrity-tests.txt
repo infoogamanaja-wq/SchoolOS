@@ -1,0 +1,5 @@
+PASS monitor accepts matching hashes
+PASS monitor detects missing index without recreating it
+PASS monitor detects altered portal
+PASS monitor refuses an incomplete baseline
+TOTAL 4 passed

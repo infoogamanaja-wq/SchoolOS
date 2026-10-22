@@ -1,0 +1,1 @@
+<?php return ['db'=>['host'=>'localhost','name'=>'schoolos','user'=>'schoolos_user','pass'=>'CHANGE_ME'],'app'=>['name'=>'SchoolOS Nigeria','timezone'=>'Africa/Lagos'],'providers'=>['paystack_secret_key'=>'','whatsapp_token'=>'','sms_token'=>'','ai_api_key'=>'']];

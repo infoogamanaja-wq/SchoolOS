@@ -1,0 +1,17 @@
+DirectoryIndex index.php
+Options -Indexes
+RewriteEngine On
+RewriteRule (^|/)\. - [F,L]
+RewriteRule ^(database|vendor|node_modules|storage|tests|src|backend|frontend|config)/ - [F,L,NC]
+<FilesMatch "^(config\.php|composer\.(json|lock)|package(-lock)?\.json|database\.sqlite|\.env.*)$">
+Require all denied
+</FilesMatch>
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
+
+RewriteRule ^storage/ - [F,L,NC]
+
+<FilesMatch "\.(zip|smnew|smrestore|tmp)$">
+Require all denied
+</FilesMatch>

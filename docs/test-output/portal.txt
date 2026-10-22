@@ -1,0 +1,62 @@
+PASS multiple explicit children
+PASS same-tenant unlinked child denied
+PASS foreign-tenant child denied
+PASS activation is idempotent and preserves rows
+PASS parent cannot activate schema
+PASS CSRF denied
+PASS render children without private data
+PASS render results without private data
+PASS results exclude drafts
+PASS render attendance without private data
+PASS render fees without private data
+PASS render receipts without private data
+PASS render homework without private data
+PASS published academic homework integration
+PASS render messages without private data
+PASS render calendar without private data
+PASS render bookings without private data
+PASS render absence without private data
+PASS render consent without private data
+PASS render pickup without private data
+PASS render transport without private data
+PASS render meals without private data
+PASS render documents without private data
+PASS render support without private data
+PASS render surveys without private data
+PASS invalid calendar date denied
+PASS reversed absence dates denied
+PASS school absence review
+PASS absence approval preserves attendance records
+PASS pickup approval and revocation
+PASS revoked pickup cannot be reapproved
+PASS parent teacher message and reply
+PASS teacher cannot review school absence requests
+PASS support integrates existing Support Desk
+PASS consent updates one child-specific response
+PASS siblings have separate consent
+PASS meal choice persists
+PASS invalid meal choice denied
+PASS private child consent denied
+PASS cross-tenant survey denied
+PASS closed response window denied
+PASS appointment double booking denied
+PASS cancelled appointment can be rebooked without deleting history
+PASS overlapping teacher slots denied
+PASS parent cannot publish school posts
+PASS staff publishes transport update
+PASS administrator review workspace renders
+PASS teacher sees assigned messages only
+PASS Community Hub class posts visible to linked parents
+PASS Community Hub private message remains private
+PASS unlinked child invoice denied
+PASS foreign invoice denied
+PASS provider amount mismatch rejected
+PASS failed verification leaves gateway pending
+PASS verified payment posts once on repeat verification
+PASS payment posted to existing Finance invoice
+PASS double entry ledger posted
+PASS disabled parent session denied
+PASS all existing student records preserved
+PASS authentication hashes preserved
+PASS legacy invoices preserved
+TOTAL 61 passed

@@ -1,0 +1,38 @@
+{
+    "checked_at": "2026-10-22T11:14:40+00:00",
+    "ok": true,
+    "files": {
+        "index.php": {
+            "ok": true,
+            "exists": true,
+            "sha256": "608e7c209df5172539570123a6b74937bf3cd0743c629030057ea7750c66b277",
+            "inode": 524458,
+            "mode": "644",
+            "mtime": "2026-10-22T11:14:39+00:00"
+        },
+        "parent_portal.php": {
+            "ok": true,
+            "exists": true,
+            "sha256": "45000246e2700f5a6e1a31654a838dfbf692cc2a7e6a980f236c323cfdf29ec6",
+            "inode": 525860,
+            "mode": "644",
+            "mtime": "2026-10-22T11:14:39+00:00"
+        },
+        "system_manager.php": {
+            "ok": true,
+            "exists": true,
+            "sha256": "cf61e4c36a6e641e21dc887061d7fae30171759948c595804f6b04ef000cb994",
+            "inode": 525851,
+            "mode": "644",
+            "mtime": "2026-10-22T11:14:39+00:00"
+        },
+        "finance_engine.php": {
+            "ok": true,
+            "exists": true,
+            "sha256": "25a3011b2ed3cf8f1ec5a6388055ab57c3f32ee31b0e6739d361a427bb96bea9",
+            "inode": 524462,
+            "mode": "644",
+            "mtime": "2026-10-22T11:14:39+00:00"
+        }
+    }
+}

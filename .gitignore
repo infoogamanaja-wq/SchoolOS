@@ -1,0 +1,9 @@
+app/config.php
+app/storage/
+app/uploads/*
+!app/uploads/schoolos-logos/
+app/uploads/schoolos-logos/*
+!app/uploads/schoolos-logos/.htaccess
+app/.installed.lock
+__pycache__/
+*.log

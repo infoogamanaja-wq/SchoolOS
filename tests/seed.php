@@ -1,0 +1,28 @@
+<?php
+require __DIR__.'/bootstrap.php';
+if(getenv('SCHOOLOS_ALLOW_TEST_FIXTURES')!=='1')throw new RuntimeException('Set SCHOOLOS_ALLOW_TEST_FIXTURES=1 for an empty disposable database only.');
+if((int)g('SELECT COUNT(*) FROM information_schema.tables WHERE table_schema=DATABASE()')>0)throw new RuntimeException('Fixture database must be empty.');
+$pdo->exec(file_get_contents(__DIR__.'/../app/database/schema.sql'));
+ecoMigrate();acInstall();sisInstall();awInstall();cmInstall();fnInstall();fn45Install();pp_install();
+q("INSERT INTO tenants(id,name) VALUES(1,'Test Academy'),(2,'Other School')");
+$pwd=password_hash('Local-test-password-2026!',PASSWORD_DEFAULT);
+foreach([[1,1,'parent@test.local','parent','Test Parent'],[2,1,'admin@test.local','school_admin','School Admin'],[3,1,'teacher@test.local','teacher','Test Teacher'],[4,1,'other@test.local','parent','Other Parent'],[5,2,'foreign@test.local','parent','Foreign Parent'],[6,null,'platform@test.local','platform_super_admin','Platform Admin'],[7,1,'student@test.local','student','Student Portal']] as $u)q('INSERT INTO users(id,tenant_id,email,role,name,password_hash) VALUES(?,?,?,?,?,?)',array_merge($u,[$pwd]));
+q("INSERT INTO classes(id,tenant_id,name,section,session_name) VALUES(1,1,'Primary 5','A','2026/2027'),(2,2,'Primary 5','B','2026/2027')");
+q("INSERT INTO students(id,tenant_id,student_no,name,class_id,email) VALUES(1,1,'TEST-1','Amara',1,'amara@test.local'),(2,1,'TEST-2','Tomi',1,'tomi@test.local'),(3,1,'TEST-3','Private Child',1,'private@test.local'),(4,2,'TEST-4','Foreign Child',2,'foreign-child@test.local')");
+q("INSERT INTO ecosystem_links(tenant_id,user_id,student_id,relation_type) VALUES(1,1,1,'parent'),(1,1,2,'parent'),(1,4,3,'parent'),(2,5,4,'parent'),(1,7,1,'student')");
+q("INSERT INTO subjects(id,tenant_id,name,code) VALUES(1,1,'Mathematics','MTH'),(2,2,'English','ENG')");
+q("INSERT INTO results(tenant_id,student_id,subject_id,score,grade,status) VALUES(1,1,1,85,'A','published'),(1,1,1,11,'F','draft'),(1,3,1,99,'A','published')");
+q("INSERT INTO attendance(tenant_id,student_id,attendance_date,status) VALUES(1,1,CURRENT_DATE(),'present')");
+q("INSERT INTO teachers(id,tenant_id,name,email,phone) VALUES(1,1,'Test Teacher','teacher@test.local','08012345678')");
+q("INSERT INTO ac_curriculum(id,tenant_id,class_id,subject_id,session_name,term_name,topic) VALUES(1,1,1,1,'2026/2027','First','Fractions')");
+q("INSERT INTO ac_lessons(tenant_id,curriculum_id,teacher_id,lesson_date,plan,homework,status) VALUES(1,1,1,CURRENT_DATE(),'Fractions lesson','Complete page 12','delivered')");
+q("INSERT INTO fn_invoices(id,tenant_id,student_id,reference,description,amount_kobo) VALUES(1,1,1,'TEST-FEE-1','Tuition',1000000),(2,1,3,'PRIVATE-FEE','Private invoice',1000000),(3,2,4,'FOREIGN-FEE','Foreign invoice',1000000)");
+q("INSERT INTO fn_payments(id,tenant_id,invoice_id,reference,amount_kobo,channel,status,confirmed_at) VALUES(1,1,1,'TEST-RECEIPT',10000,'bank','confirmed',NOW()),(2,1,2,'PRIVATE-RECEIPT',10000,'bank','confirmed',NOW())");
+q("INSERT INTO cm_posts(tenant_id,author_id,title,body,audience,class_id) VALUES(1,2,'Class announcement','Class community message','class',1)");
+q("INSERT INTO cm_posts(tenant_id,author_id,title,body,audience,recipient_id) VALUES(1,2,'PRIVATE POST','Private direct message','person',4)");
+q("INSERT INTO pp_posts(id,tenant_id,kind,title,body,created_by) VALUES(1,1,'consent','School trip','Permission for the museum trip',2),(2,1,'survey','Family survey','How can we improve?',2),(3,1,'meals','Lunch menu','Choose a school meal',2),(4,1,'calendar','Sports day','School sports day',2),(5,1,'transport','Bus update','Bus 2 is ten minutes late',2),(6,1,'document','Term letter','Published letter',2)");
+q('UPDATE pp_posts SET options_json=? WHERE id=3',[json_encode(['Rice','Beans'])]);
+q("INSERT INTO pp_posts(tenant_id,kind,title,body,student_id,created_by) VALUES(1,'consent','PRIVATE CONSENT','Private',3,2),(2,'survey','FOREIGN SURVEY','Foreign',4,2)");
+q("INSERT INTO pp_documents(tenant_id,post_id,filename,mime,content) VALUES(1,6,'letter.pdf','application/pdf','%PDF-1.4 Test document')");
+q("INSERT INTO pp_slots(id,tenant_id,teacher_user_id,starts_at,ends_at) VALUES(1,1,3,'2030-01-15 10:00:00','2030-01-15 10:30:00')");
+echo "Fixture schema and integrations installed on ".$pdo->getAttribute(PDO::ATTR_SERVER_VERSION)."\n";

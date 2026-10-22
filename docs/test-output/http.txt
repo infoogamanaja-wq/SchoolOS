@@ -1,0 +1,50 @@
+PASS fresh installer route
+PASS installer rejects CSRF
+PASS fresh installation on MariaDB
+PASS repeat installation blocked
+PASS fresh login route
+PASS fresh public homepage
+PASS existing application homepage
+PASS direct parent module safely routes anonymous visitor to public application
+PASS login parent@test.local
+PASS family HTTP children
+PASS family HTTP results
+PASS family HTTP attendance
+PASS family HTTP fees
+PASS family HTTP receipts
+PASS family HTTP homework
+PASS family HTTP messages
+PASS family HTTP calendar
+PASS family HTTP bookings
+PASS family HTTP absence
+PASS family HTTP consent
+PASS family HTTP pickup
+PASS family HTTP transport
+PASS family HTTP meals
+PASS family HTTP documents
+PASS family HTTP support
+PASS family HTTP surveys
+PASS zero child selects first linked child
+PASS negative child ID forbidden
+PASS unlinked child route forbidden
+PASS foreign child route forbidden
+PASS authorized document download
+PASS login other@test.local
+PASS unlinked document download forbidden
+PASS linked child confirmed receipt
+PASS same-tenant private receipt IDOR blocked
+PASS Community Hub parent class integration
+PASS HTTP support form and redirect
+PASS HTTP action rejects CSRF
+PASS login admin@test.local
+PASS school admin route family
+PASS school admin route fees
+PASS school admin route announcements
+PASS school admin route portal_links
+PASS school admin route students
+PASS login teacher@test.local
+PASS teacher Family Space route
+PASS login platform@test.local
+PASS authenticated Update Manager route
+PASS parent denied Update Manager
+TOTAL 49 passed

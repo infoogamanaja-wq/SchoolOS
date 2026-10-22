@@ -1,0 +1,14 @@
+PASS bootstrap ZIP installed through original frontend updater
+PASS bootstrap leaves stable index byte-for-byte unchanged
+PASS portal ZIP installed through hardened frontend updater
+PASS installed version committed after verification
+PASS every installed file matches release manifest
+PASS configuration preserved through both installs
+PASS packaged portal serves integrated homework
+PASS frontend manual rollback completes
+PASS frontend rollback restores exact stable index
+PASS frontend rollback retains new portal dependency
+PASS public homepage survives rollback
+PASS same tested package reinstalls after rollback
+PASS sibling portal works after reinstall
+TOTAL 13 passed

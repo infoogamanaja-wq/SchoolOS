@@ -1,0 +1,17 @@
+{
+  "version": "4.6.5",
+  "files": {
+    "index.php": "608e7c209df5172539570123a6b74937bf3cd0743c629030057ea7750c66b277",
+    "parent_portal.php": "45000246e2700f5a6e1a31654a838dfbf692cc2a7e6a980f236c323cfdf29ec6",
+    "system_manager.php": "cf61e4c36a6e641e21dc887061d7fae30171759948c595804f6b04ef000cb994",
+    "finance_engine.php": "25a3011b2ed3cf8f1ec5a6388055ab57c3f32ee31b0e6739d361a427bb96bea9",
+    "VERSION.txt": "955912d5fc735563670decddcebd668badd7ccd9ebfb421207556493b0a65872"
+  },
+  "requires": [
+    "config.php",
+    "parent_portal.php",
+    "finance_engine.php",
+    "finance_view.php",
+    "school_logo_handler.php"
+  ]
+}

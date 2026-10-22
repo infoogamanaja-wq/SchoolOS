@@ -1,0 +1,49 @@
+--- pre-4.6.3/system_manager.php
+
++++ uploaded/system_manager.php
+
+@@ -30,6 +30,13 @@
+
+   if(!is_array($manifest)||!preg_match('/^\d+\.\d+\.\d+$/',(string)($manifest['version']??'')))throw new RuntimeException('Invalid release version.');
+   $allow=['index.php','system_manager.php','school_logo_handler.php','finance_engine.php','finance_view.php','parent_portal.php','public/manifest.webmanifest','public/sw.js','dashboard.html','login.html','register.html','onboarding.html','VERSION.txt'];$files=$manifest['files']??null;if(!is_array($files)||!$files)throw new RuntimeException('No release files.');
+   $hashes=[];foreach($files as $file=>$hash){if(!in_array($file,$allow,true)||!in_array($file,$names,true)||!preg_match('/^[a-f0-9]{64}$/D',(string)$hash))throw new RuntimeException('Invalid release file.');$bytes=$z->getFromName($file);if(!hash_equals($hash,hash('sha256',$bytes)))throw new RuntimeException('File hash mismatch: '.$file);$hashes[$file]=$bytes;}
++  // Validate the complete prospective deployment before touching live files.
++  // The parent module may be embedded, but a direct require of it must never be left unresolved.
++  $prospectiveIndex=$hashes['index.php']??(is_file($root.'/index.php')?file_get_contents($root.'/index.php'):'');
++  if(!is_string($prospectiveIndex)||strlen($prospectiveIndex)<100)throw new RuntimeException('Missing or invalid application entry point.');
++  if(str_contains($prospectiveIndex, "__DIR__.'/parent_portal.php'") || str_contains($prospectiveIndex, '__DIR__."/parent_portal.php"')){
++   if(!isset($hashes['parent_portal.php'])&&!is_file($root.'/parent_portal.php'))throw new RuntimeException('Missing required parent_portal.php. Update rejected before activation.');
++  }
+   // Operator must verify the published release checksum through a separate trusted channel.
+   $actual=hash_file('sha256',$_FILES['package']['tmp_name']);
+   // Verify each file against release.json; require explicit admin confirmation.
+@@ -74,6 +81,10 @@
+
+      clearstatcache(true,$entry);
+      if(!is_file($entry)||!is_readable($entry)||filesize($entry)<100)throw new RuntimeException('Critical index.php integrity check failed.');
+      if(isset($hashes['index.php'])&&hash_file('sha256',$entry)!==hash('sha256',$hashes['index.php']))throw new RuntimeException('Critical index.php hash mismatch.');
++     // Check deployed dependencies before committing release metadata.
++     $liveIndex=file_get_contents($entry);
++     if($liveIndex===false)throw new RuntimeException('Cannot read deployed entry point.');
++     if((str_contains($liveIndex, "__DIR__.'/parent_portal.php'")||str_contains($liveIndex, '__DIR__."/parent_portal.php"'))&&!is_file($root.'/parent_portal.php'))throw new RuntimeException('Required Family Space module missing after activation.');
+      // Only mark the update installed once all live files have passed verification.
+      sm_write($systemDir.'/version.json',['version'=>$manifest['version'],'updated_at'=>gmdate('c'),'backup'=>basename($backup),'checksum'=>$actual]);
+      if(sm_read($systemDir.'/version.json')['version']!==$manifest['version'])throw new RuntimeException('Version metadata verification failed.');
+@@ -82,8 +93,14 @@
+
+      $restoreErrors=[];
+      foreach(array_reverse($changed) as $file){
+       $old=$backup.'/'.$file;$target=$root.'/'.$file;
+-      if(is_file($old)){if(!copy($old,$target)||hash_file('sha256',$target)!==hash_file('sha256',$old))$restoreErrors[]=$file;}
+-      elseif(is_file($target)&&!unlink($target))$restoreErrors[]=$file;
++      if(is_file($old)){
++       $restoreTemp=$target.'.smrestore';
++       if(!copy($old,$restoreTemp)||hash_file('sha256',$restoreTemp)!==hash_file('sha256',$old)||!rename($restoreTemp,$target))$restoreErrors[]=$file;
++      } elseif(is_file($target)) {
++       // Never silently delete a newly created PHP file during rollback.
++       // Keep it for forensic inspection; report manual cleanup requirement.
++       $restoreErrors[]=$file.' (new file retained for inspection)';
++      }
+      }
+      // Restore index.php even if an unrelated file change broke the deployment.
+      clearstatcache(true,$entry);

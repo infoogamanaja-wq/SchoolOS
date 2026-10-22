@@ -1,0 +1,2 @@
+PASS two simultaneous parent requests produce one booking
+TOTAL 1 passed
