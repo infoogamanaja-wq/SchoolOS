@@ -1,0 +1,5 @@
+PASS simultaneous starts resume one CBT attempt
+PASS parallel library reviews cannot issue the last copy twice
+PASS parallel club approvals cannot exceed capacity
+PASS parallel AI requests respect daily quota
+TOTAL 4 passed

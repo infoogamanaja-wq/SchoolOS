@@ -1,6 +1,6 @@
 <?php
 // Embedded in system_manager.php at package build time: no bootstrap dependency.
-function sm_allow(): array {return ['index.php','system_manager.php','school_logo_handler.php','finance_engine.php','finance_view.php','parent_portal.php','learning_portal.php','operations_core.php','hr_payroll.php','transport_portal.php','boarding_portal.php','public/manifest.webmanifest','public/sw.js','dashboard.html','login.html','register.html','onboarding.html','VERSION.txt'];}
+function sm_allow(): array {return ['index.php','system_manager.php','school_logo_handler.php','finance_engine.php','finance_view.php','parent_portal.php','learning_portal.php','operations_core.php','hr_payroll.php','transport_portal.php','boarding_portal.php','services_core.php','library_manager.php','inventory_manager.php','engagement_manager.php','website_cms.php','services_worker.php','services_push_worker.js','public/manifest.webmanifest','public/sw.js','dashboard.html','login.html','register.html','onboarding.html','VERSION.txt'];}
 function sm_json(string $path, array $data): void {
  $tmp=$path.'.'.bin2hex(random_bytes(8)).'.tmp';
  try { $bytes=json_encode($data,JSON_PRETTY_PRINT|JSON_THROW_ON_ERROR);if(file_put_contents($tmp,$bytes,LOCK_EX)!==strlen($bytes)||!chmod($tmp,0600)||!rename($tmp,$path))throw new RuntimeException('Metadata write failed.'); }

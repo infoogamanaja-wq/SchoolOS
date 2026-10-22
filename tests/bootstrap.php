@@ -1,6 +1,7 @@
 <?php
 // Test database only. Configure SCHOOLOS_TEST_DSN / USER / PASSWORD for your local MariaDB.
 $pdo=new PDO(getenv('SCHOOLOS_TEST_DSN')?:'mysql:host=localhost;dbname=schoolos_test;charset=utf8mb4',getenv('SCHOOLOS_TEST_USER')?:'root',getenv('SCHOOLOS_TEST_PASSWORD')?:'',[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,PDO::ATTR_DEFAULT_FETCH_MODE=>PDO::FETCH_ASSOC]);
+$pdo->exec("SET time_zone = '+01:00'");
 function load_index_functions():void {
  $tokens=token_get_all(file_get_contents(__DIR__.'/../app/index.php'));$n=count($tokens);
  for($i=0;$i<$n;$i++)if(is_array($tokens[$i])&&$tokens[$i][0]===T_FUNCTION){
@@ -18,3 +19,6 @@ define('SCHOOLOS_LEARNING_LIBRARY',true);require __DIR__.'/../app/learning_porta
 
 define('SCHOOLOS_OPERATIONS_LIBRARY',true);
 foreach(['operations_core.php','hr_payroll.php','transport_portal.php','boarding_portal.php'] as $module)require __DIR__.'/../app/'.$module;
+
+define('SCHOOLOS_SERVICES_LIBRARY',true);
+foreach(['services_core.php','library_manager.php','inventory_manager.php','engagement_manager.php','website_cms.php'] as $module)require __DIR__.'/../app/'.$module;

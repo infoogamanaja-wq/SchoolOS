@@ -1,0 +1,2 @@
+PASS SchoolOS-4.8.1-Services-Updater.zip declared members, SHA256, current source bytes and private-file exclusions
+PASS SchoolOS-4.9.0-Library-Inventory-Engagement-CMS.zip declared members, SHA256, current source bytes and private-file exclusions

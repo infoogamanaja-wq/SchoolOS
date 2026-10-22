@@ -1,0 +1,132 @@
+PASS CBT and LMS resolve canonical explicit student links
+PASS parent links never become student identity
+PASS unlinked student denied
+PASS parent denied learning portal
+PASS ambiguous multiple student identities denied
+PASS ambiguous student identity cannot enter legacy CBT
+PASS activation idempotent
+PASS teacher cannot activate schema
+PASS CSRF invalid action denied
+PASS Community Hub current teacher allocation works
+PASS Community Hub denies unallocated teacher
+PASS teacher sees assigned class and subject
+PASS same-school other class denied
+PASS foreign tenant class denied
+PASS unallocated subject denied
+PASS teacher view classes is scoped
+PASS teacher view attendance is scoped
+PASS teacher view timetable is scoped
+PASS teacher view lessons is scoped
+PASS teacher view syllabus is scoped
+PASS teacher view assignments is scoped
+PASS teacher view questions is scoped
+PASS teacher view scores is scoped
+PASS teacher view bulk is scoped
+PASS teacher view corrections is scoped
+PASS teacher view analytics is scoped
+PASS teacher view messages is scoped
+PASS teacher view resources is scoped
+PASS teacher view incidents is scoped
+PASS teacher view leave is scoped
+PASS teacher view pd is scoped
+PASS teacher view ai is scoped
+PASS student view dashboard is scoped
+PASS student view timetable is scoped
+PASS student view homework is scoped
+PASS student view resources is scoped
+PASS student view cbt is scoped
+PASS student view grades is scoped
+PASS student view attendance is scoped
+PASS student view feedback is scoped
+PASS student view announcements is scoped
+PASS student view clubs is scoped
+PASS student view library is scoped
+PASS student view badges is scoped
+PASS student view planner is scoped
+PASS student view ai is scoped
+PASS teacher attendance reaches existing register
+PASS teacher cannot mark other class
+PASS teacher lesson writes academic homework visible to family
+PASS syllabus progress persists
+PASS private syllabus modification denied
+PASS teacher creates allocated draft course
+PASS new course remains private before publication
+PASS teacher published assignment reaches linked student
+PASS unallocated teacher cannot add course activity
+PASS teacher adds valid question to own draft bank
+PASS other teacher question bank modification denied
+PASS published question bank remains locked
+PASS student homework submitted to LMS
+PASS future homework submission denied
+PASS other class homework denied
+PASS unpublished course homework denied
+PASS teacher feedback reaches student submission
+PASS graded homework cannot erase grade by resubmission
+PASS other teacher cannot grade submission
+PASS student learning progress recorded
+PASS valid CSV rows imported
+PASS CSV out-of-range score denied
+PASS duplicate CSV student denied
+PASS other class CSV row denied
+PASS mixed valid/invalid score import rolls back
+PASS atomic failed import preserves prior valid score
+PASS submitted scores cannot be overwritten
+PASS teacher cannot approve corrections
+PASS administrator applies unpublished correction
+PASS corrected score requires moderation again
+PASS published result locked
+PASS published correction cannot bypass publication lock
+PASS teacher message delivered to existing Family Space
+PASS parent-child messaging mismatch denied
+PASS unsafe resource URL denied
+PASS incident integrates confidential welfare case
+PASS other class incident denied
+PASS teacher cannot approve own leave
+PASS school approves teacher leave
+PASS professional development recorded and reviewed
+PASS other student cannot complete planner task
+PASS student completes own planner task
+PASS club capacity enforced
+PASS private class club denied
+PASS duplicate active book request denied
+PASS issuing book decrements available copies once
+PASS repeat loan issue denied
+PASS return restores book inventory
+PASS repeat return cannot inflate inventory
+PASS foreign school library book denied
+PASS teacher awards own-course badge
+PASS other teacher cannot award badge
+PASS incorrect CBT access code denied
+PASS wrong-class CBT denied
+PASS draft CBT denied
+PASS future CBT start denied
+PASS closed CBT start denied
+PASS start resumes same attempt without consuming limit
+PASS another student attempt denied
+PASS foreign question injection denied
+PASS CBT renders questions without answer explanation
+PASS AI assistance paused during active CBT
+PASS CBT objective score integrates existing marking
+PASS submitted attempt immutable
+PASS CBT attempt limit enforced
+PASS CBT explicit save persists resumable work
+PASS expired CBT is submitted server-side
+PASS late answers cannot replace saved work after expiry
+PASS AI disabled by default
+PASS AI missing key reports prerequisite
+PASS AI adapter returns study hint
+PASS AI redacts email and sends no student records
+PASS AI moderates both prompt and response
+PASS AI daily quota enforced
+PASS AI cheating prompt gets safe refusal
+PASS flagged AI input fails closed
+PASS flagged AI output is not displayed
+PASS malformed moderation fails closed
+PASS disabled learner session denied
+PASS Community Hub revocation follows teacher allocations
+PASS revoked teacher allocation denied
+PASS student records preserved
+PASS authentication hashes preserved
+PASS Finance records untouched
+PASS Family Space posts preserved
+TOTAL 131 passed

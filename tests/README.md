@@ -81,3 +81,45 @@ The HTTP suite uploads a real synthetic private PDF; use the domain fixture befo
 For the actual package suite, prepare another **empty** `schoolos_upgrade_test` database and run `seed.php` then `learning_seed.php` against it (not operations_seed/domain). Copy current app dependencies to a disposable `/runtime/upgrade` directory, overwrite all payload files with exact bytes from immutable `SchoolOS-4.7.0-Teacher-Student-Portals.zip`, remove the four new operations PHP modules, provide a test-only config, and set `storage/system/version.json` to `{"version":"4.7.0"}`. Point the local Apache/FastCGI root there, then run `python3 tests/operations_package_http.py http://127.0.0.1:8092`; override `SCHOOLOS_UPGRADE_ROOT` for your disposable runtime/upgrade path. The suite requires a local hostname and a runtime/upgrade filesystem target. It installs 4.7.1 and 4.8.0 ZIPs through the frontend, activates schemas, exercises views, restores the exact old index, verifies retained dependencies and reinstalls. Run `tests/apache_routing.py` against the same Apache host afterwards.
 
 Run existing `updater.php` and fresh separately seeded Family/Learning regressions as described above. Lint all PHP sources, run `python3 tools/build_release.py`, and verify each ZIP member against its release.json SHA-256. No production data or real provider calls are needed. See `docs/4.8.0/VALIDATION.md` for results and limits.
+
+## School Services 4.9.0 suites
+
+Use an **empty disposable** MariaDB database ending in `_test`. Set the test DSN/user/password as above, then run:
+
+```
+SCHOOLOS_ALLOW_TEST_FIXTURES=1 php tests/seed.php
+SCHOOLOS_ALLOW_TEST_FIXTURES=1 php tests/learning_seed.php
+SCHOOLOS_ALLOW_TEST_FIXTURES=1 php tests/operations_seed.php
+SCHOOLOS_ALLOW_TEST_FIXTURES=1 php tests/services_seed.php
+php tests/services.php
+```
+
+Create a local-only `/runtime/services` copy of current app/. Give it a synthetic config pointing to that database, with `app.cms_origin = https://schoolos.test`. The domain suite creates synthetic encrypted provider settings, so copy its **test-only** `app/storage/system/services-key.php` into the runtime's protected storage to retain the matching key. Do not copy any production key/config/database. Serve runtime locally, then run:
+
+```
+SCHOOLOS_PHP_COMMAND=/path/to/php84 python3 tests/services_http.py http://127.0.0.1:8090/services
+php tests/services_concurrency.php
+```
+
+HTTP tests require test-only Pillow for a real gallery image upload. The HTTP suite covers all role screens, actual image/PDF uploads and guarded publication/download, public enquiry and replay, private previews, encrypted provider settings, Community email guards, legacy routes and a real CLI worker bootstrap. It does not call live providers. The worker fixture has no due external deliveries when that CLI bootstrap runs; provider calls elsewhere use injected transports.
+
+Concurrency runs **after** HTTP and uses independent PHP processes/connections for licensed seats, stock/receipt bounds, idempotent issue, depreciation, delivery claiming, tour capacity and payment posting. Recreate/reseed the disposable database before repeating. Repeat the seed/domain/concurrency sequence against a separate MariaDB version/socket for compatibility.
+
+For independently checked QR output, install `qrcode`, `Pillow`, `zxing-cpp` in a disposable test environment (not in the PHP app), then run:
+
+```
+SCHOOLOS_PHP_COMMAND=/path/to/php84 python3 tests/services_qr.py
+```
+
+This compares the PHP-generated module matrix with an independent QR encoder and decodes it using ZXing. The installed PHP release has no Python or external QR service dependency.
+
+For actual packaged installation/rollback, prepare a separate empty `schoolos_upgrade_test` database, run `seed.php`, `learning_seed.php`, `operations_seed.php`, then `op_install()` through bootstrap. Prepare a disposable `/runtime/upgrade` copy of app/ **excluding storage/config/install locks**, restore the exact 4.8.0 payload from the immutable ZIP, and restore the exact Learning Portal from the immutable 4.7.0 ZIP. Remove all seven new service module/worker files initially. Supply only the synthetic config (`app.cms_origin` as above) and `storage/system/version.json` containing `{"version":"4.8.0"}`. Point local Apache/FastCGI there and run:
+
+```
+python3 tests/services_package_http.py http://127.0.0.1:8092
+python3 tests/apache_routing.py http://127.0.0.1:8092
+```
+
+Override `SCHOOLOS_UPGRADE_ROOT` if needed; the suite requires a local host and a disposable runtime/upgrade root. It installs both ZIPs through the actual frontend, activates tables, checks every manager view, grants scoped access, publishes a website through independent approval, restores the exact prior index/Learning Portal on rollback, verifies retained dependencies and checks preserved content after reinstall. Use a supervised FastCGI process (or `PHP_FCGI_MAX_REQUESTS=0` for this isolated test fixture) so the standalone test backend does not exit mid-suite after its default request limit.
+
+Run Family, Learning, Operations and updater regressions on their **own fresh fixtures** as documented above. Keep old release ZIPs immutable. Lint tracked PHP source files (exclude private generated storage), verify the new ZIP manifests/source equality and private-file exclusions, and run `git diff --check`. See `docs/4.9.0/VALIDATION.md` for exact results and the limits of simulated DNS/provider evidence.

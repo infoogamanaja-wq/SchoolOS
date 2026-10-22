@@ -1,0 +1,56 @@
+PASS support package leaves working 4.8.0 index unchanged
+PASS main release installed through frontend
+PASS deployed source matches package manifest
+PASS Finance Family Operations and private config bytes preserved
+PASS schema activation remains explicit
+PASS frontend school-admin activation succeeds
+PASS packaged Apache library catalogue
+PASS packaged Apache library resources
+PASS packaged Apache library loans
+PASS packaged Apache library reservations
+PASS packaged Apache library overdue
+PASS packaged Apache library history
+PASS packaged Apache library reports
+PASS packaged Apache library labels
+PASS packaged Apache inventory store
+PASS packaged Apache inventory orders
+PASS packaged Apache inventory requests
+PASS packaged Apache inventory stock
+PASS packaged Apache inventory suppliers
+PASS packaged Apache inventory purchases
+PASS packaged Apache inventory alerts
+PASS packaged Apache inventory audits
+PASS packaged Apache inventory assets
+PASS packaged Apache inventory depreciation
+PASS packaged Apache inventory maintenance
+PASS packaged Apache engagement feed
+PASS packaged Apache engagement events
+PASS packaged Apache engagement messages
+PASS packaged Apache engagement consent
+PASS packaged Apache engagement compose
+PASS packaged Apache engagement campaigns
+PASS packaged Apache engagement templates
+PASS packaged Apache engagement logs
+PASS packaged Apache engagement credits
+PASS packaged Apache engagement providers
+PASS packaged Apache website site
+PASS packaged Apache website content
+PASS packaged Apache website approval
+PASS packaged Apache website domains
+PASS packaged Apache website enquiries
+PASS packaged Apache website tours
+PASS packaged scoped capability assignment
+PASS packaged site configuration
+PASS packaged independent content approval
+PASS packaged approved public website
+PASS Family homework preserved
+PASS existing Learning Portal preserved
+PASS frontend full-release rollback succeeds
+PASS rollback restores exact working 4.8.0 index
+PASS rollback restores exact prior Learning Portal
+PASS rollback retains all portal and new service dependencies
+PASS homepage available after rollback
+PASS Family Portal works after rollback
+PASS reinstall preserves additive content records
+PASS approved website content returns after reinstall
+TOTAL 55 passed
