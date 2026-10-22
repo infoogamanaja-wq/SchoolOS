@@ -1,4 +1,4 @@
-reset PASS 
+reset PASS
 seed PASS Fixture schema and integrations installed on 11.8.6-MariaDB-0+deb13u1 from Debian
 learning_seed PASS Learning fixture ready on 11.8.6-MariaDB-0+deb13u1 from Debian
 operations_seed PASS Operations accounts seeded; activation intentionally pending.

@@ -28,8 +28,8 @@ PASS admin HTML governance privacy
 PASS admin HTML governance accreditation
 PASS admin HTML governance hq
 PASS admin HTML governance plugins
-PASS admin HTML wallet 
-PASS admin HTML settings 
+PASS admin HTML wallet
+PASS admin HTML settings
 PASS parent route innovations
 PASS parent route academics
 PASS parent route governance
