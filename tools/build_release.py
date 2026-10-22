@@ -14,9 +14,9 @@ def release(name,version,files,requires):
  return hashlib.sha256((OUT/name).read_bytes()).hexdigest()
 checks={}
 # Published historical archives are immutable. Never rebuild an old version from newer source.
-for name in ['SchoolOS-4.6.4-Updater-Repair.zip','SchoolOS-4.6.5-Family-Portal.zip']:
+for name in ['SchoolOS-4.6.4-Updater-Repair.zip','SchoolOS-4.6.5-Family-Portal.zip','SchoolOS-4.6.6-Learning-Updater.zip','SchoolOS-4.7.0-Teacher-Student-Portals.zip']:
  if (OUT/name).is_file():checks[name]=hashlib.sha256((OUT/name).read_bytes()).hexdigest()
-checks['SchoolOS-4.6.6-Learning-Updater.zip']=release('SchoolOS-4.6.6-Learning-Updater.zip','4.6.6',['system_manager.php'],[])
-checks['SchoolOS-4.7.0-Teacher-Student-Portals.zip']=release('SchoolOS-4.7.0-Teacher-Student-Portals.zip','4.7.0',['index.php','learning_portal.php','system_manager.php','VERSION.txt'],['config.php','parent_portal.php','finance_engine.php','finance_view.php','school_logo_handler.php','learning_portal.php'])
+checks['SchoolOS-4.7.1-Operations-Updater.zip']=release('SchoolOS-4.7.1-Operations-Updater.zip','4.7.1',['system_manager.php'],[])
+checks['SchoolOS-4.8.0-HR-Transport-Boarding.zip']=release('SchoolOS-4.8.0-HR-Transport-Boarding.zip','4.8.0',['index.php','operations_core.php','hr_payroll.php','transport_portal.php','boarding_portal.php','system_manager.php','VERSION.txt'],['config.php','parent_portal.php','learning_portal.php','finance_engine.php','finance_view.php','school_logo_handler.php','operations_core.php','hr_payroll.php','transport_portal.php','boarding_portal.php'])
 (OUT/'SHA256SUMS').write_text(''.join(f'{v}  {k}\n' for k,v in checks.items()))
 print(json.dumps(checks,indent=2))

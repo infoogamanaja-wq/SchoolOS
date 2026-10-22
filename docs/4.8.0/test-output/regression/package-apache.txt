@@ -1,0 +1,45 @@
+PASS updater support package leaves working 4.6.5 index unchanged
+PASS full Teacher Student package installed through frontend
+PASS deployed portal files match final package manifest
+PASS existing Family Space Finance and configuration bytes preserved
+PASS explicit activation required before schema changes
+PASS school administrator activates additive schemas via frontend
+PASS packaged Apache Teacher Portal classes
+PASS packaged Apache Teacher Portal attendance
+PASS packaged Apache Teacher Portal timetable
+PASS packaged Apache Teacher Portal lessons
+PASS packaged Apache Teacher Portal syllabus
+PASS packaged Apache Teacher Portal assignments
+PASS packaged Apache Teacher Portal questions
+PASS packaged Apache Teacher Portal scores
+PASS packaged Apache Teacher Portal bulk
+PASS packaged Apache Teacher Portal corrections
+PASS packaged Apache Teacher Portal analytics
+PASS packaged Apache Teacher Portal messages
+PASS packaged Apache Teacher Portal resources
+PASS packaged Apache Teacher Portal incidents
+PASS packaged Apache Teacher Portal leave
+PASS packaged Apache Teacher Portal pd
+PASS packaged Apache Teacher Portal ai
+PASS packaged Apache Student Portal dashboard
+PASS packaged Apache Student Portal timetable
+PASS packaged Apache Student Portal homework
+PASS packaged Apache Student Portal resources
+PASS packaged Apache Student Portal cbt
+PASS packaged Apache Student Portal grades
+PASS packaged Apache Student Portal attendance
+PASS packaged Apache Student Portal feedback
+PASS packaged Apache Student Portal announcements
+PASS packaged Apache Student Portal clubs
+PASS packaged Apache Student Portal library
+PASS packaged Apache Student Portal badges
+PASS packaged Apache Student Portal planner
+PASS packaged Apache Student Portal ai
+PASS working parent homework integration retained
+PASS full portal update rolls back through frontend
+PASS rollback restores exact known working 4.6.5 index
+PASS rollback never deletes either portal dependency
+PASS homepage remains available after rollback
+PASS Family Space still works after rollback
+PASS same package reinstalls with existing additive tables intact
+TOTAL 44 passed

@@ -1,0 +1,51 @@
+PASS updater support package leaves working 4.7.0 index unchanged
+PASS full HR Transport Boarding package installed through frontend
+PASS deployed portal files match final package manifest
+PASS existing Family Space Finance and configuration bytes preserved
+PASS explicit activation required before schema changes
+PASS school administrator activates additive schemas via frontend
+PASS packaged Apache hr records
+PASS packaged Apache hr recruitment
+PASS packaged Apache hr onboarding
+PASS packaged Apache hr contracts
+PASS packaged Apache hr departments
+PASS packaged Apache hr attendance
+PASS packaged Apache hr leave
+PASS packaged Apache hr duties
+PASS packaged Apache hr salaries
+PASS packaged Apache hr allowances
+PASS packaged Apache hr policy
+PASS packaged Apache hr payslips
+PASS packaged Apache hr advances
+PASS packaged Apache hr evaluations
+PASS packaged Apache hr development
+PASS packaged Apache hr grievances
+PASS packaged Apache hr exit
+PASS packaged Apache transport vehicles
+PASS packaged Apache transport drivers
+PASS packaged Apache transport routes
+PASS packaged Apache transport assignments
+PASS packaged Apache transport fees
+PASS packaged Apache transport trips
+PASS packaged Apache transport events
+PASS packaged Apache transport suggestions
+PASS packaged Apache boarding dashboard
+PASS packaged Apache boarding rooms
+PASS packaged Apache boarding allocations
+PASS packaged Apache boarding fees
+PASS packaged Apache boarding movements
+PASS packaged Apache boarding leave
+PASS packaged Apache boarding visitors
+PASS packaged Apache boarding roll
+PASS packaged Apache boarding incidents
+PASS packaged Apache boarding maintenance
+PASS packaged Apache boarding supplies
+PASS packaged Apache boarding meals
+PASS working parent homework integration retained
+PASS full portal update rolls back through frontend
+PASS rollback restores exact known working 4.7.0 index
+PASS rollback never deletes either portal dependency
+PASS homepage remains available after rollback
+PASS Family Space still works after rollback
+PASS same package reinstalls with existing additive tables intact
+TOTAL 50 passed

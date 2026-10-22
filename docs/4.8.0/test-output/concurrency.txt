@@ -1,0 +1,7 @@
+PASS parallel payroll confirmation posts only once
+PASS parallel payroll has exactly four balanced journal pairs
+PASS parallel assignments cannot exceed one-seat vehicle capacity
+PASS parallel fee retries create one invoice
+PASS parallel residents cannot allocate one bed twice
+PASS parallel stock issues cannot make supplies negative
+TOTAL 6 passed
