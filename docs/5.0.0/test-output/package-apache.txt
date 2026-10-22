@@ -1,0 +1,48 @@
+PASS support package leaves working 4.9.0 index unchanged
+PASS main release installed through frontend
+PASS deployed source matches package manifest
+PASS Finance Family Operations and private config bytes preserved
+PASS schema activation explicit
+PASS packaged frontend activation
+PASS packaged Apache reports dashboard
+PASS packaged Apache reports reports
+PASS packaged Apache reports builder
+PASS packaged Apache reports exports
+PASS packaged Apache reports retention
+PASS packaged Apache reports forecast
+PASS packaged Apache innovations copilot
+PASS packaged Apache innovations drafts
+PASS packaged Apache innovations success
+PASS packaged Apache innovations pickup
+PASS packaged Apache innovations whatsapp
+PASS packaged Apache academics cards
+PASS packaged Apache academics observations
+PASS packaged Apache academics curricula
+PASS packaged Apache academics designer
+PASS packaged Apache academics calendar
+PASS packaged Apache academics timetable
+PASS packaged Apache governance alumni
+PASS packaged Apache governance scholarships
+PASS packaged Apache governance privacy
+PASS packaged Apache governance accreditation
+PASS packaged Apache governance hq
+PASS packaged Apache governance plugins
+PASS packaged Apache wallet 
+PASS packaged Apache settings 
+PASS packaged definition mutation
+PASS packaged nested static path public/offline/offline_teacher.html
+PASS packaged nested static path public/offline/offline_teacher.js
+PASS packaged nested static path public/offline/advanced_sw.js
+PASS packaged independent plugin review
+PASS packaged Apache aggregate API credential forwarding
+PASS packaged API scope enforcement
+PASS Family homework preserved
+PASS frontend rollback succeeds
+PASS rollback restores exact stable 4.9.0 index
+PASS rollback restores exact prior transport and engagement modules
+PASS rollback retains dependency files
+PASS rollback preserves unchanged modules and private config
+PASS homepage works after rollback
+PASS Family works after rollback
+PASS reinstall retains additive intelligence records
+TOTAL 47 passed

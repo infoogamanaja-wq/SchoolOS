@@ -1,0 +1,1 @@
+Learning fixture ready on 10.11.18-MariaDB-0+deb12u1

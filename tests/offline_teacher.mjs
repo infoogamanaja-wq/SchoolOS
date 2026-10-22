@@ -1,0 +1,11 @@
+import assert from 'node:assert/strict';
+import {webcrypto} from 'node:crypto';
+import {readFile} from 'node:fs/promises';
+if(!globalThis.crypto)globalThis.crypto=webcrypto;
+const source=await readFile(new URL('../app/public/offline/offline_teacher.js',import.meta.url),'utf8');
+const {seal,unseal,queueEdit,reconcile}=await import('data:text/javascript;base64,'+Buffer.from(source).toString('base64'));
+const sample={snapshot:{tenant_id:1,user_id:3,students:[{id:1,name:'PRIVATE CHILD'}]},operations:[]};
+const a=await seal(sample,'TrustedDevicePassphrase!');const b=await seal(sample,'TrustedDevicePassphrase!');
+assert.deepEqual(await unseal(a,'TrustedDevicePassphrase!'),sample);assert.notDeepEqual(a.cipher,b.cipher);assert(!JSON.stringify(a).includes('PRIVATE CHILD'));await assert.rejects(()=>unseal(a,'IncorrectPassphrase!'));const tampered=structuredClone(a);tampered.cipher[0]^=1;await assert.rejects(()=>unseal(tampered,'TrustedDevicePassphrase!'));await assert.rejects(()=>seal(sample,'short'));
+queueEdit(sample,{event_key:'a',kind:'attendance',student_id:1,day:'2026-10-22',value:'present',base_hash:'original'});queueEdit(sample,{event_key:'b',kind:'attendance',student_id:1,day:'2026-10-22',value:'absent',base_hash:'new'});assert.equal(sample.operations.length,1);assert.equal(sample.operations[0].base_hash,'original');assert.equal(sample.operations[0].value,'absent');queueEdit(sample,{event_key:'c',kind:'score',student_id:1,assessment_id:1,value:80,base_hash:'score'});reconcile(sample,[{event_key:'b',status:'applied'},{event_key:'c',status:'conflict'}]);assert.equal(sample.operations.length,1);assert.equal(sample.operations[0].event_key,'c');
+const sw=await readFile(new URL('../app/public/offline/advanced_sw.js',import.meta.url),'utf8');assert(!sw.includes('index.php'));assert(sw.includes('url.search'));assert(source.includes('../../index.php?ix_sync'));console.log('Offline crypto and queue: 14 assertions passed.');

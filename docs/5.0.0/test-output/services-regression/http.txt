@@ -1,0 +1,109 @@
+PASS login admin@test.local
+PASS login librarian@test.local
+PASS login stock@test.local
+PASS login approver@test.local
+PASS login editor@test.local
+PASS login publisher@test.local
+PASS login comms@test.local
+PASS login assets@test.local
+PASS login parent@test.local
+PASS login student@test.local
+PASS login teacher@test.local
+PASS login foreignhr@test.local
+PASS HTTP library catalogue
+PASS HTTP library resources
+PASS HTTP library loans
+PASS HTTP library reservations
+PASS HTTP library overdue
+PASS HTTP library history
+PASS HTTP library reports
+PASS HTTP library labels
+PASS HTTP inventory store
+PASS HTTP inventory orders
+PASS HTTP inventory requests
+PASS HTTP inventory stock
+PASS HTTP inventory suppliers
+PASS HTTP inventory purchases
+PASS HTTP inventory alerts
+PASS HTTP inventory audits
+PASS HTTP inventory assets
+PASS HTTP inventory depreciation
+PASS HTTP inventory maintenance
+PASS HTTP engagement feed
+PASS HTTP engagement events
+PASS HTTP engagement messages
+PASS HTTP engagement consent
+PASS HTTP engagement compose
+PASS HTTP engagement campaigns
+PASS HTTP engagement templates
+PASS HTTP engagement logs
+PASS HTTP engagement credits
+PASS HTTP engagement providers
+PASS HTTP website site
+PASS HTTP website content
+PASS HTTP website approval
+PASS HTTP website domains
+PASS HTTP website enquiries
+PASS HTTP website tours
+PASS parent scoped library history
+PASS parent scoped inventory orders
+PASS parent scoped engagement feed
+PASS parent scoped engagement consent
+PASS parent denied CMS management
+PASS student scoped library history
+PASS student scoped inventory orders
+PASS student scoped engagement feed
+PASS student scoped engagement consent
+PASS student denied CMS management
+PASS real CMS upload gallery
+PASS unpublished gallery media unavailable publicly
+PASS parent denied private content preview
+PASS cross-school private preview denied
+PASS editor authenticated preview
+PASS independent CMS approval #5
+PASS approved gallery image safely served
+PASS real CMS upload prospectus
+PASS independent CMS approval #6
+PASS approved prospectus downloaded with safe headers
+PASS disguised executable CMS upload rejected
+PASS independent CMS approval #7
+PASS public CMS home
+PASS public CMS news
+PASS public CMS galleries
+PASS public CMS admissions
+PASS public CMS events
+PASS public CMS staff
+PASS public CMS testimonials
+PASS public CMS prospectus
+PASS public CMS tours
+PASS public CMS escapes untrusted content
+PASS public enquiry form and PRG
+PASS public enquiry replay denied
+PASS public enquiry appears in authorized admissions list
+PASS unknown school token is a 404
+PASS unknown private booking token denied
+PASS unsigned provider callback denied over HTTP
+PASS direct service library guarded services_core.php
+PASS direct service library guarded library_manager.php
+PASS direct service library guarded inventory_manager.php
+PASS direct service library guarded engagement_manager.php
+PASS direct service library guarded website_cms.php
+PASS cron worker denied through web
+PASS actual cPanel-style CLI worker bootstraps without webpage output
+PASS HTTP encrypted provider save never redisplays secret
+PASS provider settings require school administrator
+PASS legacy Community email action uses verified-contact queue guard
+PASS HTTP CSRF denial library
+PASS HTTP CSRF denial inventory
+PASS HTTP CSRF denial engagement
+PASS HTTP CSRF denial website
+PASS existing route index.php
+PASS existing route index.php?s=family&child=1&view=homework
+PASS existing route index.php?s=learning&view=classes
+PASS existing route index.php?s=fees
+PASS existing route index.php?s=announcements
+PASS existing route index.php?s=operations&area=hr
+PASS existing route index.php?s=books
+PASS existing route index.php?s=inventory
+PASS existing route index.php?s=assets
+TOTAL 108 passed

@@ -123,3 +123,23 @@ python3 tests/apache_routing.py http://127.0.0.1:8092
 Override `SCHOOLOS_UPGRADE_ROOT` if needed; the suite requires a local host and a disposable runtime/upgrade root. It installs both ZIPs through the actual frontend, activates tables, checks every manager view, grants scoped access, publishes a website through independent approval, restores the exact prior index/Learning Portal on rollback, verifies retained dependencies and checks preserved content after reinstall. Use a supervised FastCGI process (or `PHP_FCGI_MAX_REQUESTS=0` for this isolated test fixture) so the standalone test backend does not exit mid-suite after its default request limit.
 
 Run Family, Learning, Operations and updater regressions on their **own fresh fixtures** as documented above. Keep old release ZIPs immutable. Lint tracked PHP source files (exclude private generated storage), verify the new ZIP manifests/source equality and private-file exclusions, and run `git diff --check`. See `docs/4.9.0/VALIDATION.md` for exact results and the limits of simulated DNS/provider evidence.
+
+## School Intelligence 5.0.0
+
+Use a **fresh disposable database ending `_test`**. Set `SCHOOLOS_TEST_DSN`, `SCHOOLOS_TEST_USER`, `SCHOOLOS_TEST_PASSWORD` and `SCHOOLOS_ALLOW_TEST_FIXTURES=1`; never point fixtures at production. Run these sequentially with PHP 8.4 plus PDO MySQL/mbstring/fileinfo/zip/cURL/OpenSSL:
+
+```sh
+php tests/seed.php
+php tests/learning_seed.php
+php tests/operations_seed.php
+php tests/services_seed.php
+php tests/intelligence.php
+php tests/intelligence_concurrency.php
+node tests/offline_teacher.mjs
+php tests/updater.php
+python3 tests/intelligence_release.py
+```
+
+The domain fixture includes synthetic independent reviewers, cashier, parent, teacher and cross-school accounts. Provider responses are injected mocks; no real external send/payment is needed. MariaDB compatibility tests use a separately seeded instance/socket. `intelligence_http.py` targets a matching local runtime clone (default loopback port 8090 `/intelligence`); `intelligence_package_http.py` targets a disposable local Apache root with baseline 4.9.0 and fresh pre-Intelligence fixtures. Package tests replace files and perform frontend rollback: **never run them against a live installation**. Python HTTP suites that invoke PHP accept `SCHOOLOS_PHP_COMMAND`. Existing Family/Learning/Operations/Services regressions each need their own freshly seeded fixture database.
+
+Release evidence and limitations are in `docs/5.0.0/VALIDATION.md`. The offline JS suite executes WebCrypto and queue logic; it does not substitute for Android/IndexedDB/service-worker acceptance testing.

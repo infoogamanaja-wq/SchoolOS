@@ -22,3 +22,6 @@ foreach(['operations_core.php','hr_payroll.php','transport_portal.php','boarding
 
 define('SCHOOLOS_SERVICES_LIBRARY',true);
 foreach(['services_core.php','library_manager.php','inventory_manager.php','engagement_manager.php','website_cms.php'] as $module)require __DIR__.'/../app/'.$module;
+
+define('SCHOOLOS_INSIGHTS_LIBRARY',true);
+foreach(['insights_core.php', 'intelligence_reports.php', 'school_innovations.php', 'academic_tools.php', 'school_wallet.php', 'governance_hub.php'] as $module)require __DIR__.'/../app/'.$module;

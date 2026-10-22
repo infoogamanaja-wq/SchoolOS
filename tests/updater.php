@@ -30,4 +30,8 @@ $id=sm_deploy($base,package($files),'test');$journal=$base.'/storage/system/back
 ok(is_file($base.'/storage/.htaccess'),'backup storage protected');
 // Restore only from verified bytes, never corrupt a healthy live entry from bad backup.
 $id=sm_deploy($base,package($files),'test');file_put_contents($base.'/storage/system/backups/'.$id.'/index.php','corrupt');rejects(fn()=>sm_rollback($base,$id),'corrupted backup rejected');ok(file_get_contents($base.'/index.php')===$new,'corrupt backup cannot overwrite live index');
+// Narrowly allow the new static subdirectory while rejecting ancestor symlinks.
+$base2=sys_get_temp_dir().'/schoolos-nested-'.bin2hex(random_bytes(5));mkdir($base2);mkdir($base2.'/public');file_put_contents($base2.'/index.php',$old);file_put_contents($base2.'/config.php','<?php return [];');
+$id2=sm_deploy($base2,package(['public/offline/offline_teacher.html'=>'<!doctype html><title>offline shell</title>'],'5.0.0'),'nested');ok(is_file($base2.'/public/offline/offline_teacher.html'),'approved static directory created after verification');sm_rollback($base2,$id2);ok(file_get_contents($base2.'/index.php')===$old&&is_file($base2.'/public/offline/offline_teacher.html'),'nested rollback retains shell and working index');
+$outside=sys_get_temp_dir().'/schoolos-outside-'.bin2hex(random_bytes(5));mkdir($outside);rename($base2.'/public/offline',$base2.'/public/offline-safe');symlink($outside,$base2.'/public/offline');rejects(fn()=>sm_target($base2,'public/offline/offline_teacher.html'),'offline parent symlink rejected');unlink($base2.'/public/offline');rename($base2.'/public/offline-safe',$base2.'/public/offline');
 echo "TOTAL $n passed\n";

@@ -1,6 +1,6 @@
 <?php
 // Embedded in system_manager.php at package build time: no bootstrap dependency.
-function sm_allow(): array {return ['index.php','system_manager.php','school_logo_handler.php','finance_engine.php','finance_view.php','parent_portal.php','learning_portal.php','operations_core.php','hr_payroll.php','transport_portal.php','boarding_portal.php','services_core.php','library_manager.php','inventory_manager.php','engagement_manager.php','website_cms.php','services_worker.php','services_push_worker.js','public/manifest.webmanifest','public/sw.js','dashboard.html','login.html','register.html','onboarding.html','VERSION.txt'];}
+function sm_allow(): array {return ['index.php','system_manager.php','school_logo_handler.php','finance_engine.php','finance_view.php','parent_portal.php','learning_portal.php','operations_core.php','hr_payroll.php','transport_portal.php','boarding_portal.php','services_core.php','library_manager.php','inventory_manager.php','engagement_manager.php','website_cms.php','insights_core.php','intelligence_reports.php','school_innovations.php','academic_tools.php','school_wallet.php','governance_hub.php','intelligence_worker.php','public/offline/offline_teacher.html','public/offline/offline_teacher.js','public/offline/advanced_sw.js','services_worker.php','services_push_worker.js','public/manifest.webmanifest','public/sw.js','dashboard.html','login.html','register.html','onboarding.html','VERSION.txt'];}
 function sm_json(string $path, array $data): void {
  $tmp=$path.'.'.bin2hex(random_bytes(8)).'.tmp';
  try { $bytes=json_encode($data,JSON_PRETTY_PRINT|JSON_THROW_ON_ERROR);if(file_put_contents($tmp,$bytes,LOCK_EX)!==strlen($bytes)||!chmod($tmp,0600)||!rename($tmp,$path))throw new RuntimeException('Metadata write failed.'); }
@@ -9,7 +9,10 @@ function sm_json(string $path, array $data): void {
 function sm_target(string $root,string $file): string {
  if(!in_array($file,sm_allow(),true))throw new RuntimeException('Unapproved destination.');
  $path=$root.'/'.$file;
- if(is_link($path)||is_link(dirname($path))||realpath(dirname($path))!==$root.(dirname($file)==='.'?'':'/'.dirname($file)))throw new RuntimeException('Unsafe destination: '.$file);
+ if(is_link($path))throw new RuntimeException('Unsafe destination: '.$file);
+ $parent=dirname($file);$current=$root;
+ if($parent!=='.')foreach(explode('/',$parent) as $part){$current.='/'.$part;if(is_link($current)||(file_exists($current)&&(!is_dir($current)||realpath($current)!==$current)))throw new RuntimeException('Unsafe destination: '.$file);if(!file_exists($current)&&$current!==$root.'/public/offline')throw new RuntimeException('Unsafe destination: '.$file);}
+ if(!is_dir(dirname($path))&&$parent!=='public/offline')throw new RuntimeException('Unsafe destination: '.$file);
  return $path;
 }
 function sm_atomic(string $target,string $bytes,int $mode=0644): void {
@@ -92,6 +95,8 @@ function sm_deploy(string $root, ZipArchive $zip, string $checksum, ?callable $t
    sm_target($root,$dep);if(!isset($bytes[$dep])&&(!is_file($root.'/'.$dep)||!is_readable($root.'/'.$dep)))throw new RuntimeException('Missing required dependency: '.$dep);
   }
   if(!is_file($root.'/index.php')||filesize($root.'/index.php')<100)throw new RuntimeException('Restore the existing index.php before updating.');
+  // Only the fixed static offline directory may be introduced, after payload verification.
+  foreach(array_keys($bytes) as $file){$target=sm_target($root,$file);if(!is_dir(dirname($target))&&(!mkdir(dirname($target),0755)||realpath(dirname($target))!==$root.'/public/offline'))throw new RuntimeException('Cannot prepare offline static directory.');}
   $id=gmdate('Ymd_His').'_'.bin2hex(random_bytes(6));$backup=$system.'/backups/'.$id;
   if(!mkdir($backup,0700,true))throw new RuntimeException('Backup directory failed.');
   $record=['state'=>'prepared','version'=>$manifest['version'],'checksum'=>$checksum,'after'=>$manifest['files'],'before'=>[], 'version_before'=>is_file($system.'/version.json')?file_get_contents($system.'/version.json'):null,'created_at'=>gmdate('c')];
