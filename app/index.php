@@ -110,6 +110,41 @@ if(isset($_GET['ac_verify'])&&acReady()){
 
 define('SCHOOLOS_PARENT_LIBRARY', true);
 if(is_file(__DIR__.'/parent_portal.php'))require_once __DIR__.'/parent_portal.php';
+define('SCHOOLOS_LEARNING_LIBRARY', true);
+if(is_file(__DIR__.'/learning_portal.php'))require_once __DIR__.'/learning_portal.php';
+// Old LMS/CBT forms route through the same scoped, current-account checks.
+if(me()&&in_array(me()['role'],['teacher','student'],true)){
+ if(isset($_GET['lm_file'])){try{lp_download(lp_actor(),(int)$_GET['lm_file']);}catch(Throwable $ex){http_response_code(403);exit('Attachment unavailable.');}}
+ if(isset($_POST['aw_action'])){http_response_code(403);exit('Use the assigned-class attendance and welfare forms in Learning Portals.');}
+ if(isset($_POST['lm_action'])){
+  if(me()['role']==='student'&&in_array($_POST['lm_action'],['submit','complete'],true)){$_POST['lp_action']=$_POST['lm_action'];unset($_POST['lm_action']);$_GET['view']='homework';}
+  else{http_response_code(403);exit('Use Learning Portals for this learning activity.');}
+ }
+ if(me()['role']==='student'&&isset($_POST['cb_action'])){
+  $legacyCbt=(string)$_POST['cb_action'];
+  if(in_array($legacyCbt,['start','save','submit'],true)){$_POST['lp_action']=['start'=>'cbt_start','save'=>'cbt_save','submit'=>'cbt_submit'][$legacyCbt];unset($_POST['cb_action']);$_GET['view']='cbt';}
+  elseif($legacyCbt==='integrity'){
+   try{$lu=lp_actor();$ls=lp_student($lu);if(!hash_equals($_SESSION['csrf'],(string)($_POST['csrf']??'')))throw new RuntimeException('Security token expired.');$la=cbAttempt((int)$lu['tenant_id'],(int)($_POST['attempt_id']??0));if((int)$la['user_id']!==(int)$lu['id']||(int)$la['student_id']!==(int)$ls['id'])throw new RuntimeException('Attempt unavailable.');cbEvent((int)$lu['tenant_id'],(int)$la['id'],'integrity',mb_substr((string)($_POST['event']??''),0,400));header('Content-Type: application/json');echo '{"ok":true}';exit;}catch(Throwable $ex){http_response_code(403);exit('Attempt unavailable.');}
+  }
+ }
+}
+if(isset($_POST['lp_action'])||isset($_GET['lp_file'])||($_GET['s']??'')==='learning'){
+ try{
+  if(!function_exists('lp_actor'))throw new RuntimeException('Learning module is missing. Restore learning_portal.php.');
+  $lpUser=lp_actor();
+  if(isset($_POST['lp_action'])){
+   try{$lpFlash=lp_action($lpUser);}catch(Throwable $ex){$lpFlash='Error: '.$ex->getMessage();}
+   $_SESSION['lp_notice']=$lpFlash;$lpView=is_string($_GET['view']??null)?$_GET['view']:($lpUser['role']==='student'?'dashboard':'classes');
+   $lpAttempt=(int)($_SESSION['lp_attempt']??0);unset($_SESSION['lp_attempt']);
+   header('Location: index.php?s=learning&view='.rawurlencode($lpView).($lpAttempt?'&attempt='.$lpAttempt:''),true,303);exit;
+  }
+  if(isset($_GET['lp_file']))lp_download($lpUser,(int)$_GET['lp_file']);
+  if(lp_ready()&&$lpUser['role']==='student'){
+   $lpPupil=lp_student($lpUser);
+   if(isset($_GET['attempt'])){$lpAttemptRow=cbAttempt((int)$lpUser['tenant_id'],(int)$_GET['attempt']);if((int)$lpAttemptRow['user_id']!==(int)$lpUser['id']||(int)$lpAttemptRow['student_id']!==(int)$lpPupil['id'])throw new RuntimeException('Attempt unavailable.');}
+  }
+ }catch(Throwable $ex){http_response_code(403);exit('Learning Portal unavailable: '.e($ex->getMessage()));}
+}
 define('SCHOOLOS_FINANCE_ENGINE', true); require_once __DIR__.'/finance_engine.php'; // v4.4 isolated finance module
 if(!me() || isset($_GET['home'])) { ?>
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#07172e"><meta name="description" content="SchoolOS Nigeria brings school administration, academics, payments, communication and learning into one connected platform."><title>SchoolOS Nigeria — Run your school. Elevate every experience.</title><style>
@@ -585,10 +620,10 @@ if(isset($_POST['ac_action'])&&$acAllowed){try{
    q('UPDATE students SET class_id=? WHERE id=? AND tenant_id=?',[$to,$student,$tid]);$pdo->commit();$acNotice='Student promoted; previous academic results and class history retained.';
   }catch(Throwable $ex){$pdo->rollBack();throw $ex;}
  }
- elseif($act==='publish'){if(!acOwn('classes',$tid,$class)||!$session||!$term)throw new RuntimeException('Choose class, session and term.');acValidatePublication($tid,$class,$session,$term);$rows=acTermResults($tid,$class,$session,$term);if(!$rows)throw new RuntimeException('No scores for this term.');foreach($rows as $r){if(!(int)$r['all_approved'])throw new RuntimeException('Approve all recorded scores before publishing.');if(abs((float)$r['possible']-100)>0.01)throw new RuntimeException('Every recorded subject must have assessment weights totalling 100%.');}q("INSERT INTO ac_term_approvals(tenant_id,class_id,session_name,term_name,status,published_by,published_at,verify_token) VALUES(?,?,?,?,'published',?,NOW(),?) ON DUPLICATE KEY UPDATE status='published',published_by=VALUES(published_by),published_at=NOW()",[$tid,$class,$session,$term,(int)$u['id'],bin2hex(random_bytes(24))]);$acNotice='Results published. Printable reports are available.';}
+ elseif($act==='publish'){$pdo->beginTransaction();q('SELECT id FROM classes WHERE tenant_id=? AND id=? FOR UPDATE',[$tid,$class]);if(!acOwn('classes',$tid,$class)||!$session||!$term)throw new RuntimeException('Choose class, session and term.');acValidatePublication($tid,$class,$session,$term);$rows=acTermResults($tid,$class,$session,$term);if(!$rows)throw new RuntimeException('No scores for this term.');foreach($rows as $r){if(!(int)$r['all_approved'])throw new RuntimeException('Approve all recorded scores before publishing.');if(abs((float)$r['possible']-100)>0.01)throw new RuntimeException('Every recorded subject must have assessment weights totalling 100%.');}q("INSERT INTO ac_term_approvals(tenant_id,class_id,session_name,term_name,status,published_by,published_at,verify_token) VALUES(?,?,?,?,'published',?,NOW(),?) ON DUPLICATE KEY UPDATE status='published',published_by=VALUES(published_by),published_at=NOW()",[$tid,$class,$session,$term,(int)$u['id'],bin2hex(random_bytes(24))]);$pdo->commit();$acNotice='Results published. Printable reports are available.';}
  else throw new RuntimeException('Unknown academic action.');
  }audit('academics.'.$act,'academics');
- }catch(Throwable $ex){$acNotice='Error: '.$ex->getMessage();}}
+ }catch(Throwable $ex){if($pdo->inTransaction())$pdo->rollBack();$acNotice='Error: '.$ex->getMessage();}}
 if(isset($_GET['ac_pdf'])&&$acAllowed&&acReady()){
  $kind=(string)$_GET['ac_pdf'];$student=(int)($_GET['student']??0);if(!acOwn('students',$tid,$student)){http_response_code(404);exit('Student unavailable');}$name=(string)g('SELECT name FROM students WHERE tenant_id=? AND id=?',[$tid,$student]);$school=(string)g('SELECT name FROM tenants WHERE id=?',[$tid]);$lines=[$school,'OFFICIAL ACADEMIC '.($kind==='transcript'?'TRANSCRIPT':'REPORT CARD'),'Student: '.$name,'Generated: '.date('Y-m-d H:i'),''];
  if($kind==='report'){$class=(int)($_GET['class']??0);$session=mb_substr((string)($_GET['session']??''),0,100);$term=mb_substr((string)($_GET['term']??''),0,70);$approved=q("SELECT verify_token FROM ac_term_approvals WHERE tenant_id=? AND class_id=? AND session_name=? AND term_name=? AND status='published'",[$tid,$class,$session,$term])->fetch();if(!$approved){http_response_code(403);exit('Report not published');}$lines[]='Session: '.$session.' | Term: '.$term;$lines[]='Subject                       Weighted Score';foreach(acTermResults($tid,$class,$session,$term,true) as $r)if((int)$r['student_id']===$student)$lines[]=mb_strimwidth($r['subject_name'],0,28).' : '.number_format((float)$r['total'],2).'%';$lines[]='Verification: '.(isset($_SERVER['HTTP_HOST'])?'https://'.$_SERVER['HTTP_HOST'].'/index.php?ac_verify='.$approved['verify_token']:$approved['verify_token']);acPdf('schoolos_report_'.$student.'.pdf',$lines);}
@@ -623,7 +658,9 @@ function cbInstall():void {
 }
 function cbExam(int $tid,int $id):array {$r=q('SELECT * FROM cb_exams WHERE tenant_id=? AND id=?',[$tid,$id])->fetch();if(!$r)throw new RuntimeException('Exam not found.');return $r;}
 function cbAttempt(int $tid,int $id):array {$r=q('SELECT * FROM cb_attempts WHERE tenant_id=? AND id=?',[$tid,$id])->fetch();if(!$r)throw new RuntimeException('Attempt not found.');return $r;}
-function cbStudentId(int $tid,int $uid):int {try{$r=q("SELECT record_id FROM ecosystem_portal_links WHERE tenant_id=? AND user_id=? AND link_type='student' LIMIT 1",[$tid,$uid])->fetchColumn();if($r)return (int)$r;}catch(Throwable $e){}try{$r=q("SELECT student_id FROM ecosystem_portal_links WHERE tenant_id=? AND user_id=? LIMIT 1",[$tid,$uid])->fetchColumn();if($r)return (int)$r;}catch(Throwable $e){}return 0;}
+function cbStudentId(int $tid,int $uid):int {
+ try{$ids=q("SELECT DISTINCT s.id FROM ecosystem_links l JOIN students s ON s.id=l.student_id AND s.tenant_id=l.tenant_id JOIN users u ON u.id=l.user_id AND u.tenant_id=l.tenant_id WHERE l.tenant_id=? AND l.user_id=? AND l.relation_type='student' AND u.role='student' AND u.active=1 LIMIT 2",[$tid,$uid])->fetchAll(PDO::FETCH_COLUMN);return count($ids)===1?(int)$ids[0]:0;}catch(Throwable $e){return 0;}
+}
 function cbRecalc(int $tid,int $attempt):void {$s=q('SELECT COALESCE(SUM(a.awarded),0) total,COUNT(*) cnt FROM cb_answers a WHERE a.tenant_id=? AND a.attempt_id=?',[$tid,$attempt])->fetch();$pending=(int)g("SELECT COUNT(*) FROM cb_answers a JOIN cb_questions q ON q.id=a.question_id AND q.tenant_id=a.tenant_id WHERE a.tenant_id=? AND a.attempt_id=? AND q.kind IN ('essay','short') AND a.awarded IS NULL",[$tid,$attempt]);q('UPDATE cb_attempts SET score=?,status=CASE WHEN submitted_at IS NULL THEN status WHEN ?=0 THEN \'graded\' ELSE \'grading\' END WHERE tenant_id=? AND id=?',[(float)$s['total'],$pending,$tid,$attempt]);}
 function cbEvent(int $tid,int $attempt,string $event,string $details=''):void {q('INSERT INTO cb_events(tenant_id,attempt_id,event_type,details) VALUES(?,?,?,?)',[$tid,$attempt,$event,mb_substr($details,0,400)]);}
 function cbFinalize(int $tid,int $attempt):void {
@@ -666,7 +703,14 @@ function lmInstall():void {global $pdo;foreach([
 function lmStudent(int $tid,int $uid):int {return cbStudentId($tid,$uid);}
 function lmCourse(int $tid,int $id):array {return q('SELECT * FROM lm_courses WHERE tenant_id=? AND id=?',[$tid,$id])->fetch()?:[];}
 function lmAllowed(int $tid,array $course,int $student):bool {return $student>0 && (int)g('SELECT class_id FROM students WHERE tenant_id=? AND id=?',[$tid,$student])===(int)$course['class_id'];}
-function lmStaff(array $u,array $course=[]):bool {return in_array($u['role']??'',['school_admin','admin','teacher'],true) && (($u['role']??'')!=='teacher'||!$course||(int)($course['teacher_id']??0)===(int)$u['id']);}
+function lmStaff(array $u,array $course=[]):bool {
+ if(in_array($u['role']??'',['school_admin','admin'],true))return true;
+ if(($u['role']??'')!=='teacher')return false;
+ if(!$course)return true;
+ if((int)($course['teacher_id']??0)!==(int)$u['id'])return false;
+ if(function_exists('lp_scope')&&isset($course['class_id'],$course['subject_id'])){try{lp_scope($u,(int)$course['class_id'],(int)$course['subject_id']);}catch(Throwable $e){return false;}}
+ return true;
+}
 if(me()&&isset($_GET['lm_file'])&&lmReady()){
  $tid=(int)me()['tenant_id'];$id=(int)$_GET['lm_file'];$f=q('SELECT s.*,l.course_id,c.class_id,c.teacher_id,c.status course_status FROM lm_submissions s JOIN lm_lessons l ON l.id=s.lesson_id AND l.tenant_id=s.tenant_id JOIN lm_courses c ON c.id=l.course_id AND c.tenant_id=l.tenant_id WHERE s.tenant_id=? AND s.id=?',[$tid,$id])->fetch();
  if(!$f||!$f['filedata']){http_response_code(404);exit('Attachment not found.');}
@@ -792,8 +836,8 @@ function cmAllowed(array $p,string $role,int $uid,int $tid):bool {
  if($p['audience']==='students')return $role==='student';
  if($p['audience']==='class'){
    if($role==='parent')return (bool)g("SELECT s.id FROM students s JOIN ecosystem_links l ON l.student_id=s.id AND l.tenant_id=s.tenant_id WHERE s.tenant_id=? AND s.class_id=? AND l.user_id=? AND l.relation_type='parent' LIMIT 1",[$tid,(int)$p['class_id'],$uid]);
-   if($role==='student')return (bool)g('SELECT id FROM students WHERE tenant_id=? AND class_id=? AND id IN (SELECT student_id FROM ecosystem_links WHERE tenant_id=? AND user_id=?)',[$tid,(int)$p['class_id'],$tid,$uid]);
-   if($role==='teacher')return (bool)g('SELECT id FROM ac_allocations WHERE tenant_id=? AND teacher_id=? AND class_id=?',[$tid,$uid,(int)$p['class_id']]);
+   if($role==='student'){$linked=cbStudentId($tid,$uid);return $linked>0&&(bool)g('SELECT id FROM students WHERE tenant_id=? AND class_id=? AND id=?',[$tid,(int)$p['class_id'],$linked]);}
+   if($role==='teacher')return (bool)g('SELECT a.id FROM ac_allocations a JOIN classes c ON c.id=a.class_id AND c.tenant_id=a.tenant_id WHERE a.tenant_id=? AND a.teacher_id=? AND a.class_id=? AND a.session_name=c.session_name LIMIT 1',[$tid,$uid,(int)$p['class_id']]);
    return false;
  }
  return false;
@@ -874,8 +918,13 @@ if(isset($_POST['pp_action'])||isset($_GET['pp_document'])||($_GET['s']??'')==='
  }
 }
 if(isset($_SESSION['pp_notice'])){$ppNotice=(string)$_SESSION['pp_notice'];unset($_SESSION['pp_notice']);}
-$section=$_GET['s']??'dashboard';$activationFlash=(string)($_SESSION['schoolos_activation_notice']??'');unset($_SESSION['schoolos_activation_notice']);
-$nav=['family'=>'Family Space','dashboard'=>'Dashboard','students'=>'Students','parents'=>'Parents','teachers'=>'Teachers','attendance'=>'Attendance','results'=>'Results','academics'=>'Academics & Curriculum','fees'=>'Fees & Payments','courses'=>'E-Learning','books'=>'Library','exams'=>'CBT / Exams','announcements'=>'Communication','staff'=>'HR & Payroll','inventory'=>'Inventory','assets'=>'Assets','vehicles'=>'Transport','hostels'=>'Boarding','health'=>'Health','discipline'=>'Discipline','marketplace'=>'Marketplace','reports'=>'Reports','audit'=>'Audit Logs','ecosystem'=>'Ecosystem Hub','applications'=>'Admissions','tasks'=>'My Tasks','support'=>'Support Desk','referrals'=>'Partner Referrals','portal_users'=>'Portal Accounts','portal_links'=>'Account Links','saas'=>'SaaS Control Centre','integrations'=>'Integrations','school_setup'=>'School Setup'];
+$section=$_GET['s']??'dashboard';
+if(in_array($ecoRole,['teacher','student'],true)&&in_array($section,['dashboard','students','results','fees','attendance','courses','exams'],true)){
+ $legacyLearningView=$ecoRole==='student'?['dashboard'=>'dashboard','results'=>'grades','attendance'=>'attendance','courses'=>'resources','exams'=>'cbt']:['dashboard'=>'classes','students'=>'classes','results'=>'scores','attendance'=>'attendance','courses'=>'assignments','exams'=>'questions'];
+ if(!isset($_GET['view']))$_GET['view']=$legacyLearningView[$section]??($ecoRole==='student'?'dashboard':'classes');$section='learning';
+}
+$activationFlash=(string)($_SESSION['schoolos_activation_notice']??'');unset($_SESSION['schoolos_activation_notice']);
+$nav=['learning'=>'Learning Portals','family'=>'Family Space','dashboard'=>'Dashboard','students'=>'Students','parents'=>'Parents','teachers'=>'Teachers','attendance'=>'Attendance','results'=>'Results','academics'=>'Academics & Curriculum','fees'=>'Fees & Payments','courses'=>'E-Learning','books'=>'Library','exams'=>'CBT / Exams','announcements'=>'Communication','staff'=>'HR & Payroll','inventory'=>'Inventory','assets'=>'Assets','vehicles'=>'Transport','hostels'=>'Boarding','health'=>'Health','discipline'=>'Discipline','marketplace'=>'Marketplace','reports'=>'Reports','audit'=>'Audit Logs','ecosystem'=>'Ecosystem Hub','applications'=>'Admissions','tasks'=>'My Tasks','support'=>'Support Desk','referrals'=>'Partner Referrals','portal_users'=>'Portal Accounts','portal_links'=>'Account Links','saas'=>'SaaS Control Centre','integrations'=>'Integrations','school_setup'=>'School Setup'];
 $groups=['Overview'=>['dashboard','ecosystem'],'People & Admissions'=>['students','parents','teachers','staff','applications','portal_users','portal_links'],'Academics & Learning'=>['academics','attendance','results','courses','exams','books'],'Finance & Communication'=>['fees','announcements','reports','support'],'School Operations'=>['tasks','inventory','assets','vehicles','hostels','health','discipline','marketplace']];
 if($ecoRole==='platform_super_admin'){$nav['platform']='Platform Control';$nav['system']='Updates & Plugins';$groups=['Platform'=>['dashboard','ecosystem','platform','portal_users','system'],'Operations'=>['support','referrals','reports','audit'],'SaaS Management'=>['saas','integrations']];}
 elseif($ecoRole==='student'){$groups=['My Learning'=>['dashboard','ecosystem','results','courses','exams','attendance','announcements']];}
@@ -885,9 +934,11 @@ elseif($ecoRole==='staff'){$groups=['My Workspace'=>['dashboard','ecosystem','ta
 elseif($ecoRole==='admissions'){$groups=['Admissions'=>['dashboard','ecosystem','applications','announcements'],'Help'=>['support']];}
 elseif($ecoRole==='partner'){$groups=['Partner Workspace'=>['dashboard','ecosystem','referrals','support']];}
 else {$groups['School Configuration']=['school_setup'];$groups['Governance']=['audit'];}
+if($section==='learning'&&function_exists('lp_actor')){try{$lpResolved=lp_actor();if(lp_ready()&&$lpResolved['role']==='student'){$lpResolvedStudent=lp_student($lpResolved);if(isset($_GET['attempt'])){$lpResolvedAttempt=cbAttempt((int)$lpResolved['tenant_id'],(int)$_GET['attempt']);if((int)$lpResolvedAttempt['user_id']!==(int)$lpResolved['id']||(int)$lpResolvedAttempt['student_id']!==(int)$lpResolvedStudent['id'])throw new RuntimeException('Attempt unavailable.');}}}catch(Throwable $ex){http_response_code(403);exit('Learning Portal unavailable: '.e($ex->getMessage()));}}
+if(in_array($ecoRole,['school_admin','teacher','student'],true))$groups['Learning Portals']=['learning'];
 if(in_array($ecoRole,['parent','school_admin','teacher'],true))$groups['Family Space']=['family'];
 if(!array_key_exists($section,$nav)||!in_array($section,array_merge(...array_values($groups)),true))$section='dashboard';
-if(!in_array($ecoRole,['platform_super_admin','school_admin'],true)&&!in_array($section,['family','dashboard','ecosystem','applications','tasks','support','referrals','portal_users','portal_links','exams','announcements'],true))$section='ecosystem';
+if(!in_array($ecoRole,['platform_super_admin','school_admin'],true)&&!in_array($section,['learning','family','dashboard','ecosystem','applications','tasks','support','referrals','portal_users','portal_links','exams','announcements'],true))$section='ecosystem';
 $count=function($t)use($tid){return $tid?(int)g("SELECT COUNT(*) FROM `$t` WHERE tenant_id=?",[$tid]):0;};
 $icons=['ecosystem'=>'◈','applications'=>'▤','tasks'=>'✓','support'=>'◉','referrals'=>'↗','portal_users'=>'♙','portal_links'=>'↔','dashboard'=>'▦','platform'=>'◈','system'=>'⬡','students'=>'♙','parents'=>'♧','teachers'=>'♙','staff'=>'♙','attendance'=>'◷','results'=>'▤','academics'=>'▧','courses'=>'▧','exams'=>'✎','books'=>'▣','fees'=>'₦','announcements'=>'◉','reports'=>'▥','audit'=>'◷'];
 ?><!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title><?=e($nav[$section])?> · <?=e($ecoRole==='platform_super_admin'?'SchoolOS':$schoolTitle)?></title><style>
@@ -914,7 +965,7 @@ html[data-theme="dark"] .ss-progress-track{background:#334155}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style><script>try{document.documentElement.dataset.theme=localStorage.getItem("schoolos-theme")||((matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light")}catch(e){document.documentElement.dataset.theme="light"}</script></head><body><div class="app" id="app"><div class="shade" id="shade"></div><aside class="side" id="sidebar"><div class="sidehead"><h2>School<span>OS</span></h2><span style="font-size:12px;color:#a9c3d2">NIGERIA</span></div><div class="side-sub"><?=e($ecoRole==='platform_super_admin'?'Platform workspace':$schoolTitle)?></div><input class="side-search" id="navSearch" type="search" placeholder="Search modules…" aria-label="Search navigation"><nav class="navscroll" aria-label="Dashboard navigation">
 <?php foreach($groups as $group=>$items):$expanded=in_array($section,$items,true);?><section class="navgroup <?=$expanded?'open':''?>"><button class="group-title" type="button" aria-expanded="<?=$expanded?'true':'false'?>"><span><?=e($group)?></span><span class="chev">⌄</span></button><div class="group-items"><?php foreach($items as $k):?><a class="navitem <?=$section===$k?'active':''?>" <?=$section===$k?'aria-current="page"':''?> href="?s=<?=e($k)?>"><span class="navicon"><?=e($icons[$k]??'◇')?></span><span><?=e($nav[$k])?></span></a><?php endforeach;?></div></section><?php endforeach;?></nav><div class="sidefoot"><a href="?home=1">↗ Visit public website</a><a href="?logout=1">↪ Sign out</a></div></aside><main class="main"><header class="top"><div style="display:flex;align-items:center;gap:12px"><button class="mobile-toggle" id="toggle" type="button" aria-label="Open menu" aria-expanded="false">☰</button><div><div class="crumb">SchoolOS / <?=e($u['role']==='platform_super_admin'?'Platform':'School')?> / <?=e($nav[$section])?></div><h1><?=e($nav[$section])?></h1></div></div><div class="top-right"><button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch light and dark theme">◐ <span id="themeLabel">Theme</span></button><a class="btn" href="?home=1" style="background:#edf7f5;color:#08796e;font-size:12px">↗ Website</a><div class="profile"><strong><?=e($u['name'])?></strong><span><?=e(str_replace('_',' ',ucwords($u['role'],'_')))?></span></div></div></header><div class="content">
-<?php if($activationFlash!==''):?><div class="card" role="status" style="border:2px solid #20a981;background:#e9fbf3"><h2>School activated successfully</h2><p><?=e($activationFlash)?></p><p><a href="?s=students">Add students →</a> · <a href="?s=school_setup">Review academic settings →</a> · <a href="?s=results">Results →</a></p></div><br><?php endif;?><?php if(isset($ssNotice)):?><div class=card><?=e($ssNotice)?></div><br><?php endif;?><?php if(isset($notice)):?><div class=card><?=e($notice)?></div><br><?php endif;?><?php if(isset($v23notice)&&$section!=='saas'):?><div class=card><?=e($v23notice)?></div><br><?php endif;?><?php if($section==='family'):?><?php if($ppNotice!=='')echo '<div class=card role=status>'.e($ppNotice).'</div>';if(function_exists('pp_render'))pp_render(pp_actor());else echo '<div class=card>Family Space is unavailable. Restore parent_portal.php.</div>'; ?><?php elseif($section==='ecosystem'||in_array($section,['applications','tasks','support','referrals','portal_users','portal_links'],true)||($section==='dashboard'&&!in_array($ecoRole,['platform_super_admin','school_admin'],true))):?><?php
+<?php if($activationFlash!==''):?><div class="card" role="status" style="border:2px solid #20a981;background:#e9fbf3"><h2>School activated successfully</h2><p><?=e($activationFlash)?></p><p><a href="?s=students">Add students →</a> · <a href="?s=school_setup">Review academic settings →</a> · <a href="?s=results">Results →</a></p></div><br><?php endif;?><?php if(isset($ssNotice)):?><div class=card><?=e($ssNotice)?></div><br><?php endif;?><?php if(isset($notice)):?><div class=card><?=e($notice)?></div><br><?php endif;?><?php if(isset($v23notice)&&$section!=='saas'):?><div class=card><?=e($v23notice)?></div><br><?php endif;?><?php if($section==='learning'):?><?php if(isset($_SESSION['lp_notice'])){echo '<div class=card role=status>'.e($_SESSION['lp_notice']).'</div>';unset($_SESSION['lp_notice']);}if(function_exists('lp_render'))lp_render(lp_actor());else echo '<div class=card>Learning module unavailable. Restore learning_portal.php.</div>'; ?><?php elseif($section==='family'):?><?php if($ppNotice!=='')echo '<div class=card role=status>'.e($ppNotice).'</div>';if(function_exists('pp_render'))pp_render(pp_actor());else echo '<div class=card>Family Space is unavailable. Restore parent_portal.php.</div>'; ?><?php elseif($section==='ecosystem'||in_array($section,['applications','tasks','support','referrals','portal_users','portal_links'],true)||($section==='dashboard'&&!in_array($ecoRole,['platform_super_admin','school_admin'],true))):?><?php
 // Rendered only through authenticated index.php router. All queries are scoped by tenant and role.
 if(!isset($u,$ecoRole,$section)){http_response_code(403);exit;}
 function ecoTable($rows,$cols){echo '<div class="card" style="overflow-x:auto"><table class="table"><thead><tr>';foreach($cols as $label)echo '<th>'.e($label).'</th>';echo '</tr></thead><tbody>';foreach($rows as $row){echo '<tr>';foreach($row as $value)echo '<td>'.e($value).'</td>';echo '</tr>';}if(!$rows)echo '<tr><td colspan="'.count($cols).'">No records yet.</td></tr>';echo '</tbody></table></div>';}

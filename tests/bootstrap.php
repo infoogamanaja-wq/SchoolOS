@@ -14,3 +14,4 @@ function load_index_functions():void {
 load_index_functions();
 define('SCHOOLOS_PARENT_LIBRARY',true);require __DIR__.'/../app/parent_portal.php';
 define('SCHOOLOS_FINANCE_ENGINE',true);require __DIR__.'/../app/finance_engine.php';
+define('SCHOOLOS_LEARNING_LIBRARY',true);require __DIR__.'/../app/learning_portal.php';

@@ -1,0 +1,19 @@
+No syntax errors detected in /workspace/SchoolOS/app/config.example.php
+No syntax errors detected in /workspace/SchoolOS/app/finance_engine.php
+No syntax errors detected in /workspace/SchoolOS/app/finance_view.php
+No syntax errors detected in /workspace/SchoolOS/app/index.php
+No syntax errors detected in /workspace/SchoolOS/app/install.php
+No syntax errors detected in /workspace/SchoolOS/app/learning_portal.php
+No syntax errors detected in /workspace/SchoolOS/app/parent_portal.php
+No syntax errors detected in /workspace/SchoolOS/app/school_logo_handler.php
+No syntax errors detected in /workspace/SchoolOS/app/system_manager.php
+No syntax errors detected in /workspace/SchoolOS/tests/bootstrap.php
+No syntax errors detected in /workspace/SchoolOS/tests/concurrency.php
+No syntax errors detected in /workspace/SchoolOS/tests/learning.php
+No syntax errors detected in /workspace/SchoolOS/tests/learning_concurrency.php
+No syntax errors detected in /workspace/SchoolOS/tests/learning_seed.php
+No syntax errors detected in /workspace/SchoolOS/tests/portal.php
+No syntax errors detected in /workspace/SchoolOS/tests/seed.php
+No syntax errors detected in /workspace/SchoolOS/tests/updater.php
+No syntax errors detected in /workspace/SchoolOS/tools/integrity_check.php
+TOTAL 18 PHP files passed

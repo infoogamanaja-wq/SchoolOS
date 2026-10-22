@@ -1,1 +1,1 @@
-SchoolOS Nigeria 4.6.5 — Family Portal and recoverable deployments
+SchoolOS Nigeria 4.7.0 — Teacher and Student Portals

@@ -1,13 +1,17 @@
-# SchoolOS Nigeria — audited Family Portal update
+# SchoolOS Nigeria — Teacher & Student Portals 4.7.0
 
-This repository contains the repaired application source, automated tests, audit findings, and two staged Update Manager ZIPs. It was reconstructed from the supplied `public_html.zip`; production configuration, database contents, uploaded files, and historical backups are excluded.
+The latest release adds the requested **17 Teacher Portal** and **14 Student Portal** areas on top of the working Family Portal release. It preserves existing Finance, Family Space, Community Hub, WhatsApp handoff, authentication and records.
 
-Read [the audit](docs/AUDIT.md), [deployment instructions](docs/DEPLOYMENT.md), and [test evidence](docs/VALIDATION.md) before deployment.
+Read the [4.7.0 deployment guide](docs/4.7.0/DEPLOYMENT.md), [feature map](docs/4.7.0/FEATURES.md) and [validation evidence](docs/4.7.0/VALIDATION.md).
 
-1. Test `dist/SchoolOS-4.6.4-Updater-Repair.zip` on a staging clone first. It changes only `system_manager.php`, leaving the existing entry point untouched.
-2. Test `dist/SchoolOS-4.6.5-Family-Portal.zip` on staging. This changes the entry point and includes all required new code.
-3. Activate Family Space as a school administrator, after a database backup. Existing ecosystem account links supply parent access. No parent is linked merely by matching an email or name.
+Install on a backed-up staging clone through **Platform Super Admin → Updates & Plugins**, in this order:
 
-Build reproducible packages with `python3 tools/build_release.py`. PHP 8.4, MariaDB, and the extensions listed in the deployment guide are required for runtime tests. See `tests/README.md` for isolated test setup.
+1. `dist/SchoolOS-4.6.6-Learning-Updater.zip` — permits the new module; leaves the working index unchanged.
+2. `dist/SchoolOS-4.7.0-Teacher-Student-Portals.zip` — installs the tested portal/router update.
+3. As a school administrator, open **Learning Portals → Activate Learning Portals**. Configure teacher class/subject/session allocations and explicit student account links using the existing school administration screens.
 
-The complete product blueprint is product context. This change implements the requested Parent & Guardian Portal, not every future feature in that blueprint. Live hosting deletion and live Paystack behavior have not been established by local tests.
+AI is optional and disabled by default. Real provider use needs the school's private `providers.ai_api_key`, outbound HTTPS and school enablement. Automated AI tests use simulated provider responses; no live model/account availability is claimed.
+
+`python3 tools/build_release.py` builds the latest packages and checksum list. Historical 4.6.4/4.6.5 ZIPs remain immutable. See [tests/README.md](tests/README.md) for isolated test commands. This is the PHP 8.4/MariaDB/cPanel script application requested by the user; production credentials, database contents, uploaded files and historical live backups are excluded from Git and release payloads.
+
+Earlier Family Portal findings and deployment evidence remain in [docs/AUDIT.md](docs/AUDIT.md), [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) and [docs/VALIDATION.md](docs/VALIDATION.md). The product blueprint remains product context, not executable deployment instructions. No production server was accessed by this work.

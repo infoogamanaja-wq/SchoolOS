@@ -1,0 +1,22 @@
+<?php
+require __DIR__.'/bootstrap.php';
+if(getenv('SCHOOLOS_ALLOW_TEST_FIXTURES')!=='1'||!str_ends_with((string)g('SELECT DATABASE()'),'_test'))throw new RuntimeException('Disposable test database required.');
+if(lp_has('lp_pd'))throw new RuntimeException('Seed a fresh disposable learning database.');lp_install();
+$pwd=password_hash('Local-test-password-2026!',PASSWORD_DEFAULT);
+foreach([[8,1,'student2@test.local','student','Second Learner'],[9,1,'unassigned@test.local','teacher','Other Teacher'],[10,2,'foreignstudent@test.local','student','Foreign Student'],[11,1,'unlinked@test.local','student','Unlinked Student'],[12,2,'foreignteacher@test.local','teacher','Foreign Teacher']] as $r)q('INSERT INTO users(id,tenant_id,email,role,name,password_hash) VALUES(?,?,?,?,?,?)',array_merge($r,[$pwd]));
+q("INSERT INTO classes(id,tenant_id,name,section,session_name) VALUES(3,1,'PRIVATE CLASS','B','2026/2027')");q("INSERT INTO subjects(id,tenant_id,name,code) VALUES(3,1,'Science','SCI')");
+q("INSERT INTO students(id,tenant_id,student_no,name,class_id) VALUES(5,1,'TEST-5','PRIVATE CLASS LEARNER',3)");
+q("INSERT INTO ecosystem_links(tenant_id,user_id,student_id,relation_type) VALUES(1,8,2,'student'),(2,10,4,'student')");
+q("INSERT INTO ac_allocations(tenant_id,teacher_id,class_id,subject_id,session_name) VALUES(1,3,1,1,'2026/2027'),(1,9,3,3,'2026/2027'),(2,12,2,2,'2026/2027')");
+q("INSERT INTO ac_curriculum(id,tenant_id,class_id,subject_id,session_name,term_name,topic) VALUES(2,1,3,3,'2026/2027','First','PRIVATE SYLLABUS')");
+q("INSERT INTO ac_assessments(id,tenant_id,class_id,subject_id,session_name,term_name,title,category,max_score,weight) VALUES(1,1,1,1,'2026/2027','First','Mathematics assessment','exam',100,100),(2,1,3,3,'2026/2027','First','PRIVATE ASSESSMENT','exam',100,100)");
+q("INSERT INTO ac_timetable(tenant_id,class_id,subject_id,teacher_id,weekday,start_time,end_time,session_name) VALUES(1,1,1,3,1,'09:00','10:00','2026/2027'),(1,3,3,9,1,'10:00','11:00','2026/2027')");
+q("INSERT INTO lm_courses(id,tenant_id,class_id,subject_id,teacher_id,title,status) VALUES(1,1,1,1,3,'Mathematics learning','published'),(2,1,3,3,9,'PRIVATE COURSE','published'),(3,1,1,1,3,'DRAFT COURSE','draft')");
+q("INSERT INTO lm_lessons(id,tenant_id,course_id,title,content,lesson_type,points,available_at,due_at) VALUES(1,1,1,'Fractions homework','Show your working','homework',10,NULL,'2030-12-31 10:00:00'),(2,1,1,'FUTURE ACTIVITY','FUTURE CONTENT','homework',10,'2030-01-01 10:00:00',NULL),(3,1,2,'PRIVATE ACTIVITY','PRIVATE CONTENT','homework',10,NULL,NULL),(4,1,3,'DRAFT ACTIVITY','DRAFT CONTENT','homework',10,NULL,NULL)");
+q("INSERT INTO ac_resources(tenant_id,class_id,subject_id,title,url,notes) VALUES(1,1,1,'Fractions practice','https://example.org/fractions','Practice resource'),(1,3,3,'PRIVATE RESOURCE','https://example.org/private','Private')");
+q("INSERT INTO cb_exams(id,tenant_id,class_id,subject_id,title,duration_minutes,attempt_limit,published,created_by,starts_at,ends_at) VALUES(1,1,1,1,'Mathematics CBT',30,1,1,3,NULL,NULL),(2,1,3,3,'PRIVATE EXAM',30,1,1,9,NULL,NULL),(3,1,1,1,'DRAFT EXAM',30,1,0,3,NULL,NULL),(4,1,1,1,'Future exam',30,1,1,3,'2030-01-01 10:00:00',NULL),(5,1,1,1,'Closed exam',30,1,1,3,NULL,'2020-01-01 10:00:00')");
+q("INSERT INTO cb_questions(id,tenant_id,exam_id,kind,body,options_json,correct_answer,points,explanation) VALUES(1,1,1,'mcq','Five plus two?', '[\"Six\",\"Seven\"]','Seven',1,'PRIVATE ANSWER EXPLANATION'),(2,1,2,'mcq','PRIVATE QUESTION', '[\"a\",\"b\"]','a',1,'Private')");
+q("INSERT INTO books(id,tenant_id,title,author,copies,available) VALUES(1,1,'Library Mathematics','School Library',1,1),(2,2,'FOREIGN BOOK','Other School',1,1)");
+q("INSERT INTO lp_clubs(id,tenant_id,class_id,title,description,capacity,created_by) VALUES(1,1,1,'Science club','Explore science',1,2),(2,1,3,'PRIVATE CLUB','Private club',10,2)");
+q("INSERT INTO ac_assessments(id,tenant_id,class_id,subject_id,session_name,term_name,title,category,max_score,weight) VALUES(3,1,1,1,'2026/2027','Second','HTTP CSV assessment','ca',30,100)");
+echo 'Learning fixture ready on '.$pdo->getAttribute(PDO::ATTR_SERVER_VERSION)."\n";

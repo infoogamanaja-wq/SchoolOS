@@ -1,0 +1,24 @@
+<?php
+require __DIR__.'/bootstrap.php';if(!str_ends_with((string)g('SELECT DATABASE()'),'_test'))throw new RuntimeException('Use a disposable database.');date_default_timezone_set('Africa/Lagos');$_SESSION=['csrf'=>'race'];
+function race_user(int $id):array {$_SESSION['u']=q('SELECT * FROM users WHERE id=?',[$id])->fetch();return lp_actor();}
+function race_action(int $id,array $p):void {$_POST=['csrf'=>'race']+$p;lp_action(race_user($id));}
+$worker=tempnam(sys_get_temp_dir(),'learning-race-').'.php';
+$code= <<<'WORKER'
+<?php
+require BOOTSTRAP;date_default_timezone_set('Africa/Lagos');$_SESSION=['csrf'=>'race','u'=>q('SELECT * FROM users WHERE id=?',[(int)$argv[1]])->fetch()];
+try{$u=lp_actor();$p=json_decode($argv[2],true,512,JSON_THROW_ON_ERROR);$_POST=['csrf'=>'race']+$p;
+ if($p['lp_action']==='race_cbt'){echo 'OK:'.lp_cbt_start($u,(int)$p['exam_id'],'');}
+ elseif($p['lp_action']==='race_ai'){$c=['providers'=>['ai_api_key'=>'local-test-key']];lp_ai($u,'Explain fraction practice',fn($path,$payload,$key)=>$path==='moderations'?['results'=>[['flagged'=>false]]]:['choices'=>[['message'=>['content'=>'Practise using equal bars.']]]]);echo 'OK';}
+ else{lp_action($u);echo 'OK';}
+}catch(Throwable $e){echo 'DENIED';}
+WORKER;
+file_put_contents($worker,str_replace('BOOTSTRAP',var_export(__DIR__.'/bootstrap.php',true),$code));
+function workers(string $worker,array $jobs):array {
+ $all=[];foreach($jobs as [$uid,$post]){$pipes=[];$proc=proc_open([PHP_BINARY,'-c',php_ini_loaded_file(),$worker,(string)$uid,json_encode($post)],[0=>['pipe','r'],1=>['pipe','w'],2=>['pipe','w']],$pipes);fclose($pipes[0]);$all[]=[$proc,$pipes];}$results=[];
+ foreach($all as [$proc,$pipes]){$results[]=stream_get_contents($pipes[1]);$err=stream_get_contents($pipes[2]);fclose($pipes[1]);fclose($pipes[2]);if(proc_close($proc)!==0||$err)throw new RuntimeException('Worker error: '.$err);}return $results;
+}
+function single_success(array $out,string $label):void {sort($out);if($out!==['DENIED','OK'])throw new RuntimeException($label.': '.json_encode($out));echo 'PASS '.$label."\n";}
+q("INSERT INTO cb_exams(tenant_id,class_id,subject_id,title,duration_minutes,attempt_limit,published,created_by) VALUES(1,1,1,'Parallel CBT',30,1,1,3)");$exam=(int)$pdo->lastInsertId();q("INSERT INTO cb_questions(tenant_id,exam_id,kind,body,options_json,correct_answer,points) VALUES(1,?,'mcq','Two plus two?','[\"Three\",\"Four\"]','Four',1)",[$exam]);$out=workers($worker,[[7,['lp_action'=>'race_cbt','exam_id'=>$exam]],[7,['lp_action'=>'race_cbt','exam_id'=>$exam]]]);if(count(array_unique($out))!==1||!str_starts_with($out[0],'OK:')||(int)g('SELECT COUNT(*) FROM cb_attempts WHERE exam_id=?',[$exam])!==1)throw new RuntimeException('Parallel CBT duplicated attempt.');echo "PASS simultaneous starts resume one CBT attempt\n";
+q("INSERT INTO books(tenant_id,title,copies,available) VALUES(1,'Parallel loan book',1,1)");$book=(int)$pdo->lastInsertId();race_action(7,['lp_action'=>'borrow','book_id'=>$book]);$l1=(int)g('SELECT MAX(id) FROM lp_library_loans WHERE book_id=? AND student_id=1',[$book]);race_action(8,['lp_action'=>'borrow','book_id'=>$book]);$l2=(int)g('SELECT MAX(id) FROM lp_library_loans WHERE book_id=? AND student_id=2',[$book]);single_success(workers($worker,[[2,['lp_action'=>'review_loan','loan_id'=>$l1,'decision'=>'issued','due_on'=>'2030-01-15']],[2,['lp_action'=>'review_loan','loan_id'=>$l2,'decision'=>'issued','due_on'=>'2030-01-15']]]),'parallel library reviews cannot issue the last copy twice');if((int)g('SELECT available FROM books WHERE id=?',[$book])!==0)throw new RuntimeException('Incorrect inventory.');
+q("INSERT INTO lp_clubs(tenant_id,class_id,title,description,capacity,created_by) VALUES(1,1,'Parallel club','One place',1,2)");$club=(int)$pdo->lastInsertId();race_action(7,['lp_action'=>'join_club','club_id'=>$club]);$m1=(int)g('SELECT MAX(id) FROM lp_club_members WHERE club_id=? AND student_id=1',[$club]);race_action(8,['lp_action'=>'join_club','club_id'=>$club]);$m2=(int)g('SELECT MAX(id) FROM lp_club_members WHERE club_id=? AND student_id=2',[$club]);single_success(workers($worker,[[2,['lp_action'=>'review_member','member_id'=>$m1,'decision'=>'approved']],[2,['lp_action'=>'review_member','member_id'=>$m2,'decision'=>'approved']]]),'parallel club approvals cannot exceed capacity');
+q('DELETE FROM lp_ai_usage WHERE tenant_id=1 AND user_id=3');q('UPDATE lp_ai_settings SET teachers_enabled=1,daily_limit=1 WHERE tenant_id=1');single_success(workers($worker,[[3,['lp_action'=>'race_ai']],[3,['lp_action'=>'race_ai']]]),'parallel AI requests respect daily quota');if((int)g('SELECT request_count FROM lp_ai_usage WHERE tenant_id=1 AND user_id=3 AND usage_day=?',[date('Y-m-d')])!==1)throw new RuntimeException('Incorrect quota.');unlink($worker);echo "TOTAL 4 passed\n";

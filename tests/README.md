@@ -39,3 +39,21 @@ Apache tests verify DirectoryIndex, fallback rewrite, storage/config/database/do
 Use `python3 tools/build_release.py` to reproduce ZIPs and hashes. Lint all PHP files and verify built archive contents and manifest hashes before distributing. Live Paystack test transactions and cPanel quarantine/deletion observations require the user's actual staging services and logs.
 
 The read-only monitor can be tested independently with `SCHOOLOS_PHP_COMMAND=/path/to/php84 python3 tests/integrity_monitor.py`. To repeat MariaDB compatibility checks on a second server, set a socket-specific `SCHOOLOS_TEST_DSN`, create its empty `schoolos_test` database, and run the seed, portal, and concurrency suites there.
+
+## Teacher / Student 4.7.0 suites
+
+Use a new **empty, disposable** `schoolos_learning_test` database and a socket-specific `SCHOOLOS_TEST_DSN` when necessary. Run the base seed, then the learning seed, then domain tests:
+
+```
+SCHOOLOS_ALLOW_TEST_FIXTURES=1 php tests/seed.php
+SCHOOLOS_ALLOW_TEST_FIXTURES=1 php tests/learning_seed.php
+php tests/learning.php
+```
+
+The seed refuses existing portal fixtures; do not run against production. The domain suite mutates synthetic data. `tests/learning_concurrency.php` uses independent PHP processes to test CBT starts, last-copy library issue, club capacity and AI quota reservation. Run it **after** HTTP tests because it deliberately starts an active exam.
+
+Prepare a local `/learning` root from app/ pointing only at schoolos_learning_test, then run `python3 tests/learning_http.py http://127.0.0.1:8090`. This exercises all views, cross-account denial, old-form guards, actual multipart CSV preview/commit, and homework attachment download restrictions.
+
+For packaged-upgrade tests, prepare a separate empty `schoolos_upgrade_test`, run only the base seed against it, and point the local Apache document root at a disposable `/runtime/upgrade` copy of the working **4.6.5** application, with its 4.6.5 version metadata. Copy the exact old app files from the immutable 4.6.5 ZIP; retain required existing dependencies from app/. Do not include learning_portal.php initially. Supply only the isolated database config. Run `python3 tests/learning_package_http.py http://127.0.0.1:8092`. It uploads both new packages through the frontend, explicitly activates schemas, checks all views, performs rollback and verifies/reinstalls the package. It refuses a nonlocal URL and checks that its filesystem target is a disposable runtime/upgrade root. Override its root with `SCHOOLOS_UPGRADE_ROOT` if needed.
+
+The existing Family Space regression suite must run on a **different**, freshly base-seeded disposable database (`php tests/portal.php`), because it has its own expected synthetic state. Second-version MariaDB compatibility uses the same seeds/domain/concurrency suites and an independent socket/server, not the live school database. AI tests supply mock transports and a fake test key; no provider network traffic or real student data is involved.

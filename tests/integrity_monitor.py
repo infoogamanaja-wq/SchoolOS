@@ -10,4 +10,9 @@ with tempfile.TemporaryDirectory(prefix='schoolos-monitor-') as d:
  original=(p/'index.php').read_bytes();(p/'index.php').unlink();check(1,'monitor detects missing index without recreating it');assert not (p/'index.php').exists();(p/'index.php').write_bytes(original)
  (p/'parent_portal.php').write_text('altered');check(1,'monitor detects altered portal')
  (p/'release.json').write_text('{"files":{}}');check(2,'monitor refuses an incomplete baseline')
-print('TOTAL 4 passed')
+with tempfile.TemporaryDirectory(prefix='schoolos-learning-monitor-') as d:
+ p=Path(d)
+ with zipfile.ZipFile(r/'dist/SchoolOS-4.7.0-Teacher-Student-Portals.zip') as z:z.extractall(p)
+ check(0,'monitor accepts new learning release manifest')
+ (p/'learning_portal.php').unlink();check(1,'monitor detects missing learning module without recreating it')
+print('TOTAL 6 passed')
