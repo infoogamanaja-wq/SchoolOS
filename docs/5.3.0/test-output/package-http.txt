@@ -1,0 +1,42 @@
+PASS baseline 5.2.1 activation
+PASS baseline frontend creates old isolated demo
+PASS existing demo booking before migration
+PASS support ZIP preserves exact stable index
+PASS main update installed through actual frontend
+PASS deployed manifest portal_experience.php
+PASS deployed manifest portal_collaboration.php
+PASS deployed manifest portal_experience.css
+PASS deployed manifest portal_experience.js
+PASS deployed manifest classroom.php
+PASS deployed manifest classroom.js
+PASS deployed manifest index.php
+PASS deployed manifest experience.php
+PASS deployed manifest experience_ui.php
+PASS deployed manifest experience_admin.php
+PASS deployed manifest experience_demo.php
+PASS deployed manifest finance_engine.php
+PASS deployed manifest parent_portal.php
+PASS deployed manifest learning_portal.php
+PASS deployed manifest services_core.php
+PASS deployed manifest library_manager.php
+PASS deployed manifest operations_core.php
+PASS deployed manifest insights_core.php
+PASS deployed manifest engagement_manager.php
+PASS deployed manifest public_guides.php
+PASS deployed manifest public_guides.json
+PASS deployed manifest system_manager.php
+PASS deployed manifest VERSION.txt
+PASS existing demo upgrades automatically to daily meal calendar
+PASS upgraded demo displays CA and exam breakdown
+PASS automatic demo migration preserves existing booking
+PASS demo has connected new chat conversation
+PASS packaged demo receipt has school contact branding
+PASS school explicitly activates additive live-workspace tables
+PASS packaged real-school chat workspace ready
+PASS existing family review records retained
+PASS actual frontend rollback succeeds
+PASS rollback restores exact baseline files
+PASS Finance view affiliate wallet and private config preserved
+PASS stable homepage works after rollback
+PASS reinstall preserves demo booking and migrated data
+Portal package: 41 assertions passed.

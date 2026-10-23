@@ -1,0 +1,82 @@
+PASS login admin@test.local
+PASS login analyst@test.local
+PASS login parent@test.local
+PASS login other@test.local
+PASS login teacher@test.local
+PASS login student@test.local
+PASS login foreignhr@test.local
+PASS admin HTML reports dashboard
+PASS admin HTML reports reports
+PASS admin HTML reports builder
+PASS admin HTML reports exports
+PASS admin HTML reports retention
+PASS admin HTML reports forecast
+PASS admin HTML innovations copilot
+PASS admin HTML innovations drafts
+PASS admin HTML innovations success
+PASS admin HTML innovations pickup
+PASS admin HTML innovations whatsapp
+PASS admin HTML academics cards
+PASS admin HTML academics observations
+PASS admin HTML academics curricula
+PASS admin HTML academics designer
+PASS admin HTML academics calendar
+PASS admin HTML academics timetable
+PASS admin HTML governance alumni
+PASS admin HTML governance scholarships
+PASS admin HTML governance privacy
+PASS admin HTML governance accreditation
+PASS admin HTML governance hq
+PASS admin HTML governance plugins
+PASS admin HTML wallet
+PASS admin HTML settings
+PASS parent cannot open unassigned Intelligence innovations
+PASS parent cannot open unassigned Intelligence academics
+PASS parent cannot open unassigned Intelligence governance
+PASS parent cannot open unassigned Intelligence governance
+PASS parent cannot open unassigned Intelligence wallet
+PASS reports access denied parent
+PASS student cannot open unassigned Intelligence innovations
+PASS student cannot open unassigned Intelligence academics
+PASS student cannot open unassigned Intelligence governance
+PASS student cannot open unassigned Intelligence governance
+PASS student cannot open unassigned Intelligence wallet
+PASS reports access denied student
+PASS teacher cannot open unassigned Intelligence innovations
+PASS teacher cannot open unassigned Intelligence academics
+PASS teacher cannot open unassigned Intelligence governance
+PASS teacher cannot open unassigned Intelligence governance
+PASS teacher cannot open unassigned Intelligence wallet
+PASS reports access denied teacher
+PASS parent own wallet retained in scoped portal
+PASS student own wallet retained in scoped portal
+PASS smart pickup retained inside Family Space
+PASS private export denied
+PASS private export denied
+PASS private export denied
+PASS owner CSV download private
+PASS report card role routing
+PASS report card role routing
+PASS report card role routing
+PASS report card role routing
+PASS unlinked report card denied
+PASS assigned snapshot JSON private
+PASS family snapshot denied
+PASS fresh CSRF JSON synchronization
+PASS JSON synchronization CSRF enforced
+PASS approved requester private access response
+PASS other family access response denied
+PASS offline static shell public/offline/offline_teacher.html
+PASS offline static shell public/offline/offline_teacher.js
+PASS offline static shell public/offline/advanced_sw.js
+PASS direct PHP source protected insights_core.php
+PASS direct PHP source protected intelligence_reports.php
+PASS direct PHP source protected school_innovations.php
+PASS direct PHP source protected academic_tools.php
+PASS direct PHP source protected school_wallet.php
+PASS direct PHP source protected governance_hub.php
+PASS cron unavailable through HTTP
+PASS API rejects anonymous access
+PASS form CSRF enforced
+PASS actual Intelligence CLI worker produces no webpage
+TOTAL 81 passed

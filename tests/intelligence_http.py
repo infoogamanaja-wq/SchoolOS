@@ -23,8 +23,11 @@ for area,views in areas.items():
   s,b,_=text(a,f'index.php?s=intelligence&area={area}&view={view}');ok(clean(s,b) and 'op-card' in b,f'admin HTML {area} {view}')
 for c,label in [(parent,'parent'),(student,'student'),(teacher,'teacher')]:
  for area,view in [('innovations','copilot'),('academics','cards'),('governance','privacy'),('governance','alumni'),('wallet','')]:
-  s,b,_=text(c,f'index.php?s=intelligence&area={area}&view={view}');ok(clean(s,b) and 'School Intelligence' in b,f'{label} route {area}')
- s,b,_=text(c,'index.php?s=intelligence&area=reports');ok(clean(s,b) and 'Requires reports_view' in b,'reports access denied '+label)
+  s,b,_=text(c,f'index.php?s=intelligence&area={area}&view={view}');ok(s==403,f'{label} cannot open unassigned Intelligence {area}')
+ s,b,_=text(c,'index.php?s=intelligence&area=reports');ok(s==403,'reports access denied '+label)
+for c,label in [(parent,'parent'),(student,'student')]:
+ s,b,_=text(c,'index.php?s=wallet');ok(clean(s,b) and 'School prepaid credits' in b,label+' own wallet retained in scoped portal')
+s,b,_=text(parent,'index.php?s=family&child=1&view=pickup');ok(clean(s,b) and 'Time-limited pickup credential' in b,'smart pickup retained inside Family Space')
 for c in [parent,foreign,public]:
  s,b,h=req(c,'index.php?ix_export=1');ok(s==403 and b'false' in b,'private export denied')
 s,b,h=req(analyst,'index.php?ix_export=1');ok(s==200 and b'class,recorded' in b and h.get('Cache-Control')=='private, no-store','owner CSV download private')
@@ -38,4 +41,4 @@ for path in ['public/offline/offline_teacher.html','public/offline/offline_teach
  s,b,h=req(public,path);ok(s==200 and b'Amara' not in b,'offline static shell '+path)
 for file in ['insights_core.php','intelligence_reports.php','school_innovations.php','academic_tools.php','school_wallet.php','governance_hub.php']:
  s,b,h=req(public,file);ok(s==200 and b'SchoolOS Nigeria' in b and b'function ' not in b,'direct PHP source protected '+file)
-s,b,h=req(public,'intelligence_worker.php');ok(s==404,'cron unavailable through HTTP');s,b,h=req(public,'index.php?ix_api=v1&dataset=attendance');ok(s==403,'API rejects anonymous access');s,b,_=text(parent,'index.php?s=intelligence&area=innovations',{'csrf':'bad','ix_action':'si_scan'});ok(clean(s,b) and 'Security token expired' in b,'form CSRF enforced');r=subprocess.run([os.environ.get('SCHOOLOS_PHP_COMMAND','/workspace/toolchain/php'),'/workspace/schoolos-audit/runtime/intelligence/intelligence_worker.php','1','10'],capture_output=True,text=True);ok(r.returncode==0 and r.stdout.startswith('Created ') and '<html' not in r.stdout,'actual Intelligence CLI worker produces no webpage');print('TOTAL',n,'passed')
+s,b,h=req(public,'intelligence_worker.php');ok(s==404,'cron unavailable through HTTP');s,b,h=req(public,'index.php?ix_api=v1&dataset=attendance');ok(s==403,'API rejects anonymous access');s,b,_=text(parent,'index.php?s=family&child=1&view=pickup',{'csrf':'bad','ix_action':'si_pickup_issue','px_return_family':'1'});ok(clean(s,b) and 'Security token expired' in b,'form CSRF enforced');r=subprocess.run([os.environ.get('SCHOOLOS_PHP_COMMAND','/workspace/toolchain/php'),'/workspace/schoolos-audit/runtime/intelligence/intelligence_worker.php','1','10'],capture_output=True,text=True);ok(r.returncode==0 and r.stdout.startswith('Created ') and '<html' not in r.stdout,'actual Intelligence CLI worker produces no webpage');print('TOTAL',n,'passed')

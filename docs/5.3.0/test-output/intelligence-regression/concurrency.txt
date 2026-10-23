@@ -1,0 +1,8 @@
+PASS 1 parallel funding retries credit exactly once
+PASS 2 parallel purchases cannot overdraw balance
+PASS 3 parallel same sale reference charges once
+PASS 4 parallel offline edits preserve conflict instead of overwriting
+PASS 5 same-account retry stress 1 charges once
+PASS 6 same-account retry stress 2 charges once
+PASS 7 same-account retry stress 3 charges once
+School Intelligence concurrency: 7 assertions passed.

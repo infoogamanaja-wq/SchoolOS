@@ -1,0 +1,59 @@
+PASS 1 additive Portal Experience activation
+PASS 2 repeat activation preserves learners
+PASS 3 ordinary teacher does not receive generic Operations or Intelligence
+PASS 4 ordinary teacher has no unrelated service desk
+PASS 5 teacher has teaching and chat workspaces
+PASS 6 learner does not receive parent portal
+PASS 7 parent has family workspace
+PASS 8 communications officer opens their actual service desk
+PASS 9 parent contacts include admin, allocated teacher and linked learner
+PASS 10 parent cannot target another school or unrelated teacher
+PASS 11 student can chat with verified parent but not arbitrary peers
+PASS 12 parent message supports multiple unique recipients
+PASS 13 multi-recipient delivery creates private copies
+PASS 14 cross-school recipient rejected
+PASS 15 invalid batch sends no partial messages
+PASS 16 teacher sends to multiple verified guardians
+PASS 17 teacher cannot message unlinked guardian in a batch
+PASS 18 pickup requires an explicit phone number
+PASS 19 pickup with phone is submitted
+PASS 20 collector phone retained for authorized school review
+PASS 21 daily meal action confirms success
+PASS 22 different choices saved on different dates
+PASS 23 changing a day updates instead of duplicates
+PASS 24 unpublished meal rejected
+PASS 25 meal date outside published menu rejected
+PASS 26 meal selection cannot target another child
+PASS 27 calendar audience describes intended attendees
+PASS 28 calendar details expand and include dates/time/audience
+PASS 29 staff-only events hidden from families
+PASS 30 published results label CA and exam separately
+PASS 31 CA/exam contributions and total are mathematically correct
+PASS 32 school contact details loaded from its branding
+PASS 33 professional amount-in-words conversion
+PASS 34 receipt contains school branding and contacts
+PASS 35 receipt uses professional payment and balance wording
+PASS 36 authorized parent/admin/teacher group conversation created
+PASS 37 non-member guardian cannot read conversation
+PASS 38 foreign-school user cannot read conversation
+PASS 39 chat retry is idempotent
+PASS 40 teacher receives group messages
+PASS 41 read cursor advances to delivered messages
+PASS 42 unrelated guardian group prevents disclosure
+PASS 43 teacher schedules allocated class
+PASS 44 unallocated teacher cannot open another teacher lesson
+PASS 45 foreign parent cannot access live lesson
+PASS 46 learner waits until host starts
+PASS 47 teacher broadcasts and learner receives
+PASS 48 no external media relay silently configured
+PASS 49 scoped classroom signaling delivers host offer
+PASS 50 learner cannot impersonate a broadcasting host
+PASS 51 host receives only addressed answer
+PASS 52 forged classroom session token rejected
+PASS 53 ended lesson cannot be joined
+PASS 54 lookalike virtual classroom URLs rejected
+PASS 55 teacher can schedule a real-provider invitation without API credentials
+PASS 56 learner cannot create a live lesson
+PASS 57 portal writes require CSRF
+PASS 58 all workflow changes preserve existing learner records
+Portal Experience: 58 assertions passed.

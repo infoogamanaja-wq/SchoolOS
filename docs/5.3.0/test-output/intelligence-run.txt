@@ -1,0 +1,9 @@
+reset 0
+seed 0 Fixture schema and integrations installed on 11.8.6-MariaDB-0+deb13u1 from Debian
+learning_seed 0 Learning fixture ready on 11.8.6-MariaDB-0+deb13u1 from Debian
+operations_seed 0 Operations accounts seeded; activation intentionally pending.
+services_seed 0 School Services accounts seeded; activation pending.
+intelligence 0 School Intelligence domain: 115 assertions passed.
+http 0 TOTAL 81 passed
+concurrency 0 School Intelligence concurrency: 7 assertions passed.
+offline-js 0 Offline crypto and queue: 14 assertions passed.

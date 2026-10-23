@@ -1,0 +1,54 @@
+PASS immutable SchoolOS-4.6.4-Updater-Repair.zip
+PASS immutable SchoolOS-4.6.5-Family-Portal.zip
+PASS immutable SchoolOS-4.6.6-Learning-Updater.zip
+PASS immutable SchoolOS-4.7.0-Teacher-Student-Portals.zip
+PASS immutable SchoolOS-4.7.1-Operations-Updater.zip
+PASS immutable SchoolOS-4.8.0-HR-Transport-Boarding.zip
+PASS immutable SchoolOS-4.8.1-Services-Updater.zip
+PASS immutable SchoolOS-4.9.0-Library-Inventory-Engagement-CMS.zip
+PASS immutable SchoolOS-4.9.1-Intelligence-Updater.zip
+PASS immutable SchoolOS-5.0.0-Intelligence-Innovations.zip
+PASS immutable SchoolOS-5.0.1-Experience-Updater.zip
+PASS immutable SchoolOS-5.1.0-Platform-Experience.zip
+PASS immutable SchoolOS-5.1.1-Website-Affiliate-Updater.zip
+PASS immutable SchoolOS-5.2.0-Website-Affiliates.zip
+PASS immutable SchoolOS-5.2.1-Interactive-Website.zip
+PASS payload file count SchoolOS-5.2.2-Portal-Updater.zip
+PASS archive integrity SchoolOS-5.2.2-Portal-Updater.zip
+PASS exact manifest files SchoolOS-5.2.2-Portal-Updater.zip
+PASS source and hash system_manager.php
+PASS 0644 permissions SchoolOS-5.2.2-Portal-Updater.zip
+PASS private files excluded SchoolOS-5.2.2-Portal-Updater.zip
+PASS payload file count SchoolOS-5.3.0-Role-Portals-LMS.zip
+PASS archive integrity SchoolOS-5.3.0-Role-Portals-LMS.zip
+PASS exact manifest files SchoolOS-5.3.0-Role-Portals-LMS.zip
+PASS source and hash portal_experience.php
+PASS source and hash portal_collaboration.php
+PASS source and hash portal_experience.css
+PASS source and hash portal_experience.js
+PASS source and hash classroom.php
+PASS source and hash classroom.js
+PASS source and hash index.php
+PASS source and hash experience.php
+PASS source and hash experience_ui.php
+PASS source and hash experience_admin.php
+PASS source and hash experience_demo.php
+PASS source and hash finance_engine.php
+PASS source and hash parent_portal.php
+PASS source and hash learning_portal.php
+PASS source and hash services_core.php
+PASS source and hash library_manager.php
+PASS source and hash operations_core.php
+PASS source and hash insights_core.php
+PASS source and hash engagement_manager.php
+PASS source and hash public_guides.php
+PASS source and hash public_guides.json
+PASS source and hash system_manager.php
+PASS source and hash VERSION.txt
+PASS 0644 permissions SchoolOS-5.3.0-Role-Portals-LMS.zip
+PASS private files excluded SchoolOS-5.3.0-Role-Portals-LMS.zip
+PASS new helper definitions precede autoloading experience module
+PASS required baseline dependencies available
+PASS deterministic SchoolOS-5.2.2-Portal-Updater.zip
+PASS deterministic SchoolOS-5.3.0-Role-Portals-LMS.zip
+Portal release: 53 assertions passed.

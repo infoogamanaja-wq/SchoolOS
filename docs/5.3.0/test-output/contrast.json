@@ -1,0 +1,77 @@
+[
+  {
+    "role": "parent",
+    "route": "?s=workspace",
+    "failures": []
+  },
+  {
+    "role": "parent",
+    "route": "?s=family",
+    "failures": []
+  },
+  {
+    "role": "parent",
+    "route": "?s=family&child=1&view=results",
+    "failures": []
+  },
+  {
+    "role": "parent",
+    "route": "?s=family&child=1&view=meals",
+    "failures": []
+  },
+  {
+    "role": "teacher",
+    "route": "?s=workspace",
+    "failures": []
+  },
+  {
+    "role": "teacher",
+    "route": "?s=learning&view=classes",
+    "failures": []
+  },
+  {
+    "role": "teacher",
+    "route": "?s=learning&view=attendance",
+    "failures": []
+  },
+  {
+    "role": "teacher",
+    "route": "?s=learning&view=scores",
+    "failures": []
+  },
+  {
+    "role": "student",
+    "route": "?s=workspace",
+    "failures": []
+  },
+  {
+    "role": "student",
+    "route": "?s=learning",
+    "failures": []
+  },
+  {
+    "role": "student",
+    "route": "?s=learning&view=homework",
+    "failures": []
+  },
+  {
+    "role": "admin",
+    "route": "?s=workspace",
+    "failures": []
+  },
+  {
+    "role": "admin",
+    "route": "?s=fees",
+    "failures": []
+  },
+  {
+    "role": "admin",
+    "route": "?s=services&area=library&view=reservations",
+    "failures": []
+  },
+  {
+    "role": "driver",
+    "route": "?s=operations&area=transport",
+    "failures": []
+  }
+]

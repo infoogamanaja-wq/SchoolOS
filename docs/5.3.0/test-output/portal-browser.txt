@@ -1,0 +1,34 @@
+PASS teacher navigation excludes generic operations/intelligence
+PASS teacher navigation excludes unassigned services
+PASS learner does not receive parent portal
+PASS family compass has six intentional feature cards
+PASS all family features retained in organized groups
+PASS booking success prominently displayed
+PASS success banner receives focus
+PASS absence success displayed
+PASS pickup collector phone required
+PASS pickup confirmation displayed
+PASS calendar opens date/time/audience details
+PASS meal calendar provides daily choices
+PASS first daily meal save confirmed
+PASS different days keep different meal choices
+PASS published result screen separates CA and exam
+PASS receipt carries school branding and contact details
+PASS parent sends to administrator and teacher together
+PASS chat content is rendered as text, not executable markup
+PASS linked learner receives parent chat
+PASS parent receives learner reply without reloading
+PASS transport update reaches parent overview
+PASS important update rotation can be paused
+PASS library Reservations highlights the current view
+PASS teacher has connected demo live lesson
+PASS teacher camera stream starts after explicit action
+PASS in-app WebRTC media reaches the allocated learner
+PASS learner receives the teacher video track
+PASS learner is not given teacher broadcast controls
+PASS visible dashboard text meets tested dark-mode contrast thresholds
+PASS mobile portal has no horizontal page overflow ?s=family
+PASS mobile portal has no horizontal page overflow ?s=learning
+PASS mobile portal has no horizontal page overflow ?s=learning&view=live
+PASS no browser JavaScript errors
+Portal browser: 33 assertions passed.

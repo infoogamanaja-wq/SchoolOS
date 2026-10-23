@@ -61,6 +61,10 @@
       [
         "15. Troubleshooting and escalation",
         "A missing menu may reflect role permission, an inactive module or an incomplete setup. Check the guide and setup reminders, then ask the platform team with the route, timestamp and safe reproduction steps. Do not include passwords or children’s records in a public support request. A payment pending state needs provider reconciliation; repeating a charge is not the first remedy. Offline conflicts need review rather than silent overwrite. For 404/500 errors, operators should preserve server logs and rollback evidence; no release can prove hosting deletion is permanently solved without logs."
+      ],
+      [
+        "Portal update and family setup",
+        "Activate installed workspace tables from Start Here after installing 5.3.0. Complete school branding, address, telephone and email for receipts. Publish calendar items with dates, times and audience; publish meal options with a date range so parents can select each day. Assign specialist roles deliberately: teachers and learners receive their own focused portals. Configure a school-controlled TURN relay for reliable remote in-app video. Review bookings, absence requests and pickup requests in Family engagement."
       ]
     ]
   ],
@@ -82,6 +86,10 @@
       [
         "Offline and responsible assistance",
         "Capture only supported attendance/assessment tasks offline on a secured device. Reconnect, synchronize and review conflicts; do not assume local capture reached the server. AI lesson assistance drafts suggestions for your review; do not submit confidential student data without school approval. Log incidents through the safeguarding workflow, submit leave requests and maintain professional development records."
+      ],
+      [
+        "Live teaching studio",
+        "Organize work by assigned classes and courses. Create Zoom or Google Meet invitations using meetings you create with those providers; SchoolOS does not provision those accounts. Built-in live lessons broadcast teacher video to assigned learners, with a maximum of eight participants including the teacher. Use HTTPS, permit teacher camera and microphone, and configure a school-controlled TURN relay for reliable remote media. Learners receive the broadcast without camera or microphone permission. Screen sharing is teacher-controlled; leaving ends local capture. Use verified conversations and multi-recipient parent messages for family communication."
       ]
     ]
   ],
@@ -103,6 +111,10 @@
       [
         "Transport, meals and safe pickup",
         "Review assigned transport updates and meal selections where the school enables them. Create a time-limited pickup authorization for the intended adult and learner. Share codes privately; staff must verify the guardian/adult and record handover. Revoke an unused authorization if plans change. Never put real family information in the public demo."
+      ],
+      [
+        "Family care, daily meals and conversations",
+        "Family Space groups results, attendance, homework, care and school services. Published results show CA and exam contributions when those components exist; legacy total-only results remain labelled. Expand events to see dates, times, audience and venue. Choose a meal separately for each available day. Provide the authorized collector telephone number and use short-lived pickup authorization only after school approval and identity checks. Confirmation banners report saved requests. Use Conversations for verified child and assigned-teacher chats; messages to multiple adults are delivered as separate private copies. Important transport updates appear on your overview. Pause rotating updates or enable sound if you prefer."
       ]
     ]
   ],
@@ -120,6 +132,10 @@
       [
         "Build good habits",
         "Use the study planner, school announcements, clubs, library and badges where enabled. Respect ebook licensing and lending rules. Safeguarded AI study support is for explanation and practice, not cheating or sharing private information. Ask a teacher when an answer seems wrong or makes you uncomfortable. Sign out on shared devices."
+      ],
+      [
+        "Your learning journey",
+        "Use your course map, class resources, assignments, grades and study tools from the learner workspace. Open Live classroom for a scheduled lesson assigned to your class; the teacher must start a built-in broadcast first. Your camera and microphone are not requested for receiving the broadcast. Use Conversations to contact verified guardians and assigned teachers. School day shows your transport and boarding information; an enabled wallet shows only your own balance."
       ]
     ]
   ],
@@ -304,6 +320,10 @@
       [
         "Demo, privacy and continuity",
         "Provision the demo only in its separate dedicated database ending _demo. Demo sessions and records are isolated; external providers and financial actions are blocked. Refresh only the validated sandbox, never a live tenant. Monitor scheduled jobs, delivery failures, backups and payment reconciliation. Protect server logs and downloads, document retention and data-processing responsibilities, and investigate access/child-data incidents under the applicable Nigerian requirements."
+      ],
+      [
+        "Upgrade the connected demo",
+        "Installing 5.3.0 automatically adds the new portal examples to a previously configured, verified isolated demo database on its next connection. Existing demo bookings are retained. This does not seed live schools. Configure a dedicated demo relay separately if testing remote in-app video; approved demo refreshes retain only those sandbox relay settings. Never copy live-school provider credentials into the public demo."
       ]
     ]
   ],

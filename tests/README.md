@@ -177,3 +177,9 @@ Use the existing disposable Experience fixtures and test DSN after running `expe
 ## Interactive website 5.2.1
 
 Run `website_interactions_browser.py` against the local Experience runtime for all 36 questions, themes, animation, pause controls and branding. `website_interactive_package.py` requires the disposable Apache root already at 5.2.0 and tests installation, exact rollback and reinstall. `website_interactive_release.py` checks the patch and the pinned historical archives. `website_browser.py` accepts `SCHOOLOS_TEST_OUTPUT` so regression screenshots/logs can be written under the current release without changing historical evidence.
+
+## Role portals and live learning 5.3.0
+
+On a fresh disposable Experience fixture (base seed, learning/operations/services seeds, then `experience.php`), run `portal_experience.php` followed by `portal_concurrency.php` with `SCHOOLOS_TEST_DSN`. These tests mutate fictional records and must not run against a live school. `portal_http.py` uses a matching loopback runtime and tests authenticated JSON boundaries and downloadable guides. `portal_browser.py` uses Chromium/Playwright and the provisioned fictional demo, including actual teacher-to-learner WebRTC media. Refresh the marked sandbox before replaying it; the local fixture requires a separately configured test TURN relay because of Chromium's managed network policy. No relay is provisioned by the release.
+
+`portal_package_http.py` expects a disposable Apache root at port 8092 based on 5.2.1, empty live/test-demo databases and the documented fixture identities. It installs both ZIPs through the actual frontend and checks exact rollback/reinstall plus automatic sandbox migration without deleting a pre-upgrade booking. `portal_release.py` checks artifacts, source hashes, 0644 modes, private-file exclusion, deterministic rebuilds and all 15 previous published ZIPs. Evidence and production limits are in `docs/5.3.0/VALIDATION.md`.

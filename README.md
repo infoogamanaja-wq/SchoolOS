@@ -1,4 +1,12 @@
-# SchoolOS Nigeria — Interactive Website 5.2.1
+# SchoolOS Nigeria — Role Portals & Live Learning 5.3.0
+
+Family, teacher and learner workspaces now have focused navigation, verified in-app conversations, daily meal choices, CA/exam results, branded receipts, prominent updates and improved dark mode. Live lessons support existing Zoom/Meet invitations and a small-group in-app teacher broadcast; reliable remote video requires a separately configured TURN relay.
+
+On a backed-up **5.2.1 staging installation**, install `dist/SchoolOS-5.2.2-Portal-Updater.zip`, then `dist/SchoolOS-5.3.0-Role-Portals-LMS.zip` through **Updates & Plugins**. Activate installed workspaces in **Setup & Accounts**. Existing configured demos migrate on their next connection; an unconfigured demo still needs its own empty cPanel database. Production was not accessed.
+
+Read [deployment and demo setup](docs/5.3.0/DEPLOYMENT.md), [release scope](docs/5.3.0/RELEASE.md) and [validation evidence](docs/5.3.0/VALIDATION.md). Preview the [parent night portal](docs/5.3.0/test-output/parent-night.png), [teacher studio](docs/5.3.0/test-output/teacher-night.png) and [branded receipt](docs/5.3.0/test-output/branded-receipt.png).
+
+## Earlier releases
 
 A six-file frontend patch adds visible academic doodle movement, animated headline text, scroll reveals, hover spotlights, a persistent light/night switch and **36 challenges across six topics**. Public pages, login and dashboards now share the same SchoolOS mark. School-specific uploaded logos remain separate.
 
@@ -20,11 +28,11 @@ On a backed-up staging copy of **5.1.0**, install through **Platform Super Admin
 
 **1,395 primary assertions**, **257 MariaDB compatibility assertions** and **56 PHP syntax checks** passed locally. Real browser and frontend installation/rollback evidence is included. No production deployment or live provider transfer was performed. See the deployment guide for required provider/cron configuration.
 
-The previous [5.1.0 Experience guide](docs/5.1.0/DEPLOYMENT.md) documents registration, approved member access, guided school setup and isolated connected demo accounts. Existing school modules and records are retained. These packages update an existing application and are not standalone installers. Historical published ZIPs remain immutable; checksums are in `dist/SHA257SUMS`.
+The previous [5.1.0 Experience guide](docs/5.1.0/DEPLOYMENT.md) documents registration, approved member access, guided school setup and isolated connected demo accounts. Existing school modules and records are retained. These packages update an existing application and are not standalone installers. Historical published ZIPs remain immutable; checksums are in `dist/SHA256SUMS`.
 
-The previous [5.0.0 Intelligence guide](docs/5.0.0/DEPLOYMENT.md) and its [feature boundaries](docs/5.0.0/FEATURES.md) remain available. Upgrade earlier installations in sequence. The ZIPs update an existing application and are not standalone installers. Check `dist/SHA257SUMS`.
+The previous [5.0.0 Intelligence guide](docs/5.0.0/DEPLOYMENT.md) and its [feature boundaries](docs/5.0.0/FEATURES.md) remain available. Upgrade earlier installations in sequence. The ZIPs update an existing application and are not standalone installers. Check `dist/SHA256SUMS`.
 
-The [4.9.0 School Services guide](docs/4.9.0/DEPLOYMENT.md) remains available for the previous release. Earlier versions must be upgraded in sequence. Checksums are in `dist/SHA257SUMS`. These ZIPs update an existing installation; they are not standalone installers.
+The [4.9.0 School Services guide](docs/4.9.0/DEPLOYMENT.md) remains available for the previous release. Earlier versions must be upgraded in sequence. Checksums are in `dist/SHA256SUMS`. These ZIPs update an existing installation; they are not standalone installers.
 
 Prior [4.8.0 Operations](docs/4.8.0/DEPLOYMENT.md) and [4.7.0 Learning](docs/4.7.0/DEPLOYMENT.md) guides remain available.
 

@@ -1,0 +1,8 @@
+seed 0 Fixture schema and integrations installed on 10.11.18-MariaDB-0+deb12u1
+learning_seed 0 Learning fixture ready on 10.11.18-MariaDB-0+deb12u1
+operations_seed 0 Operations accounts seeded; activation intentionally pending.
+services_seed 0 School Services accounts seeded; activation pending.
+experience 0 Experience domain: 57 assertions passed.
+experience_concurrency 0 Experience concurrency: 4 assertions passed.
+portal_experience 0 Portal Experience: 58 assertions passed.
+portal_concurrency 0 PASS eight-person media limit remains exact

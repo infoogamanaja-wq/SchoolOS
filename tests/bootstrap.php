@@ -29,3 +29,5 @@ foreach(['insights_core.php', 'intelligence_reports.php', 'school_innovations.ph
 define('SCHOOLOS_EXPERIENCE',true);foreach(['experience.php','experience_ui.php','experience_admin.php','experience_demo.php'] as $module)require __DIR__.'/../app/'.$module;
 
 foreach(['affiliate.php','public_site.php','public_guides.php'] as $module)require __DIR__.'/../app/'.$module;
+
+foreach(['portal_experience.php','portal_collaboration.php','classroom.php'] as $module)require_once __DIR__.'/../app/'.$module;

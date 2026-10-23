@@ -1,0 +1,5 @@
+PASS concurrent chat retries return one message ID
+PASS duplicate message is not inserted
+PASS concurrent guardians retain one meal choice per day
+PASS concurrent live-class joins enforce the final seat
+PASS eight-person media limit remains exact

@@ -1,0 +1,22 @@
+PASS member receives chat JSON
+PASS conversation response cannot be cached
+PASS unrelated parent cannot fetch private conversation
+PASS foreign school cannot fetch private conversation
+PASS API rejects invalid CSRF
+PASS GET cannot send a message
+PASS teacher denied unassigned operations
+PASS teacher denied unassigned intelligence
+PASS teacher denied unrelated CMS
+PASS learner cannot render parent portal
+PASS verified parent can open own receipt
+PASS foreign parent cannot open school receipt
+PASS direct module access denied portal_experience.php
+PASS direct module access denied portal_collaboration.php
+PASS direct module access denied classroom.php
+PASS downloadable role guide owner
+PASS downloadable role guide teacher
+PASS downloadable role guide parent
+PASS downloadable role guide student
+PASS downloadable role guide driver
+PASS downloadable role guide platform
+Portal HTTP: 21 assertions passed.

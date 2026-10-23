@@ -85,6 +85,8 @@ function pp_action(array $u): string {
    if($a==='ticket'){q("INSERT INTO ecosystem_support(tenant_id,created_by,subject,message,status) VALUES(?,?,?,?,'open')",[$tid,$uid,$subject,'Student #'.$sid.': '.$body]);return 'Support ticket opened in Support Desk.';}
    $start=null;$end=null;$recipient=null;
    if($a==='absence'||$a==='pickup'){$start=pp_date(pp_text('starts_on',10));$end=$a==='absence'?pp_date(pp_text('ends_on',10)):$start;if($end<$start)throw new RuntimeException('End date must follow start date.');}
+   if($a==='pickup'){ $phone=pp_text('collector_phone',30);if(!preg_match('/^\+?[0-9][0-9 ()-]{6,24}$/D',$phone)||strlen(preg_replace('/\D/','',$phone))>15)throw new RuntimeException('Provide a valid phone number for the authorized collector.');$body='Collector phone: '.$phone."\n".$body;}
+   if($a==='message'&&function_exists('px_recipients')){$recipients=px_recipients($u,$_POST['recipient_ids']??($_POST['recipient_id']??[]));foreach($recipients as $r){if(!in_array($r['role'],['teacher','school_admin'],true))throw new RuntimeException('Choose assigned teachers or your school administrator.');if($r['role']==='teacher'&&!g('SELECT a.teacher_id FROM ac_allocations a JOIN classes c ON c.id=a.class_id AND c.tenant_id=a.tenant_id AND c.session_name=a.session_name WHERE a.tenant_id=? AND a.teacher_id=? AND a.class_id=? LIMIT 1',[$tid,$r['id'],$s['class_id']]))throw new RuntimeException('Choose a teacher allocated to the selected child.');}return xp_tx(function()use($tid,$uid,$sid,$subject,$body,$recipients){foreach($recipients as $r)q("INSERT INTO pp_requests(tenant_id,user_id,student_id,kind,subject,body,recipient_id) VALUES(?,?,?,'message',?,?,?)",[$tid,$uid,$sid,$subject,$body,$r['id']]);audit('family.message.multiple','student',(string)$sid);return 'Message delivered to '.count($recipients).' school recipients.';});}
    if($a==='message'){$recipient=(int)($_POST['recipient_id']??0);if(!g("SELECT id FROM users WHERE tenant_id=? AND id=? AND role IN ('teacher','school_admin') AND active=1",[$tid,$recipient]))throw new RuntimeException('Choose a school teacher or administrator.');}
    q('INSERT INTO pp_requests(tenant_id,user_id,student_id,kind,subject,body,starts_on,ends_on,recipient_id) VALUES(?,?,?,?,?,?,?,?,?)',[$tid,$uid,$sid,$a,$subject,$body,$start,$end,$recipient]);audit('family.request',$a,(string)$pdo->lastInsertId());return 'Request submitted for school review.';
   }
@@ -102,7 +104,7 @@ function pp_action(array $u): string {
    $pdo->beginTransaction();try{
     $slot=q('SELECT * FROM pp_slots WHERE tenant_id=? AND id=? FOR UPDATE',[$tid,(int)($_POST['slot_id']??0)])->fetch();
     if(!$slot||!$slot['active']||$slot['starts_at']<=date('Y-m-d H:i:s'))throw new RuntimeException('Appointment is unavailable.');
-    if($a==='cancel_booking'){q("UPDATE pp_bookings SET status='cancelled' WHERE tenant_id=? AND slot_id=? AND user_id=? AND student_id=? AND status='booked'",[$tid,$slot['id'],$uid,$sid]);}
+    if($a==='cancel_booking'){if(q("UPDATE pp_bookings SET status='cancelled' WHERE tenant_id=? AND slot_id=? AND user_id=? AND student_id=? AND status='booked'",[$tid,$slot['id'],$uid,$sid])->rowCount()!==1)throw new RuntimeException('No matching booking is available to cancel.');}
     else{
      if(g("SELECT id FROM pp_bookings WHERE tenant_id=? AND slot_id=? AND status='booked'",[$tid,$slot['id']]))throw new RuntimeException('This slot is already booked.');
      q('INSERT INTO pp_bookings(tenant_id,slot_id,user_id,student_id) VALUES(?,?,?,?)',[$tid,$slot['id'],$uid,$sid]);
@@ -110,7 +112,7 @@ function pp_action(array $u): string {
    }catch(Throwable $e){$pdo->rollBack();throw $e;}
   }
   if($a==='revoke_pickup'){
-   q("UPDATE pp_requests SET status='revoked' WHERE tenant_id=? AND id=? AND user_id=? AND student_id=? AND kind='pickup' AND status IN ('pending','approved')",[$tid,(int)($_POST['request_id']??0),$uid,$sid]);audit('family.pickup.revoked','request',(string)($_POST['request_id']??0));return 'Pickup authorization revoked.';
+   if(q("UPDATE pp_requests SET status='revoked' WHERE tenant_id=? AND id=? AND user_id=? AND student_id=? AND kind='pickup' AND status IN ('pending','approved')",[$tid,(int)($_POST['request_id']??0),$uid,$sid])->rowCount()!==1)throw new RuntimeException('Pickup request is unavailable or already revoked.');audit('family.pickup.revoked','request',(string)($_POST['request_id']??0));return 'Pickup authorization revoked.';
   }
   throw new RuntimeException('Unsupported parent action.');
  }
@@ -144,7 +146,7 @@ function pp_action(array $u): string {
   $start=pp_text('starts_at',16);$end=pp_text('ends_at',16);$start=$start?pp_datetime($start):null;$end=$end?pp_datetime($end):null;
   if($start&&$end&&$end<=$start)throw new RuntimeException('Invalid date range.');
   $options=array_values(array_filter(array_map('trim',explode("\n",pp_text('options',2000))),fn($s)=>$s!==''));if(count($options)>30)throw new RuntimeException('Too many options.');
-  if($kind==='meals'&&!$options)throw new RuntimeException('Enter meal choices, one per line.');
+  if($kind==='calendar'&&(!$start||!$end))throw new RuntimeException('Set the calendar event’s start and end date/time.');if($kind==='meals'&&(!$options||!$start||!$end||strtotime($end)-strtotime($start)>31*86400))throw new RuntimeException('Enter meal choices and a menu start/end date covering no more than 31 days.');
   $doc=null;if($kind==='document'){
    $f=$_FILES['document']??null;if(!$f||$f['error']!==UPLOAD_ERR_OK||$f['size']<1||$f['size']>2097152)throw new RuntimeException('Document must be 1 byte to 2 MB.');
    $mime=(new finfo(FILEINFO_MIME_TYPE))->file($f['tmp_name']);if(!in_array($mime,['application/pdf','image/jpeg','image/png','image/webp'],true))throw new RuntimeException('Only PDF and images allowed.');
@@ -153,7 +155,7 @@ function pp_action(array $u): string {
   $pdo->beginTransaction();try{
    q('INSERT INTO pp_posts(tenant_id,kind,title,body,class_id,student_id,starts_at,ends_at,options_json,created_by) VALUES(?,?,?,?,?,?,?,?,?,?)',[$tid,$kind,$title,$body,$class?:null,$student?:null,$start,$end,json_encode($options,JSON_THROW_ON_ERROR),$uid]);$pid=(int)$pdo->lastInsertId();
    if($doc)q('INSERT INTO pp_documents(tenant_id,post_id,filename,mime,content) VALUES(?,?,?,?,?)',[$tid,$pid,$doc['filename'],$doc['mime'],$doc['content']]);
-   audit('family.publish',$kind,(string)$pid);$pdo->commit();return 'Published to the selected families.';
+   if(function_exists('px_publish_meta'))px_publish_meta($u,$pid,$kind);audit('family.publish',$kind,(string)$pid);$pdo->commit();return 'Published to the selected families.';
   }catch(Throwable $e){$pdo->rollBack();throw $e;}
  }
  if($a==='close_post'){q('UPDATE pp_posts SET active=0 WHERE tenant_id=? AND id=?',[$tid,(int)($_POST['post_id']??0)]);return 'Item closed. Responses retained.';}
@@ -175,7 +177,7 @@ function pp_table(array $rows,array $labels): void {
 }
 function pp_render(array $u): void {
  $tid=(int)$u['tenant_id'];$uid=(int)$u['id'];$admin=$u['role']==='school_admin';
- echo '<style>.pp-nav{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}.pp-nav a{padding:9px 12px;border:1px solid #cbd5e1;border-radius:9px;color:inherit;text-decoration:none}.pp-nav a[aria-current=page]{background:#075e56;color:white}.pp-card{background:var(--card,#fff);border:1px solid #d7e3e6;border-radius:16px;padding:22px;margin:14px 0}.pp-card label{display:block;margin:12px 0}.pp-card input,.pp-card textarea,.pp-card select{display:block;max-width:100%;box-sizing:border-box;width:100%;padding:10px;border:1px solid #aabdc8;border-radius:7px;font:inherit}.pp-scroll{overflow:auto}.pp-card p{white-space:pre-wrap}.pp-hero{background:linear-gradient(110deg,#13394c,#08796e);color:white;border-radius:18px;padding:24px}.pp-card form{margin:16px 0}.pp-card button{margin:8px 0}</style><div class="pp-hero"><h2>Parent & Guardian Portal</h2><p>Your family’s school day, in one place.</p></div>';
+ echo '<style>.pp-nav{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0}.pp-nav a{padding:9px 12px;border:1px solid #cbd5e1;border-radius:9px;color:inherit;text-decoration:none}.pp-nav a[aria-current=page]{background:#075e56;color:white}.pp-card{background:var(--card,#fff);border:1px solid #d7e3e6;border-radius:16px;padding:22px;margin:14px 0}.pp-card label{display:block;margin:12px 0}.pp-card input,.pp-card textarea,.pp-card select{display:block;max-width:100%;box-sizing:border-box;width:100%;padding:10px;border:1px solid #aabdc8;border-radius:7px;font:inherit}.pp-scroll{overflow:auto}.pp-card p{white-space:pre-wrap}.pp-hero{background:linear-gradient(110deg,#13394c,#08796e);color:white;border-radius:18px;padding:24px}.pp-card form{margin:16px 0}.pp-card button{margin:8px 0}</style><div class="pp-hero"><h2>'.($u['role']==='parent'?'Parent & Guardian Portal':($u['role']==='teacher'?'Family appointments & replies':'Family engagement desk')).'</h2><p>'.($u['role']==='parent'?'Your family’s school day, in one place.':'Coordinate appointments and respond to the families connected to your work.').'</p></div>';
  if(!pp_ready()){
   echo '<div class="pp-card"><h3>Activate Family Space</h3><p>Back up the database first. Activation adds six tables without altering existing records. Activate Ecosystem Hub first.</p>';
   if($admin){pp_form('activate');pp_end('Activate Family Space');}else echo '<p>Ask your school administrator to activate Family Space.</p>';echo '</div>';return;
@@ -183,12 +185,12 @@ function pp_render(array $u): void {
  if($u['role']!=='parent'){pp_staff($u);return;}
  $children=pp_children($u);if(!$children){echo '<div class="pp-card">No children are linked yet. Ask your school to link your parent account under Account Links. Matching names or emails never grants access.</div>';return;}
  $sid=(int)($_GET['child']??0);if($sid===0)$sid=(int)$children[0]['id'];$s=pp_child($u,$sid);
- $tabs=['children'=>'Multiple children','results'=>'Results','attendance'=>'Attendance','fees'=>'Fee payment','receipts'=>'Receipts','homework'=>'Homework','messages'=>'Messages','calendar'=>'Calendar','bookings'=>'Parent–teacher bookings','absence'=>'Absence requests','consent'=>'Consent forms','pickup'=>'Pickup authorization','transport'=>'Transport updates','meals'=>'School meals','documents'=>'Documents','support'=>'Support tickets','surveys'=>'Surveys'];
+ $tabs=['children'=>'Multiple children','results'=>'Results','attendance'=>'Attendance','fees'=>'Fee payment','receipts'=>'Receipts','homework'=>'Homework','messages'=>'Messages','calendar'=>'Calendar','bookings'=>'Parent–teacher bookings','absence'=>'Absence requests','consent'=>'Consent forms','pickup'=>'Pickup authorization','transport'=>'Transport updates','boarding'=>'Boarding & welfare','meals'=>'School meals','documents'=>'Documents','support'=>'Support tickets','surveys'=>'Surveys'];
  $tab=(string)($_GET['view']??'children');if(!isset($tabs[$tab]))$tab='children';
- echo '<nav class="pp-nav" aria-label="Children">';foreach($children as $child)echo '<a href="?s=family&amp;child='.(int)$child['id'].'&amp;view='.e($tab).'" '.((int)$child['id']===$sid?'aria-current="page"':'').'>'.e($child['name']).'</a>';echo '</nav><nav class="pp-nav" aria-label="Family features">';
- foreach($tabs as $key=>$label)echo '<a href="?s=family&amp;child='.$sid.'&amp;view='.$key.'" '.($key===$tab?'aria-current="page"':'').'>'.e($label).'</a>';echo '</nav><div class="pp-card"><h2>'.e($tabs[$tab]).' · '.e($s['name']).'</h2>';
- if($tab==='children'){pp_table(array_map(fn($c)=>[$c['student_no'],$c['name'],$c['class_name']],$children),['Admission number','Child','Class']);echo '<p><a href="?s=announcements">Open Community Hub & WhatsApp contacts →</a></p>';}
- elseif($tab==='results'){
+ echo '<nav class="pp-nav" aria-label="Children">';foreach($children as $child)echo '<a href="?s=family&amp;child='.(int)$child['id'].'&amp;view='.e($tab).'" '.((int)$child['id']===$sid?'aria-current="page"':'').'>'.e($child['name']).'</a>';echo '</nav>';px_feature_navigation($tabs,$tab,'family','&amp;child='.$sid);echo '<div class="pp-card"><h2>'.e($tabs[$tab]).' · '.e($s['name']).'</h2>';
+
+ if($tab==='children'){px_family_hub($u,$children,$s);pp_table(array_map(fn($c)=>[$c['student_no'],$c['name'],$c['class_name']],$children),['Admission number','Child','Class']);echo '<p><a href="?s=announcements">Open Community Hub & WhatsApp contacts →</a></p>';}
+ elseif($tab==='results'){if(pp_has('ac_term_approvals'))px_results($u,$s);echo '<h3>Legacy published totals</h3><p class="muted">Older total-only records are retained below. CA and exam marks are not inferred where they were never recorded.</p>';
   pp_table(q("SELECT sub.name,r.score,r.max_score,r.grade,r.remark FROM results r JOIN subjects sub ON sub.id=r.subject_id AND sub.tenant_id=r.tenant_id WHERE r.tenant_id=? AND r.student_id=? AND r.status='published' ORDER BY r.id DESC LIMIT 100",[$tid,$sid])->fetchAll(),['Subject','Score','Maximum','Grade','Remark']);
   if(pp_has('ac_term_approvals'))pp_table(q("SELECT a.session_name,a.term_name,sub.name,a.title,sc.score,a.max_score FROM ac_scores sc JOIN ac_assessments a ON a.id=sc.assessment_id AND a.tenant_id=sc.tenant_id JOIN subjects sub ON sub.id=a.subject_id AND sub.tenant_id=a.tenant_id JOIN ac_term_approvals p ON p.tenant_id=a.tenant_id AND p.class_id=a.class_id AND p.session_name=a.session_name AND p.term_name=a.term_name WHERE sc.tenant_id=? AND sc.student_id=? AND sc.status='approved' AND p.status='published' ORDER BY a.id DESC LIMIT 100",[$tid,$sid])->fetchAll(),['Session','Term','Subject','Assessment','Score','Maximum']);
  }
@@ -200,6 +202,7 @@ function pp_render(array $u): void {
   if(pp_has('ac_lessons'))pp_table(q("SELECT l.lesson_date,sub.name,c.topic,l.homework FROM ac_lessons l JOIN ac_curriculum c ON c.id=l.curriculum_id AND c.tenant_id=l.tenant_id JOIN subjects sub ON sub.id=c.subject_id AND sub.tenant_id=c.tenant_id WHERE l.tenant_id=? AND c.class_id=? AND l.status='delivered' AND l.homework IS NOT NULL AND l.homework<>'' ORDER BY l.lesson_date DESC LIMIT 100",[$tid,$s['class_id']])->fetchAll(),['Lesson date','Subject','Topic','Homework']);else echo '<p>No published academic homework yet.</p>';
  }
  elseif($tab==='fees'||$tab==='receipts'){pp_finance_view($u,$s,$tab);}
+ elseif($tab==='boarding'){bd_render($u);}
  elseif($tab==='bookings'){
   $slots=q("SELECT sl.*,u.name teacher FROM pp_slots sl JOIN users u ON u.id=sl.teacher_user_id AND u.tenant_id=sl.tenant_id AND u.active=1 WHERE sl.tenant_id=? AND sl.active=1 AND sl.starts_at>? ORDER BY sl.starts_at LIMIT 100",[$tid,date('Y-m-d H:i:s')])->fetchAll();
   foreach($slots as $slot){$book=q("SELECT * FROM pp_bookings WHERE tenant_id=? AND slot_id=? AND status='booked'",[$tid,$slot['id']])->fetch();echo '<h3>'.e($slot['teacher']).'</h3><p>'.e($slot['starts_at']).' – '.e($slot['ends_at']).' (Africa/Lagos)</p>';
@@ -210,9 +213,9 @@ function pp_render(array $u): void {
   $a=['absence'=>'absence','pickup'=>'pickup','messages'=>'message','support'=>'ticket'][$tab];pp_form($a,$sid);pp_field('subject',$a==='pickup'?'Authorized adult’s full name':'Subject');
   pp_field('body',$a==='pickup'?'Relationship, phone, pickup window and identity-check instructions':'Details','textarea');
   if($a==='absence'){pp_field('starts_on','First absence date','date');pp_field('ends_on','Last absence date','date');}
-  if($a==='pickup')pp_field('starts_on','Pickup date','date');
-  if($a==='message'){echo '<label>Recipient<select name="recipient_id" required>';foreach(q("SELECT id,name,role FROM users WHERE tenant_id=? AND active=1 AND role IN ('teacher','school_admin') ORDER BY name",[$tid])->fetchAll() as $r)echo '<option value="'.(int)$r['id'].'">'.e($r['name'].' · '.$r['role']).'</option>';echo '</select></label>';}
-  pp_end($a==='pickup'?'Request pickup authorization':'Submit');
+  if($a==='pickup'){pp_field('collector_phone','Authorized adult’s phone number','tel');pp_field('starts_on','Pickup date','date');}
+  if($a==='message'){echo '<p><a class="btn" href="?s=chat">Open live school conversations →</a></p><label>Recipients (choose one or more)<select name="recipient_ids[]" multiple size="5" required>';foreach(px_contacts($u) as $r)if(in_array($r['role'],['teacher','school_admin'],true))echo '<option value="'.(int)$r['id'].'">'.e($r['name'].' · '.$r['role']).'</option>';echo '</select></label>';}
+  pp_end($a==='pickup'?'Request pickup authorization':'Submit');if($a==='pickup')px_pickup_tokens($u,$s);
   if($a==='ticket')pp_table(q('SELECT id,subject,message,status,created_at FROM ecosystem_support WHERE tenant_id=? AND created_by=? ORDER BY id DESC LIMIT 100',[$tid,$uid])->fetchAll(),['Ticket','Subject','Message','Status','Created']);
   else{
    $rows=q('SELECT id,subject,body,starts_on,ends_on,status,reply FROM pp_requests WHERE tenant_id=? AND user_id=? AND student_id=? AND kind=? ORDER BY id DESC LIMIT 100',[$tid,$uid,$sid,$a])->fetchAll();pp_table($rows,['ID','Subject','Details','From','To','Status','School reply']);
@@ -220,9 +223,10 @@ function pp_render(array $u): void {
   }
  }
  else{
+  if($tab==='transport')px_transport_view($u,$s);
   $kind=['surveys'=>'survey','documents'=>'document'][$tab]??$tab;
   $posts=q('SELECT * FROM pp_posts WHERE tenant_id=? AND kind=? AND active=1 ORDER BY COALESCE(starts_at,created_at) DESC LIMIT 200',[$tid,$kind])->fetchAll();$shown=0;
-  foreach($posts as $p){if(!pp_visible($p,$s))continue;$shown++;echo '<article class="pp-card"><h3>'.e($p['title']).'</h3><p>'.e($p['body']).'</p><small>'.e($p['starts_at']).' '.e($p['ends_at']).'</small>';
+  foreach($posts as $p){if(!pp_visible($p,$s)||!px_post_visible($p,$u))continue;$shown++;if($kind==='calendar'){px_event($p);continue;}if($kind==='meals'&&px_ready()){px_meal_view($u,$s,$p);continue;}echo '<article class="pp-card"><h3>'.e($p['title']).'</h3><p>'.e($p['body']).'</p><small>'.e($p['starts_at']).' '.e($p['ends_at']).'</small>';
    if($kind==='document'){$doc=g('SELECT id FROM pp_documents WHERE tenant_id=? AND post_id=?',[$tid,$p['id']]);echo '<p><a href="?s=family&amp;child='.$sid.'&amp;pp_document='.(int)$doc.'">Download document</a></p>';}
    if(in_array($kind,['consent','survey','meals'],true)){
     $answer=g('SELECT answer FROM pp_responses WHERE tenant_id=? AND post_id=? AND user_id=? AND student_id=?',[$tid,$p['id'],$uid,$sid]);if($answer)echo '<p>Your saved response: '.e($answer).'</p>';
@@ -253,7 +257,7 @@ function pp_staff(array $u): void {
  $tid=(int)$u['tenant_id'];$uid=(int)$u['id'];$admin=$u['role']==='school_admin';
  echo '<div class="pp-card"><h2>Family Space · school workspace</h2><p>Use Portal Accounts and Account Links to connect parents to their children. Published documents are explicitly shared with families; private SIS documents remain private.</p>';
  if($admin){
-  pp_form('publish');echo '<label>Type<select name="kind">';foreach(['calendar','consent','transport','meals','document','survey'] as $k)echo '<option>'.e($k).'</option>';echo '</select></label>';pp_field('title','Title');pp_field('body','Details','textarea');
+  pp_form('publish');echo '<label>Type<select name="kind">';foreach(['calendar','consent','transport','meals','document','survey'] as $k)echo '<option>'.e($k).'</option>';echo '</select></label>';pp_field('title','Title');echo '<label>Event audience<select name="event_audience"><option value="families">All families</option><option value="students">Students (guardians can view details)</option><option value="parents">Parents / guardians</option><option value="all">Whole school community</option><option value="staff">Staff only</option></select></label>';pp_field('event_location','Event location (optional)','text',false);pp_field('body','Details','textarea');
   echo '<label>Class audience<select name="class_id"><option value="0">All classes</option>';foreach(q('SELECT id,name FROM classes WHERE tenant_id=? ORDER BY name',[$tid])->fetchAll() as $c)echo '<option value="'.(int)$c['id'].'">'.e($c['name']).'</option>';echo '</select></label>';
   pp_field('student_id','Student ID (optional, narrows audience)','number',false);pp_field('starts_at','Start / response window opens (Africa/Lagos)','datetime-local',false);pp_field('ends_at','End / response deadline (Africa/Lagos)','datetime-local',false);pp_field('options','Meal or survey choices, one per line','textarea',false);
   echo '<label>Document (PDF/image, up to 2 MB)<input type="file" name="document" accept="application/pdf,image/jpeg,image/png,image/webp"></label>';pp_end('Publish to families');

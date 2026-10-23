@@ -28,7 +28,7 @@ for c,area,views in [(librarian,'library',['catalogue','resources','loans','rese
 for c,label in [(parent,'parent'),(student,'student')]:
  for area,view in [('library','history'),('inventory','orders'),('engagement','feed'),('engagement','consent')]:
   s,b,_=text(c,'index.php?s=services&area='+area+'&view='+view);ok(clean(s,b) and 'op-card' in b and 'Private maintenance findings' not in b,label+' scoped '+area+' '+view)
- s,b,_=text(c,'index.php?s=services&area=website');ok(clean(s,b) and 'Website editor or approver access required' in b and 'visitor@test.local' not in b,label+' denied CMS management')
+ s,b,_=text(c,'index.php?s=services&area=website');ok(s==403 and 'not assigned' in b and 'visitor@test.local' not in b,label+' denied CMS management')
 # Submit an identifiable gallery with a real safe image; drafts/media stay private until publication.
 def upload(kind,slug,name,mime,content):
  _,b,_=text(editor,'index.php?s=services&area=website&view=content');boundary='SchoolOSCMSMediaBoundary';fields={'csrf':token(b),'sv_action':'wc_content','kind':kind,'slug':slug,'title':'HTTP '+kind,'body':'HTTP PUBLIC '+kind,'publication_consent':'yes','consent_note':'Synthetic publication-consent fixture'};parts=[]

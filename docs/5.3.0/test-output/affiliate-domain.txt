@@ -1,0 +1,71 @@
+PASS 1 non-platform installation refused
+PASS 2 installation is repeatable and disabled by default
+PASS 3 operator identity is supplied user information
+PASS 4 parent cannot change commercial terms
+PASS 5 commission over supported cap rejected
+PASS 6 administrator can enable configured program
+PASS 7 terms required
+PASS 8 application duplicate is idempotent
+PASS 9 pending account cannot withdraw
+PASS 10 school creation atomically records referral
+PASS 11 trial creates no commission
+PASS 12 wrong provider amount cannot earn commission
+PASS 13 failed verification leaves no credit
+PASS 14 replayed payment creates exactly one commission
+PASS 15 commission uses integer kobo and frozen rate
+PASS 16 administrator can pause program
+PASS 17 pause preserves existing obligations at original rate
+PASS 18 paused program blocks new withdrawals
+PASS 19 unverified payout account rejected
+PASS 20 invalid bank details rejected before provider
+PASS 21 bank setup saves provider-verified NGN recipient
+PASS 22 bank resolution must match requested account
+PASS 23 below-minimum withdrawal refused
+PASS 24 insufficient withdrawal refused
+PASS 25 withdrawal reserves funds atomically
+PASS 26 reservation prevents double spending
+PASS 27 other affiliate cannot authorize payout
+PASS 28 exact provider verification marks transfer paid
+PASS 29 paid transfer cannot be submitted twice
+PASS 30 reconciliation replay does not debit twice
+PASS 31 timeout is surfaced
+PASS 32 unknown transfer stays reserved
+PASS 33 uncertain transfer is not blindly retried
+PASS 34 unmatched transfer evidence refused
+PASS 35 verified transfer failure releases reservation
+PASS 36 refund event replay reverses commission once
+PASS 37 partial refunds cumulatively reverse full commission
+PASS 38 refund after payout retains visible debt instead of deleting history
+PASS 39 negative refunded balance cannot withdraw
+PASS 40 suspended affiliate cannot change payout account
+PASS 41 affiliate dashboard excludes another affiliate financial details
+PASS 42 affiliate views do not expose referred school names
+PASS 43 expired referral is not attributed
+PASS 44 self referral is rejected
+PASS 45 affiliate POST requires valid CSRF token
+PASS 46 all eighteen role guides available
+PASS 47 substantive guide for owner
+PASS 48 substantive guide for teacher
+PASS 49 substantive guide for parent
+PASS 50 substantive guide for student
+PASS 51 substantive guide for hr
+PASS 52 substantive guide for driver
+PASS 53 substantive guide for transport
+PASS 54 substantive guide for warden
+PASS 55 substantive guide for library
+PASS 56 substantive guide for inventory
+PASS 57 substantive guide for communications
+PASS 58 substantive guide for website
+PASS 59 substantive guide for admissions
+PASS 60 substantive guide for finance
+PASS 61 substantive guide for affiliate
+PASS 62 substantive guide for platform
+PASS 63 substantive guide for staff
+PASS 64 substantive guide for governance
+PASS 65 affiliate workflows preserve existing student records
+PASS 66 legacy verified subscription path credits once
+PASS 67 legacy source refund reverses its commission
+PASS 68 test commissions cannot fund live withdrawals
+PASS 69 provider transfer cannot be reconciled in a different environment
+PASS 70 large proportional refund remains exact without integer multiplication overflow
+Affiliate domain: 70 assertions passed.

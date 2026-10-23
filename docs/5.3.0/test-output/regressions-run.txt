@@ -1,0 +1,17 @@
+learning-reset PASS
+learning-seed PASS Fixture schema and integrations installed on 11.8.6-MariaDB-0+deb13u1 from Debian
+learning-learning_seed PASS Learning fixture ready on 11.8.6-MariaDB-0+deb13u1 from Debian
+learning-domain PASS TOTAL 131 passed
+learning-http PASS TOTAL 55 passed
+learning-concurrency PASS TOTAL 4 passed
+operations-reset PASS
+operations-seed PASS Fixture schema and integrations installed on 11.8.6-MariaDB-0+deb13u1 from Debian
+operations-learning_seed PASS Learning fixture ready on 11.8.6-MariaDB-0+deb13u1 from Debian
+operations-operations_seed PASS Operations accounts seeded; activation intentionally pending.
+operations-domain PASS TOTAL 128 passed
+operations-http PASS TOTAL 90 passed
+operations-concurrency PASS TOTAL 6 passed
+family-reset PASS
+family-seed PASS Fixture schema and integrations installed on 11.8.6-MariaDB-0+deb13u1 from Debian
+family-domain PASS TOTAL 61 passed
+updater PASS TOTAL 27 passed

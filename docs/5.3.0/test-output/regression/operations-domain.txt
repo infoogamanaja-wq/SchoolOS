@@ -1,0 +1,129 @@
+PASS module starts with explicit activation pending
+PASS teacher cannot activate operations
+PASS school administrator activates complete schema
+PASS repeated activation preserves records without inferred staff bindings
+PASS CSRF required
+PASS parent cannot grant access
+PASS foreign account capability denied
+PASS parent cannot be made driver
+PASS capabilities separate payroll and driving
+PASS exponent amounts denied
+PASS negative money denied
+PASS fractional kobo denied
+PASS exact kobo conversion and half-up rounding
+PASS unlimited final band required
+PASS invalid tax rate denied
+PASS progressive annual bands pension and monthly tax known vector
+PASS deductions above gross rejected
+PASS driver cannot change salary
+PASS incomplete onboarding blocks activation
+PASS onboarding activates employee
+PASS HR cannot bind employee to a parent account
+PASS peer personnel access denied
+PASS cross-school personnel access denied
+PASS employee owns linked personnel record
+PASS recruitment cannot skip offer
+PASS hire creates onboarding record without credentials
+PASS zero-pay new hire cannot activate
+PASS overlapping duties denied
+PASS duplicate staff clock-in denied
+PASS duplicate clock-out denied
+PASS employee cannot approve own leave
+PASS staff leave uses existing Welfare register
+PASS advance self-approval denied
+PASS HR reviewer cannot confirm cash disbursement
+PASS advance cannot post twice
+PASS advance reserved in payroll
+PASS separate draft cannot deduct reserved balance again
+PASS payroll creator cannot approve own run
+PASS salary and allowance edits preserve approved snapshot
+PASS paid run cannot post twice
+PASS journal count and advance balance unchanged after retry
+PASS paid run cannot be voided
+PASS payroll and advance Finance journals balance
+PASS employee cannot create own evaluation
+PASS driver and vehicle schedule overlap denied
+PASS vehicle passenger capacity enforced
+PASS other driver route denied
+PASS foreign school route denied
+PASS transport period fee idempotent
+PASS full routes excluded from route suggestions
+PASS other driver manifest mutation denied
+PASS pending manifest blocks trip completion
+PASS GPS frequency limited
+PASS passenger pickup cannot replay
+PASS handover requires physical identity confirmation
+PASS handover consumes Family pickup authorization
+PASS nearby available route suggestion returned
+PASS released assignment preserves previous trip manifest
+PASS driver cannot change route settings
+PASS disabling route GPS erases retained coordinates
+PASS driver licence renewal preserves account and trip history
+PASS room bed capacity enforced
+PASS occupied bed cannot be double allocated
+PASS other warden hostel denied
+PASS cross-school hostel denied
+PASS unlinked family cannot request hostel leave
+PASS duplicate check-in denied
+PASS cannot release checked-in resident bed
+PASS check-out without approved permit denied
+PASS approved permit records authorized check-out
+PASS check-in closes out permit
+PASS visitor cannot sign out twice
+PASS absent roll call creates scoped family update
+PASS boarding incidents and welfare integrate confidential school cases
+PASS other warden cannot close private event
+PASS negative supplies stock prevented
+PASS supply movements retain correct quantity
+PASS boarding fee retries idempotent
+PASS meal publication retries preserve family choices
+PASS meal serving cannot charge twice
+PASS meal serving posts once to existing Finance
+PASS HR view records renders
+PASS HR view recruitment renders
+PASS HR view onboarding renders
+PASS HR view contracts renders
+PASS HR view departments renders
+PASS HR view attendance renders
+PASS HR view leave renders
+PASS HR view duties renders
+PASS HR view salaries renders
+PASS HR view allowances renders
+PASS HR view policy renders
+PASS HR view payslips renders
+PASS HR view advances renders
+PASS HR view evaluations renders
+PASS HR view development renders
+PASS HR view grievances renders
+PASS HR view exit renders
+PASS transport view vehicles renders
+PASS transport view drivers renders
+PASS transport view routes renders
+PASS transport view assignments renders
+PASS transport view fees renders
+PASS transport view trips renders
+PASS transport view events renders
+PASS transport view suggestions renders
+PASS warden view dashboard renders
+PASS warden view rooms renders
+PASS warden view allocations renders
+PASS warden view fees renders
+PASS warden view movements renders
+PASS warden view leave renders
+PASS warden view visitors renders
+PASS warden view roll renders
+PASS warden view incidents renders
+PASS warden view maintenance renders
+PASS warden view supplies renders
+PASS warden view meals renders
+PASS family/student transport and boarding avoid confidential records
+PASS family/student transport and boarding avoid confidential records
+PASS unassigned warden sees no private events
+PASS incomplete team exit clearance blocks finalization
+PASS cleared unlinked employee exit preserves history
+PASS existing student records preserved
+PASS existing authentication hashes preserved
+PASS existing Finance invoice preserved
+PASS existing Finance invoice preserved
+PASS existing Finance invoice preserved
+TOTAL 128 passed

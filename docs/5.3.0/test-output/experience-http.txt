@@ -1,0 +1,106 @@
+PASS public index.php?login=1
+PASS public index.php?register=1
+PASS public index.php?join=1
+PASS public index.php?xp_privacy=1
+PASS interactive login facts and demo selector
+PASS password visibility control
+PASS login admin@test.local
+PASS login platform@test.local
+PASS login teacher@test.local
+PASS login parent@test.local
+PASS login student@test.local
+PASS role overview school administrator
+PASS role onboarding school administrator
+PASS role overview platform
+PASS role onboarding platform
+PASS role overview teacher
+PASS role onboarding teacher
+PASS role overview parent
+PASS role onboarding parent
+PASS role overview student
+PASS role onboarding student
+PASS school admin setup readiness alerts
+PASS dashboard metrics have defined meaning
+PASS owner navigation ?s=workspace
+PASS owner navigation ?s=welcome
+PASS owner navigation ?s=students
+PASS owner navigation ?s=parents
+PASS owner navigation ?s=teachers
+PASS owner navigation ?s=applications
+PASS owner navigation ?s=portal_users
+PASS owner navigation ?s=portal_links
+PASS owner navigation ?s=academics
+PASS owner navigation ?s=attendance
+PASS owner navigation ?s=results
+PASS owner navigation ?s=learning
+PASS owner navigation ?s=fees
+PASS owner navigation ?s=announcements
+PASS owner navigation ?s=services
+PASS owner navigation ?s=operations
+PASS owner navigation ?s=intelligence
+PASS owner navigation ?s=school_setup
+PASS owner navigation ?s=support
+PASS owner navigation ?s=audit
+PASS owner navigation ?s=family
+PASS owner navigation ?s=chat
+PASS working configuration index.php?s=welcome&view=access
+PASS working configuration index.php?s=welcome&view=modules
+PASS working configuration index.php?s=welcome&view=platform
+PASS walkthrough completion persists
+PASS tour CSRF enforced
+PASS approved member forced through first-login password change
+PASS initial password gate protects direct school routes
+PASS new password unlocks only scoped overview without guessed child links
+PASS login schooladmin@demo.schoolos.test
+PASS isolated demo overview schooladmin
+PASS login teacher@demo.schoolos.test
+PASS isolated demo overview teacher
+PASS login parent@demo.schoolos.test
+PASS isolated demo overview parent
+PASS login student@demo.schoolos.test
+PASS isolated demo overview student
+PASS login driver@demo.schoolos.test
+PASS isolated demo overview driver
+PASS login warden@demo.schoolos.test
+PASS isolated demo overview warden
+PASS login hr@demo.schoolos.test
+PASS isolated demo overview hr
+PASS login librarian@demo.schoolos.test
+PASS isolated demo overview librarian
+PASS login stock@demo.schoolos.test
+PASS isolated demo overview stock
+PASS login comms@demo.schoolos.test
+PASS isolated demo overview comms
+PASS login admissions@demo.schoolos.test
+PASS isolated demo overview admissions
+PASS login partner@demo.schoolos.test
+PASS isolated demo overview partner
+PASS login platform@demo.schoolos.test
+PASS isolated demo overview platform
+PASS login reviewer@demo.schoolos.test
+PASS isolated demo overview reviewer
+PASS connected demo workflow teacher
+PASS connected demo workflow parent
+PASS connected demo workflow student
+PASS connected demo workflow driver
+PASS connected demo workflow warden
+PASS connected demo workflow hr
+PASS connected demo workflow librarian
+PASS connected demo workflow stock
+PASS connected demo workflow admissions
+PASS demo teacher can record fictional attendance
+PASS demo parent sees teacher attendance change
+PASS demo host management endpoint blocked index.php?s=system
+PASS demo host management endpoint blocked index.php?s=integrations
+PASS demo host management endpoint blocked index.php?v24_backup=1
+PASS demo live checkout blocked
+PASS demo external integration action blocked
+PASS public demo password never authenticates into live database
+PASS demo native mail dispatcher blocked
+PASS direct source protected experience.php
+PASS direct source protected experience_ui.php
+PASS direct source protected experience_admin.php
+PASS direct source protected experience_demo.php
+PASS demo maintenance CLI blocked over HTTP
+PASS shared demo role capabilities cannot be revoked
+TOTAL 105 passed
